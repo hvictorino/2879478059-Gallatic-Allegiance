@@ -1,0 +1,630 @@
+Part : &<../phase_thruster_small/phase_thruster_small.rules>/Part
+{
+	NameKey = "Parts/PhaseThrusterSmallAngled"
+	IconNameKey = "Parts/PhaseThrusterSmallAngledIcon"
+	ID = ultranova.phase_thruster_small_angled_eL
+	OtherIDs = [ultranova.phase_thruster_small_angled_eR]
+	FlipWhenLoadingIDs = [ultranova.phase_thruster_small_angled_eR]
+	DescriptionKey = "Parts/PhaseThrusterSmallDesc"
+	Size = [1, 3]
+	PhysicalRect = [0, 0, 1, 2]
+	SaveRect = &PhysicalRect
+	IsFlippable = true
+	GenerateRectCollider = false
+	AllowedDoorLocations
+	[
+		[0, -1]
+		[1, 0]
+		[-1, 0]
+	]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [21.33, 64]
+	}
+	ExternalWallsByCell
+	[
+		{
+			Key = [0, 1]
+			Value = [TopLeft, Left, BottomLeft, Top, TopRight]
+		}
+	]
+	InternalWallsByCell
+	[
+		{
+			Key = [0, 1]
+			Value = [Right, BottomRight]
+		}
+	]
+	Components : ^/0/Components
+	{
+		Collider
+		{
+			Type = PolygonCollider
+			Vertices
+			[
+				[0, 0]
+				[1, 0]
+				[1, 1]
+				[0, 2]
+			]
+		}
+
+		Graphics = &<../phase_thruster_small/phase_thruster_small.rules>/Part/Components/Graphics
+		NozzleGraphics
+		{
+			Type = Graphics
+			Location = [.5, 1.5]
+			Floor
+			{
+				Layer = "structure"
+				Offset = [0, .5]
+				DamageLevels
+				[
+					{
+						File = "nozzle.png"
+						NormalsFile = "nozzle_normals.png"
+						Size = [1, 2]
+					}
+				]
+			}
+			Walls
+			{
+				Layer = "external_walls"
+				DamageLevels
+				[
+					{
+						File = "external_walls.png"
+						NormalsFile = "./Data/ships/terran/armor_wedge/external_wall_normals.png"
+						Size = [1, 1]
+						MirrorU = true
+						MirrorV = true
+					}
+					{
+						File = "external_walls_33.png"
+						NormalsFile = "./Data/ships/terran/armor_wedge/external_wall_normals_33.png"
+						Size = [1, 1]
+						MirrorU = true
+						MirrorV = true
+					}
+					{
+						File = "external_walls_66.png"
+						NormalsFile = "./Data/ships/terran/armor_wedge/external_wall_normals_66.png"
+						Size = [1, 1]
+						MirrorU = true
+						MirrorV = true
+					}
+				]
+			}
+			Roof
+			{
+				Layer = "roofs"
+				DamageLevels
+				[
+					{
+						File = "roof.png"
+						NormalsFile = "roof_normals.png"
+						Size = [1, 1]
+						MirrorU = true
+						MirrorV = true
+					}
+				]
+			}
+		}
+
+		BlueThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = BlueThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				BlueGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"blue/lights_B1.png"
+									"blue/lights_B2.png"
+									"blue/lights_B3.png"
+									"blue/lights_B4.png"
+									"blue/lights_B5.png"
+									"blue/lights_B4.png"
+									"blue/lights_B3.png"
+									"blue/lights_B2.png"
+								]
+								Size = [1, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						Offset = [0, 1]
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1.0 // Controls the "height" of the light for the purposes of normal mapping.
+								VertexColor = [0*1.0,148*1.0, 255*1.0]
+							}
+						]
+					}
+				}
+
+				BlueThrustEffects
+				{
+					Type = ContinuousEffects
+					ChainedTo = MainThruster
+					FactorMediaEffectsIntensityWith = MainThruster
+					Location = [0.5, 0]
+					MediaEffects
+					[
+						&<../phase_thruster_small/blue/particles/thruster_trail_small.rules>
+						//&<particles/thruster_glow_small.rules>
+
+						: /COMMON_SOUNDS/ThrusterRumble
+						{
+							Volume = .075
+							Speed = 2
+							MaxConcurrentVolume = .15
+						}
+					]
+				}
+			}
+		}
+
+		GreenThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = GreenThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				GreenGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"green/lights_G1.png"
+									"green/lights_G2.png"
+									"green/lights_G3.png"
+									"green/lights_G4.png"
+									"green/lights_G5.png"
+									"green/lights_G4.png"
+									"green/lights_G3.png"
+									"green/lights_G2.png"
+								]
+								Size = [1, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						Offset = [0, 1]
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1.0 // Controls the "height" of the light for the purposes of normal mapping.
+								VertexColor = [63*1.0, 255*1.0, 0*1.0]
+							}
+						]
+					}
+				}
+
+				GreenThrustEffects
+				{
+					Type = ContinuousEffects
+					ChainedTo = MainThruster
+					FactorMediaEffectsIntensityWith = MainThruster
+					Location = [0.5, 0]
+					MediaEffects
+					[
+						&<../phase_thruster_small/green/particles/thruster_trail_small.rules>
+						//&<particles/thruster_glow_small.rules>
+
+						: /COMMON_SOUNDS/ThrusterRumble
+						{
+							Volume = .075
+							Speed = 2
+							MaxConcurrentVolume = .15
+						}
+					]
+				}
+			}
+		}
+
+		OrangeThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = OrangeThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				OrangeGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"orange/lights_O1.png"
+									"orange/lights_O2.png"
+									"orange/lights_O3.png"
+									"orange/lights_O4.png"
+									"orange/lights_O5.png"
+									"orange/lights_O4.png"
+									"orange/lights_O3.png"
+									"orange/lights_O2.png"
+								]
+								Size = [1, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						Offset = [0, 1]
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1.0 // Controls the "height" of the light for the purposes of normal mapping.
+								VertexColor = [255*1.0, 149*1.0, 0*1.0]
+							}
+						]
+					}
+				}
+
+				OrangeThrustEffects
+				{
+					Type = ContinuousEffects
+					ChainedTo = MainThruster
+					FactorMediaEffectsIntensityWith = MainThruster
+					Location = [0.5, 0]
+					MediaEffects
+					[
+						&<../phase_thruster_small/orange/particles/thruster_trail_small.rules>
+						//&<particles/thruster_glow_small.rules>
+
+						: /COMMON_SOUNDS/ThrusterRumble
+						{
+							Volume = .075
+							Speed = 2
+							MaxConcurrentVolume = .15
+						}
+					]
+				}
+			}
+		}
+
+		PurpleThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = PurpleThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				PurpleGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"purple/lights_P1.png"
+									"purple/lights_P2.png"
+									"purple/lights_P3.png"
+									"purple/lights_P4.png"
+									"purple/lights_P5.png"
+									"purple/lights_P4.png"
+									"purple/lights_P3.png"
+									"purple/lights_P2.png"
+								]
+								Size = [1, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						Offset = [0, 1]
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1.0 // Controls the "height" of the light for the purposes of normal mapping.
+								VertexColor = [255*1.0, 0*1.0, 233*1.0]
+							}
+						]
+					}
+				}
+
+				PurpleThrustEffects
+				{
+					Type = ContinuousEffects
+					ChainedTo = MainThruster
+					FactorMediaEffectsIntensityWith = MainThruster
+					Location = [0.5, 0]
+					MediaEffects
+					[
+						&<../phase_thruster_small/purple/particles/thruster_trail_small.rules>
+						//&<particles/thruster_glow_small.rules>
+
+						: /COMMON_SOUNDS/ThrusterRumble
+						{
+							Volume = .075
+							Speed = 2
+							MaxConcurrentVolume = .15
+						}
+					]
+				}
+			}
+		}
+
+		RedThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = RedThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				RedGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"red/lights_R1.png"
+									"red/lights_R2.png"
+									"red/lights_R3.png"
+									"red/lights_R4.png"
+									"red/lights_R5.png"
+									"red/lights_R4.png"
+									"red/lights_R3.png"
+									"red/lights_R2.png"
+								]
+								Size = [1, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						Offset = [0, 1]
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1.0 // Controls the "height" of the light for the purposes of normal mapping.
+								VertexColor = [255*1.0, 0*1.0, 20*1.0]
+							}
+						]
+					}
+				}
+
+				RedThrustEffects
+				{
+					Type = ContinuousEffects
+					ChainedTo = MainThruster
+					FactorMediaEffectsIntensityWith = MainThruster
+					Location = [0.5, 0]
+					MediaEffects
+					[
+						&<../phase_thruster_small/red/particles/thruster_trail_small.rules>
+						//&<particles/thruster_glow_small.rules>
+
+						: /COMMON_SOUNDS/ThrusterRumble
+						{
+							Volume = .075
+							Speed = 2
+							MaxConcurrentVolume = .15
+						}
+					]
+				}
+			}
+		}
+
+		YellowThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = YellowThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				YellowGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"yellow/lights_Y1.png"
+									"yellow/lights_Y2.png"
+									"yellow/lights_Y3.png"
+									"yellow/lights_Y4.png"
+									"yellow/lights_Y5.png"
+									"yellow/lights_Y4.png"
+									"yellow/lights_Y3.png"
+									"yellow/lights_Y2.png"
+								]
+								Size = [1, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						Offset = [0, 1]
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1.0 // Controls the "height" of the light for the purposes of normal mapping.
+								VertexColor = [255*1.0, 255*1.0, 0*1.0]
+							}
+						]
+					}
+				}
+
+				YellowThrustEffects
+				{
+					Type = ContinuousEffects
+					ChainedTo = MainThruster
+					FactorMediaEffectsIntensityWith = MainThruster
+					Location = [0.5, 0]
+					MediaEffects
+					[
+						&<../phase_thruster_small/yellow/particles/thruster_trail_small.rules>
+						//&<particles/thruster_glow_small.rules>
+
+						: /COMMON_SOUNDS/ThrusterRumble
+						{
+							Volume = .075
+							Speed = 2
+							MaxConcurrentVolume = .15
+						}
+					]
+				}
+			}
+		}
+
+		WhiteThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = WhiteThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				WhiteGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"white/lights_W1.png"
+									"white/lights_W2.png"
+									"white/lights_W3.png"
+									"white/lights_W4.png"
+									"white/lights_W5.png"
+									"white/lights_W4.png"
+									"white/lights_W3.png"
+									"white/lights_W2.png"
+								]
+								Size = [1, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						Offset = [0, .5]
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3, 3]
+								Z = 1.0 // Controls the "height" of the light for the purposes of normal mapping.
+								VertexColor = [224*1.0, 224*1.0, 224*1.0]
+							}
+						]
+					}
+				}
+
+				WhiteThrustEffects
+				{
+					Type = ContinuousEffects
+					ChainedTo = MainThruster
+					FactorMediaEffectsIntensityWith = MainThruster
+					Location = [0.5, 0]
+					MediaEffects
+					[
+						&<../phase_thruster_small/white/particles/thruster_trail_small.rules>
+						//&<particles/thruster_glow_small.rules>
+
+						: /COMMON_SOUNDS/ThrusterRumble
+						{
+							Volume = .075
+							Speed = 2
+							MaxConcurrentVolume = .15
+						}
+					]
+				}
+			}
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [1, 3]
+		}
+	}
+}

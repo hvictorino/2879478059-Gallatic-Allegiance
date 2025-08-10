@@ -1,0 +1,19 @@
+ID = ultranova.rocket_internal
+Range = 350
+IdealRange = 225
+Speed = 45
+
+Components : &<../../../rocket_silo/he_rocket/rocket/rocket.rules>/Components
+{
+	Sprite : &<../../../rocket_silo/he_rocket/rocket/rocket.rules>/Components/Sprite
+	{
+		Type = Sprite
+		RenderBucket = BulletLower1
+	}
+
+	Hit : &<../../../rocket_silo/he_rocket/rocket/rocket.rules>/Components/Hit
+	{
+		Type = SimpleHit
+		SourceShipLowCollisions = false
+	}
+}

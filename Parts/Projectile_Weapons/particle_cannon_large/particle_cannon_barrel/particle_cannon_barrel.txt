@@ -1,0 +1,479 @@
+Part : /BASE_PART
+{
+	NameKey = "Parts/ParticleCannonLargeBarrel"
+	IconNameKey = "Parts/ParticleCannonLargeBarrelIcon"
+	ID = ultranova.particle_cannon_barrel
+	EditorGroup = "WeaponsProjectile"
+	DescriptionKey = "Parts/ParticleCannonLargeBarrelDesc"
+	Cost = 7500
+	Size = [2, 5]
+	Density = 4
+	SelectionTypeID = "particle_cannon"
+	SelectionPriority = 1
+	SelectionTypeByRotation = true
+	MaxHealth = 40000
+	Flammable = false
+	TypeCategories = [weapon, uses_power, particle_cannon_large_power, particle_cannon_large, particle_cannon_large_ammo, particle_cannon_large_barrel]
+	ReceivableBuffs = [Railgun, RailgunShot, RailgunOperation, ParticleCannonNeedsPower]
+	GeneratorRequiresDoors = false
+	AllowedDoorLocations = []
+	ExternalWalls = [None]
+	InternalWalls = [All]
+	IsWalled = false
+	ProhibitAbove = 5
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [38.4, 96]
+	}
+	Components : ^/0/Components
+	{
+		IsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, BatteryStorage, RailgunOperationBuffToggle]
+			Mode = All
+		}
+
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+		}
+
+		FireModeToggle
+		{
+			Type = UIToggle
+			ToggleID = "fire_mode"
+			Default = 1
+			ToggledOnChoices = [0, 1, 2]
+		}
+		AutoTargetToggle
+		{
+			Type = ModeToggle
+			Mode = FireModeToggle
+			OnModes = [1, 2]
+		}
+		AutoFireToggle
+		{
+			Type = ModeToggle
+			Mode = FireModeToggle
+			OnMode = 2
+		}
+
+		BatteryStorage
+		{
+			Type = AmmoStorage
+			AmmoType = battery
+			MaxAmmo = 4000
+		}
+
+		ParticleCannonNeedsPowerProvider
+		{
+			Type = AreaBuffProvider
+			BuffType = ParticleCannonNeedsPower
+			BuffArea = [0, 5, 2, 1]
+			Criteria
+			{
+				Category = particle_cannon_large
+				Rot = 0
+				Left = 0
+				Right = 2
+				Top = 5
+			}
+		}
+
+		RailgunBuffToggle
+		{
+			Type = BuffToggle
+			BuffType = Railgun
+		}
+
+		RailgunOperationBuffToggle
+		{
+			Type = BuffToggle
+			BuffType = RailgunOperation
+		}
+
+		ShotBuffProvider
+		{
+			Type = SelfBuffProvider
+			BuffType = RailgunShot
+			ChainsFromBuffType = Railgun
+			BuffAmount = { BaseValue=0; BuffType=Railgun; BuffMode=Add; }
+		}
+
+		ReverseOperationBuffProvider
+		{
+			Type = AreaBuffProvider
+			BuffType = RailgunReverseOperation
+			BuffArea = [0, 5, 2, 1]
+			OperationalToggle = IsOperational
+			Criteria
+			{
+				Category = particle_cannon_large
+				Rot = 0
+				Left = 0
+				Right = 2
+				Top = 5
+			}
+		}
+
+		AmmoProxy
+		{
+			Type = AmmoStorageProxy
+			AmmoType = bullet
+			PartLocation = [0, 5]
+			PartCriteria
+			{
+				Category = particle_cannon_large_ammo
+				Rot = 0
+				Left = 0
+				Right = 2
+				Top = 5
+			}
+			ComponentID = LoadedAmmo
+		}
+
+		Weapon
+		{
+			Type = FixedWeapon
+			Location = [1, .125] // Relative to upper-left corner of unrotated part.
+			Rotation = -90d // Relative to unrotated part.
+			OperationalToggle = IsOperational
+			AutoFireToggle = AutoFireToggle
+			FireInterval = 4
+			TargetingArc = 90d
+			AIFirepowerRating = { BaseValue=4000; BuffType=RailgunShot; BuffMode=Multiply; }
+			Emitter = BulletEmitter
+			FirePermissionToggle = FireModeToggle
+
+			AutoTarget
+			{
+				TargetType = ShipParts
+				Toggle = AutoTargetToggle
+			}
+
+			CoverageLine
+			{
+				LineSprite
+				{
+					Texture = &/INDICATORS/RadialGradient
+					VertexColor = [255, 255, 255, 191]
+					UVRect = [.5, 0, 0, 1]
+				}
+				LineThickness = 2
+
+				BeginCapSprite : LineSprite
+				{
+					UVRect = [0, 0, .5, 1]
+				}
+				BeginCapSize = [1, 2]
+
+				EndCapSprite : LineSprite
+				{
+					UVRect = [.5, 0, .5, 1]
+				}
+				EndCapSize = [1, 2]
+			}
+		}
+
+		ReloadProgressBar
+		{
+			Type = ProgressBar
+			OperationalToggle = IsOperational
+			ShowProgressFor = Weapon
+		}
+
+		BulletEmitter
+		{
+			Type = BulletEmitter
+			ChainedTo = Weapon
+			FireTrigger = Weapon
+			GetTargetFrom = Weapon
+			OperationalToggle = IsOperational
+			Recoil = 500
+			Bullet = &<particle_shot_large/particle_shot_large.txt>
+			AmmoUsage
+			[
+				{
+					AmmoStorage = AmmoProxy
+					AmmoUsed = 6
+				}
+				{
+					AmmoStorage = BatteryStorage
+					AmmoUsed = 1000
+				}
+			]
+		}
+
+		FireEffect
+		{
+			Type = TriggeredEffects
+			ChainedTo = Weapon
+			Location = [1.5, 0]
+			Trigger = BulletEmitter
+
+			MediaEffects
+			[
+				&<particles/shoot.txt>
+				&<particle_shot_large/particles/flash.txt>
+
+				: /BASE_SOUNDS/AudioExterior
+				{
+					Sound = "shoot.wav"
+					Volume = 1.0
+					SpeedVariation = 0
+				}
+
+
+				: /BASE_SHAKE
+				{
+					ShakeAmount = .025
+					Duration = .25
+				}
+			]
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [1, 2.5]
+			OperationalToggle = IsOperational
+			OperationalDoodad
+			{
+				Layer = "turrets"
+				DamageLevels
+				[
+					{
+						AnimationFiles
+						[
+							"doodads_on1.png"
+							"doodads_on2.png"
+							"doodads_on3.png"
+							"doodads_on4.png"
+							"doodads_on5.png"
+							"doodads_on4.png"
+							"doodads_on3.png"
+							"doodads_on2.png"
+						]
+						Size = [2, 5]
+						AnimationInterval = 0.1
+						AnimationStartTime = Zero
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "turrets"
+				DamageLevels
+				[
+					{
+						File = "doodads_off.png"
+						Size = [2, 5]
+					}
+				]
+			}
+		}
+
+		AmmoSprites1
+		{
+			Type = AmmoSprites
+			Location = [1.5, 3]
+			AmmoStorage = BatteryStorage
+			Layer = "doodads_low"
+			RangeLow = 0
+			RangeHigh = 1000
+			AmmoLevels
+			[
+				{
+					File = "../particle_cannon_extender/batteries5.png"
+					Size = [1, 2]
+				}
+			]
+		}
+
+		AmmoSprites2
+		{
+			Type = AmmoSprites
+			Location = [1.5, 4.5]
+			AmmoStorage = BatteryStorage
+			Layer = "doodads_low"
+			RangeLow = 1001
+			RangeHigh = 2000
+			AmmoLevels
+			[
+				{
+					File = "../particle_cannon_extender/batteries5.png"
+					Size = [1, 2]
+				}
+			]
+		}
+
+		AmmoSprites3
+		{
+			Type = AmmoSprites
+			Location = [.5, 3]
+			AmmoStorage = BatteryStorage
+			Layer = "doodads_low"
+			RangeLow = 2001
+			RangeHigh = 3000
+			AmmoLevels
+			[
+				{
+					File = "../particle_cannon_extender/batteries5.png"
+					MirrorU = true
+					Size = [1, 2]
+				}
+			]
+		}
+
+		AmmoSprites4
+		{
+			Type = AmmoSprites
+			Location = [.5, 4.5]
+			AmmoStorage = BatteryStorage
+			Layer = "doodads_low"
+			RangeLow = 3001
+			RangeHigh = 4000
+			AmmoLevels
+			[
+				{
+					File = "../particle_cannon_extender/batteries5.png"
+					MirrorU = true
+					Size = [1, 2]
+				}
+			]
+		}
+
+		OperationEffects
+		{
+			Type = ToggleEffects
+			Location = [1, 2.5]
+			Toggle = IsOperational
+			ToggledOnMediaEffects = &/COMMON_EFFECTS/PowerOn
+			ToggledOffMediaEffects = &/COMMON_EFFECTS/PowerOff
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/BigPartDestroyed
+			Location = [1, 2.5]
+		}
+
+		RecursiveDeath
+		{
+			Type = DeathEffects
+			Location = [1, 5.5]
+
+			HitEffects
+			[
+				{
+					Type = AreaDamage
+					Damage = 5000
+					Radius = .6
+					Falloff = 0
+					Delay = .15
+					Filter
+					{
+						OperationalHealth = true
+						StructuralHealth = false
+						Friendlies = true
+					}
+				}
+			]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [1, 2.5]
+			Layer = "indicators"
+			Indicators
+			[
+				// Missing component
+				{
+					Toggle = RailgunBuffToggle
+					ShowInBuildMode = true
+					AtlasSprite
+					{
+						File = &/INDICATORS/MissingComponent
+						Size = [1, 1]
+					}
+				}
+
+				// Turned off.
+				{
+					Toggle = PowerToggle
+					AtlasSprite
+					{
+						File = &/INDICATORS/PowerOff
+						Size = [1, 1]
+					}
+				}
+
+				// Out of power.
+				{
+					Toggle = BatteryStorage
+					Delay = &~/Part/Components/Weapon/FireInterval
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoPower
+						Size = [1.5, 1.5]
+					}
+				}
+			]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [2, 5]
+		}
+	}
+
+	Stats
+	{
+		PowerCapacity = (&~/Part/Components/BatteryStorage/MaxAmmo) / 1000
+
+		RecPower = &../StatsByCategory/0/Stats/PowerPerSecond
+		RecCrew = (&RecPower) * 4
+	}
+
+	StatsByCategory
+	[
+		{
+			NameKey = "StatCategories/ParticleCannonShot"
+			Stats
+			{
+				DamagePerShot = &~/Part/Components/BulletEmitter/Bullet/Components/DamagePool/Damage/BaseValue
+				DamagePerSecond = (&DamagePerShot) * (&ROF)
+				Damage = [&../DamagePerShot, &../DamagePerSecond]
+				Penetration = &~/Part/Components/BulletEmitter/Bullet/Components/Hit/Penetration/BaseValue
+				PowerDrainPerShot = (&~/Part/Components/BulletEmitter/Bullet/Components/Hit/PenetratingOperational/HitEffects/2/TotalDrain/BaseValue) / 1000
+				PowerDrainPerSecond = (&PowerDrainPerShot) * (&ROF)
+				PowerDrain = [&../PowerDrainPerShot, &../PowerDrainPerSecond]
+				ROF = 1 / (&~/Part/Components/Weapon/FireInterval)
+				RangeLimited = [&~/Part/Components/BulletEmitter/Bullet/Range/BaseValue, &~/Part/Components/BulletEmitter/Bullet/Range/MaxValue]
+				Arc = 0
+				ShotSpeed = &~/Part/Components/BulletEmitter/Bullet/Speed/BaseValue
+				ShotHP = &~/Part/Components/BulletEmitter/Bullet/Components/Targetable/Health
+				AmmoPerShot = &~/Part/Components/BulletEmitter/AmmoUsage/0/AmmoUsed
+				AmmoPerSecond = (&AmmoPerShot) * (&ROF)
+				ShotAmmoUsage = [&../AmmoPerShot, &../AmmoPerSecond]
+				PowerPerShot = (&~/Part/Components/BulletEmitter/AmmoUsage/1/AmmoUsed) / 1000
+				PowerPerSecond = (&PowerPerShot) * (&ROF)
+				ShotPowerUsage = [&../PowerPerShot, &../PowerPerSecond]
+			}
+		}
+	]
+
+	StatsNotesKey = "Stats/ParticleCannonNotes"
+}

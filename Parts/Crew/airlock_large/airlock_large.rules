@@ -1,0 +1,357 @@
+Part : <./Data/ships/terran/base_part_terran.rules>/Part
+{
+	NameKey = "Parts/AirlockLarge"
+	IconNameKey = "Parts/AirlockLargeIcon"
+	ID = ultranova.airlock_large
+	EditorGroup = "Crew"
+	DescriptionKey = "Parts/AirlockLargeDesc"
+	SelectionTypeID = "airlock"
+	Resources
+	[
+		[steel, 32]
+		[coil, 8]
+	]
+	Size = [3, 3]
+	PhysicalRect = [0, 1, 3, 2]
+	SaveRect = &PhysicalRect
+	MaxHealth = 10000
+	TypeCategories = [storage, airlock]
+	ReceivableBuffs : ^/0/ReceivableBuffs []
+	ForceManhattanPathInPart = true
+	ProhibitAbove = 2
+	AllowedDoorLocations
+	[
+		[0, 3]
+		[1, 3]
+		[2, 3]
+	]
+	BlockedTravelCellDirections
+	[
+		{
+			Key = [0, 2]
+			Value = [Up]
+		}
+		{
+			Key = [2, 2]
+			Value = [Up]
+		}
+	]
+	ExternalWallsByCell
+	[
+		{
+			Key = [0, 1]
+			Value = [TopLeft, Left]
+		}
+		{
+			Key = [1, 1]
+			Value = None
+		}
+		{
+			Key = [2, 1]
+			Value = [TopRight, Right]
+		}
+	]
+	InternalWallsByCell
+	[
+		{
+			Key = [0, 0]
+			Value = [Left, TopLeft, Top, TopRight]
+		}
+		{
+			Key = [1, 0]
+			Value = [TopLeft, Top, TopRight]
+		}
+		{
+			Key = [2, 0]
+			Value = [Right, TopRight, Top, TopLeft]
+		}
+	]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [64, 64]
+	}
+	Components : ^/0/Components
+	{
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+			RequiresCommand = false
+		}
+
+		Airlock : &<./Data/ships/terran/airlock/airlock.rules>/Part/Components/Airlock
+		{
+			Type = Airlock
+			OperationalToggle = PowerToggle
+			EnterExitPoint = [1.5, 1.33]
+			UITileRect = [7/64, 3 - 7/64, 3 - 14/64, 1 - 14/64]
+		}
+
+		//Storages
+		Storage1
+		{
+			Type = FlexResourceGrid
+			GridRect = [0, 2, 1, 1]
+			Layer = "doodads_low"
+			SpriteInset = 8/64
+			RandomSpriteRotation = false
+			AllowExternalPickupAndDelivery = false
+		}
+
+		Storage2
+		{
+			Type = FlexResourceGrid
+			GridRect = [2, 2, 1, 1]
+			Layer = "doodads_low"
+			SpriteInset = 8/64
+			RandomSpriteRotation = false
+			AllowExternalPickupAndDelivery = false
+		}
+
+		ExternalWallsGraphics
+		{
+			Type = Graphics
+			Location = [1.5, 0.5]
+			Walls
+			{
+				Layer = "external_walls"
+				DamageLevels
+				[
+					{
+						File = "external_walls.png"
+						NormalsFile = "external_walls_normals.png"
+						Size = [3, 1]
+					}
+				]
+			}
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [1.5, 2]
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "floor.png"
+						Size = [3, 2]
+					}
+				]
+			}
+			OperationalDoodad
+			{
+				Layer = "doodads_high"
+				DamageLevels
+				[
+					{
+						AnimationFiles
+						[
+							"divider_on1.png"
+							"divider_on2.png"
+							"divider_on3.png"
+							"divider_on4.png"
+							"divider_on5.png"
+							"divider_on6.png"
+							"divider_on7.png"
+							"divider_on8.png"
+							"divider_on9.png"
+							"divider_on10.png"
+							"divider_on11.png"
+						]
+						AnimationInterval = 0.01
+						Size = [2, 1]
+					}
+				]
+			}
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "walls.png"
+						Size = [3, 2]
+					}
+				]
+			}
+		}
+
+		AirlockOpenToggle
+		{
+			Type = CrewDestinationProximityToggle
+			Distance = 2
+		}
+		RoofDoorSprite
+		{
+			Type = OpenCloseSprite
+			Location = [1.5, 1.5]
+			OperationalToggle = AirlockOpenToggle
+			Layer = "roofs"
+			OpenDamageLevels
+			[
+				{
+					AnimationFiles
+					[
+						"roof1.png"
+						"roof2.png"
+						"roof3.png"
+						"roof4.png"
+						"roof5.png"
+						"roof6.png"
+						"roof7.png"
+						"roof8.png"
+						"roof9.png"
+						"roof10.png"
+						"roof11.png"
+					]
+					NormalsAnimationFiles
+					[
+						"roof1_normals.png"
+						"roof2_normals.png"
+						"roof3_normals.png"
+						"roof4_normals.png"
+						"roof5_normals.png"
+						"roof6_normals.png"
+						"roof7_normals.png"
+						"roof8_normals.png"
+						"roof9_normals.png"
+						"roof10_normals.png"
+						"roof11_normals.png"
+					]
+					Size = [3, 3]
+					AnimationInterval = 0.01
+					AnimationStartTime = MinValue
+					ClampAnimation = true
+				}
+			]
+			ClosedDamageLevels
+			[
+				{
+					AnimationFiles
+					[
+						"roof11.png"
+						"roof10.png"
+						"roof9.png"
+						"roof8.png"
+						"roof7.png"
+						"roof6.png"
+						"roof5.png"
+						"roof4.png"
+						"roof3.png"
+						"roof2.png"
+						"roof1.png"
+					]
+					NormalsAnimationFiles
+					[
+						"roof11_normals.png"
+						"roof10_normals.png"
+						"roof9_normals.png"
+						"roof8_normals.png"
+						"roof7_normals.png"
+						"roof6_normals.png"
+						"roof5_normals.png"
+						"roof4_normals.png"
+						"roof3_normals.png"
+						"roof2_normals.png"
+						"roof1_normals.png"
+					]
+					Size = [3, 3]
+					AnimationInterval = 0.01
+					AnimationStartTime = MinValue
+					ClampAnimation = true
+				}
+			]
+		}
+		InnerDoorSprite
+		{
+			Type = OpenCloseSprite
+			Location = [1.5, 1.5]
+			OperationalToggle = AirlockOpenToggle
+			Layer = "doodads_low"
+			OpenDamageLevels
+			[
+				{
+					AnimationFiles
+					[
+						"door1.png"
+						"door2.png"
+						"door3.png"
+						"door4.png"
+						"door5.png"
+						"door6.png"
+						"door7.png"
+						"door8.png"
+						"door9.png"
+						"door10.png"
+						"door11.png"
+					]
+					Size = [3, 1]
+					AnimationInterval = 0.01
+					AnimationStartTime = MinValue
+					ClampAnimation = true
+				}
+			]
+			ClosedDamageLevels
+			[
+				{
+					AnimationFiles
+					[
+						"door11.png"
+						"door10.png"
+						"door9.png"
+						"door8.png"
+						"door7.png"
+						"door6.png"
+						"door5.png"
+						"door4.png"
+						"door3.png"
+						"door2.png"
+						"door1.png"
+					]
+					Size = [3, 1]
+					AnimationInterval = 0.01
+					AnimationStartTime = MinValue
+					ClampAnimation = true
+				}
+			]
+		}
+
+		AirVentingSpriteA : &<./Data/ships/terran/airlock/airlock.rules>/Part/Components/AirVentingSprite
+		{
+			Location = [1.25, 1.5]
+		}
+
+		AirVentingSpriteB : &AirVentingSpriteA
+		{
+			Location = [1.75, 1.5]
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/MedPartDestroyedDry
+			Location = [1.5, 2]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [3, 3]
+		}
+	}
+
+	Stats
+	{
+		StorageTiles = 2
+	}
+}

@@ -1,0 +1,45 @@
+Components : &<../../rocket_silo/he_rocket/rocket_launcher_he.rules>/Components
+{
+	WeaponA : ~/WeaponBase
+	{
+		Location = [0.34375, 1]
+		ShowExplicitTarget = false
+		Emitter = EmitterA
+	}
+
+	EmitterA : ~/EmitterBase
+	{
+		ChainedTo = WeaponA
+		FireTrigger = WeaponA
+		GetTargetFrom = WeaponA
+		AmmoStorage = RocketStorageA
+	}
+
+	WeaponB : ~/WeaponBase
+	{
+		Location = [0.65625, 1]
+		ShowExplicitTarget = false
+		Emitter = EmitterB
+	}
+
+	EmitterB : ~/EmitterBase
+	{
+		ChainedTo = WeaponB
+		FireTrigger = WeaponB
+		GetTargetFrom = WeaponB
+		AmmoStorage = RocketStorageB
+	}
+}
+
+RocketStorageBase = &<../../rocket_silo/he_rocket/rocket_launcher_he.rules>/RocketStorageBase
+
+WeaponBase = &<../../rocket_silo/he_rocket/rocket_launcher_he.rules>/WeaponBase
+
+EmitterBase : &<../../rocket_silo/he_rocket/rocket_launcher_he.rules>/EmitterBase
+{
+	Bullet = &<rocket/rocket.rules>
+}
+
+LaunchEffectBase = &<../../rocket_silo/he_rocket/rocket_launcher_he.rules>/LaunchEffectBase
+
+RocketStats = &<../../rocket_silo/he_rocket/rocket_launcher_he.rules>/RocketStats

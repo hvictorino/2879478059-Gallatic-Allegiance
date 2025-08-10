@@ -1,0 +1,251 @@
+CategoryNouns
+{
+	CoreShieldSingular = "Основной Щит"
+	CoreShieldPlural = "Основные Щиты"
+}
+
+Inputs
+{
+	PartToggles
+	{
+		thruster_orange = "Цвет Двигателя: Оранжевый"
+		thruster_blue = "Цвет Двигателя: Синий"
+		thruster_green = "Цвет Двигателя: Зеленый"
+		thruster_yellow = "Цвет Двигателя: Желтый"
+		thruster_purple = "Цвет Двигателя: Фиолетовый"
+		thruster_red = "Цвет Двигателя: Красный"
+		thruster_white = "Цвет Двигателя: Белый"
+		
+		windows_on_off_off = "Детализация Крыши: Выкл."
+		windows_on_off_on = "Детализация Крыши: Вкл."
+	}
+}
+
+Parts
+{
+	//Large Airlock
+	AirlockLarge = "Большой Воздушный Шлюз"
+	AirlockLargeIcon = &AirlockLarge
+	AirlockLargeDesc = "Большой Воздушный Шлюз позволяющий экипажу покидать и возвращатся на корабль, будь это для добычи, транспортировки, подбора ресурсов или для перемещения между кораблями. Также имеет две ячейки хранения для ресурсов."
+
+	//Small Antigrav
+	AntigravSmall = "Маленький Антигравитационный Двигатель"
+	AntigravSmallIcon = "Маленький Антигав."
+	AntigravSmallDesc = "Антигравы это маленькие двигатели которые можно поставить внутри корабля. Они выдают малую движущую мощнось в любую сторону, однако весьма прожорливые на энергию учитывая их слабость."
+
+	//Small Beam PD
+	BeamPDSmall = "Маленькая Лучевая Защитная Установка"
+	BeamPDSmallIcon = "Маленькая Лучевая ЗУ"
+	BeamPDSmallDesc = "<b><yellow>Фракция:</yellow> Альянс Ориона</b> \n\nМаленькая защитная установка стреляющая лазерами по снарядам, повреждая или вовсе уничтожая снаряды с большой точностью."
+
+	//Large Beam PD
+	BeamPDLarge = "Большая Лучевая Защитная Установка"
+	BeamPDLargeIcon = "Большая Лучевая ЗУ"
+	BeamPDLargeDesc = "<b><yellow>Фракция:</yellow> Альянс Ориона</b> \n\nМмаленькая защитная установка стреляющая лазерами очередью три раза по снарядам, повреждая или вовсе уничтожая снаряды с большой точностью."
+
+	//Crew Quarters Walkthrough
+	CrewQuartersWalkThrough = "Жилые Каюты (Проходные)"
+	CrewQuartersWalkThroughIcon = "Каюты (Проходные)"
+	CrewQuartersWalkThroughDesc = "Дает возможность для найма четырех членов экипажа, Дополнительо позволяя другому персоналу корабля проходить через комнату"
+
+	//Command Booster
+	CommandBooster = "Внешний Доп. Коммандный Компьютер"
+	CommandBoosterIcon = "Коммандный Бустер"
+	CommandBoosterDesc = "Внешний Доп. Коммандный Компьютер, также известен как Коммандный Бустер, дает <good>+15<image name='command_points' colored='true'/></good> Очков Коммандования когда пристроен вплотную к капитанкой рубке любого типа. \n\n"\
+						 "Во избежание сбоев в системе только один доп. коммандный комьпютер будет подключен к одной капитанской рубке"
+
+	//Small CIWS Unit
+	CIWSSmall = "Маленькая ПСПЗ Туррель"
+	CIWSSmallIcon = "Маленькая ПСПЗ"
+	CIWSSmallDesc = "<b><yellow>Фракция:</yellow> Терранская Планетарная Федерация</b> \n\nМаленькая Плазменная Система Пулеметной Защиты стреляет плазменными пулями очередями, и может либо повредить либо уничтожить снаряды и ракеты."
+
+	//Large CIWS Unit
+	CIWSLarge = "Большая ПСПЗ Туррель"
+	CIWSLargeIcon = "Большая ПСПЗ"
+	CIWSLargeDesc = "<b><yellow>Фракция:</yellow> Терранская Планетарная Федерация</b> \n\nБольшая Плазменная Система Пулеметной Защиты стреляет плазменными пулями не останавливаясь, и может либо повредить либо уничтожить снаряды и ракеты."
+
+	//Fighter Energy Cannons
+	EnergyCannons = "Лазерная Пушка"
+	EnergyCannonsDesc = "Лазерная пушка это компактное лазерное вооружение которое можно поставить за блоками брони, Что делает её крайне полезной для истребителей."
+
+	EnergyCannon = "Лазерная пушка"
+	EnergyCannonIcon = &EnergyCannon
+	EnergyCannonLeft = "Лазерная пушка (Левая)"
+	EnergyCannonLeftIcon = "Лазерная Пушка (Лев)"
+	EnergyCannonDesc = "Компактное лазерное вооружение которое можно поставить за блоками брони."
+
+	//Long Fighter Energy Cannons
+	EnergyCannonLong = "Длинная лазерная пушка"
+	EnergyCannonLongIcon = "Лазерная Пушка"
+	EnergyCannonLongLeft = "Длинная Лазерная Пушка (Левая)"
+	EnergyCannonLongLeftIcon = "Лазерная Пушка (Лев)"
+	EnergyCannonLongDesc = "Удлиненная версия компактной лазерной пушки которую можно установить за броней."
+
+	//Fighter Miniguns
+	EnergyMiniguns = "Лазерный Миниган"
+	EnergyMinigunsDesc = "Лазерные Миниганы компактные, быстро-стреляющие версии обычных лазерных пушек. Они неточные, Однако крайне полезные для столкновений на близких дистанциях."
+
+	EnergyMinigun = "Лазерный Миниган"
+	EnergyMinigunIcon = &EnergyMinigun
+	EnergyMinigunLeft = "Лазерный Миниган (Левый)"
+	EnergyMinigunLeftIcon = "Лазерный Миниган (Лев)"
+	EnergyMinigunDesc = "Скорострельный миниган который можно поставить за броней."
+
+	//Fire Room
+	FireRoom = "Комната огнетушения"
+	FireRoomIcon = &FireRoom
+	FireRoomDesc = "Неуязвимая к огню комната, имеющая в себе два огнетушителя."
+
+	//Gauss Cannon
+	CannonGauss = "Пушка Гаусса"
+	CannonGaussIcon = &CannonGauss
+	CannonGaussDesc = "Стреляет заряженными пушечными снарядами, которые с легкостью пробивают щиты и корабли."
+
+	//Heavy Machine Gun
+	MachineGunHeavy = "Тяжелый Энергетический Пулемет"
+	MachineGunHeavyIcon = "Тяж. Энергетический ПМ."
+	MachineGunHeavyDesc = "Стреляет энергетическими снарядами крайне быстро. Предназначен для боев на малой дистанции, однако можно успешно раздражать и мешать врагу издалека."
+
+	//Dual Heavy Machine Gun
+	MachineGunHeavyDual = "Двуствольный Тяжелый Энергетический Пулемет."
+	MachineGunHeavyDualIcon = "Двуствол. Тяж. Энергетический ПМ."
+	MachineGunHeavyDualDesc = "Двуствольная версия и так Тяжелого Пулемета, Имеет более вместительную батарею а также улучшенную точность."
+
+	//Missile Silo
+	MissileSilo = "Пусковые шахты"
+	MissileSiloIcon = &MissileSilo
+	MissileSiloDesc = "Прям как ракетная установка, Только ракеты можно запускать изнутри корабля. Стреляет только Фугасными ракетами."
+
+	//Small Particle Cannon
+	ParticleCannonSmall = "Пушка Частиц"
+	ParticleCannonSmallDesc = "Пушка Частиц это модульное оружие которое стреляет разогнаными снарядами."
+
+	ParticleCannonSmallLoader = "Загрузчик Пушки Частиц"
+	ParticleCannonSmallLoaderIcon = "Загрузчик PAC"
+	ParticleCannonSmallLoaderDesc = "<b><yellow>Фракция:</yellow> Терранская Планетарная Федерация</b> \n\nОбязательная часть для строительвста Пушки Частиц, заряжает пушку снарядами и энергией для выстрела."
+
+	ParticleCannonSmallBarrelExtender = "Удленнитель Пушки Частиц"
+	ParticleCannonSmallBarrelExtenderIcon = "Удленнитель PAC"
+	ParticleCannonSmallBarrelExtenderDesc = "<b><yellow>Фракция:</yellow> Терранская Планетарная Федерация</b> \n\nОпциональная часть для строительвста Пушки Частиц, удленнитель пушки улучшает дальнобойность, а так же скорость снаряда и его урон."
+
+	ParticleCannonSmallBarrel = "Дуло Пушки Частиц"
+	ParticleCannonSmallBarrelIcon = "Дуло PAC"
+	ParticleCannonSmallBarrelDesc = "<b><yellow>Фракция:</yellow> Терранская Планетарная Федерация</b> \n\nОбязательная часть для строительвста Пушки Частиц, дуло Пушки Частиц позволяет из нее стрелять."
+
+	//Large Particle Cannon
+	ParticleCannonLarge = "Большая Пушка Частиц"
+	ParticleCannonLargeDesc = "Большая Пушка Частиц это модульное оружие, стреляющее пробивающими снарядами, которые создают Э.М.И эффект в процессе пробития вражеского корабля."
+
+	ParticleCannonLargeLoader = "Большой Модуль Загрузки Пушки Частиц"
+	ParticleCannonLargeLoaderIcon = "Большой Мод. Загрузки ПЧ"
+	ParticleCannonLargeLoaderDesc = "<b><yellow>Фракция:</yellow> Терранская Планетарная Федерация</b> \n\nОбязательная часть во время строительства Пушки Частиц, загрузчик пушки частиц заряжает пушку снарядами и энергией для стрельбы из Большой Пушки Частиц. \n\n"\
+									"Большая Пушка Частиц это модульное оружие, стреляющее пробивающими снарядами, которые создают Э.М.И эффект в процессе пробития вражеского корабля."
+
+	ParticleCannonLargeExtender = "Большой Удленнитель Пушки Частиц"
+	ParticleCannonLargeExtenderIcon = "Большой Удленнитель ПЧ"
+	ParticleCannonLargeExtenderDesc = "<b><yellow>Фракция:</yellow> Терранская Планетарная Федерация</b> \n\nОпциональная часть для строительвста Большой Пушки Частиц, удленнитель большой пушки улучшает дальнобойность, а так же скорость снаряда и его урон. \n\n"\
+									"Большая Пушка Частиц это модульное оружие, стреляющее пробивающими снарядами, которые создают Э.М.И эффект в процессе пробития вражеского корабля."
+
+	ParticleCannonLargeBarrelExtender = "Большой Удленнитель Пушки Частиц (Внешний)"
+	ParticleCannonLargeBarrelExtenderIcon = "Большой Удленнитель ПЧ (Внеш.)"
+	ParticleCannonLargeBarrelExtenderDesc = "<b><yellow>Фракция:</yellow> Терранская Планетарная Федерация</b> \n\nОпциональная часть для строительвста Большой Пушки Частиц, удленнитель большой пушки улучшает дальнобойность, а так же скорость снаряда и его урон. Внешний Удленитель более прочный, однако для его зарядки нужно прямая зарядка от других удленителей или от зарядника пушки, означая что экипаж не может их заряжать вручную. \n\n"\
+									"Большая Пушка Частиц это модульное оружие, стреляющее пробивающими снарядами, которые создают Э.М.И эффект в процессе пробития вражеского корабля."
+
+	ParticleCannonLargeBarrel = "Большое Дуло Пушки Частиц"
+	ParticleCannonLargeBarrelIcon = "Большое Дуло ПЧ"
+	ParticleCannonLargeBarrelDesc = "<b><yellow>Фракция:</yellow> Терранская Планетарная Федерация</b> \n\nОбязательная часть для строительвста Пушки Частиц, дуло Пушки Частиц позволяет из нее стрелять. \n\n"\
+									"Большая Пушка Частиц это модульное оружие, стреляющее пробивающими снарядами, которые создают Э.М.И эффект в процессе пробития вражеского корабля."
+
+	//Phase Thrusters
+	PhaseThrusterSmall = "Маленький Фазовый двигатель"
+	PhaseThrusterSmallIcon = &PhaseThrusterSmall
+	PhaseThrusterSmallDesc = "Маленький маломощный двигатель для маневрирования."
+
+	PhaseThrusterSmallAngled = "Маленький Фазовый двигатель (Наклоненный)"
+	PhaseThrusterSmallAngledIcon = &PhaseThrusterSmall
+
+	PhaseThrusterSmallInset = "Маленький Фазовый двигатель (Усилительный)"
+	PhaseThrusterSmallInsetIcon = &PhaseThrusterSmall
+
+	PhaseThrusterMed = "Средний Фазовый Двигатель"
+	PhaseThrusterMedIcon = "Сред. Фазовый Двигатель"
+	PhaseThrusterMedDesc = "Более мощная версия фаозвого двигателя, так же как и предшедствующие, используется для маневрирования."
+
+	PhaseThrusterMedAngled = "Средний Фазовый Двигатель (Наклоненный)"
+	PhaseThrusterMedAngledIcon = &PhaseThrusterMedIcon
+
+	PhaseThrusterMedInset = "Средний Фазовый Двигатель (Усилительный)"
+	PhaseThrusterMedInsetIcon = &PhaseThrusterMedIcon
+
+	//Plasma Thrusters
+	PlasmaThrusterSmall = "Маленький Плазма Двигатель"
+	PlasmaThrusterSmallIcon = &PlasmaThrusterSmall
+	PlasmaThrusterSmallDesc = "Плазменные двигатели имеют большую скорость чем свои стандартные версии, однако более дорогие, требуют больше топлива и не имеют инертной тяги."
+
+	PlasmaThrusterMed = "Стандартный Плазма Двигатель"
+	PlasmaThrusterMedIcon = "Стандарт. Плазма Двигатель"
+	PlasmaThrusterMedDesc = &PlasmaThrusterSmallDesc
+
+	PlasmaThrusterLarge = "Большой Плазма Двигатель"
+	PlasmaThrusterLargeIcon = "Большой Плазма Двигатель"
+	PlasmaThrusterLargeDesc = &PlasmaThrusterSmallDesc
+
+	PlasmaThrusterHuge = "Огромный Плазма Двигатель"
+	PlasmaThrusterHugeIcon = "Огромный Плазма Двигатель"
+	PlasmaThrusterHugeDesc = &PlasmaThrusterSmallDesc
+
+	//Phantom Reactor
+	ReactorPhantom = "Реактор класса Фантом"
+	ReactorPhantomIcon = "Реактор Фантом"
+	ReactorPhantomDesc = "Реактор меньше обычного, выдающий в половину меньше энергии чем обычный, стоит следовательно дешевле."
+
+	//Fighter Turret
+	TurretFighter = "Лазерная Туррель Истребителя"
+	TurretFighterIcon = "Туррель Истребителя"
+	TurretFighterDesc = "Одноствольная Высокоточная туррель на крыше наносящее относительно малый урон."
+
+	//Medium Turret
+	TurretMed = "Средняя Лазерная Туррель"
+	TurretMedIcon = "Сред. Туррель"
+	TurretMedDesc = "Двуствольная высокоточная туррель наносящая средний урон."
+
+	//Large Turret
+	TurretLarge = "Большая Лазерная Туррель"
+	TurretLargeIcon = "Большая туррель"
+	TurretLargeDesc = "Двуствольная высокоточная туррель наносащяя большой урон."
+}
+
+PartToggles
+{
+	ThrusterOrange = "Цвет Двигателя: Оранжевый"
+	ThrusterBlue = "Цвет Двигателя: Оранжевый"
+	ThrusterGreen = "Цвет Двигателя: Зеленый"
+	ThrusterYellow = "Цвет Двигателя: Желтый"
+	ThrusterPurple = "Цвет Двигателя: Фиолетовый"
+	ThrusterRed = "Цвет Двигателя: Красный"
+	ThrusterWhite = "Цвет Двигателя: Белый"
+
+	WindowsOnOff_Off = "Детализация Крыши: Выкл."
+	WindowsOnOff_On = "Детализация Крыши: Вкл."
+}
+
+Stats
+{
+	BulletVolleyFmt = "<white>Bullets per Volley:</white> <good>{0}</good> <gray>Per Volley</gray>"
+	ParticleCannonNotes = "<gray>ВАЖНО: Урон, Пробитие, Дальнобойность, Скорость Снаряда, и Потребление Энергии повышается с каждым удленнителем.</gray>"
+}
+
+StatCategories
+{
+	//Shots
+	BeamPDShot = "Лучевой ПВО Выстрел"
+	CIWSShot = "Плазменный ПВО Снаряд"
+	FighterWeapons = "Лазерный Згусток"
+	GaussShot = "Снаряд Пушки Гаусса"
+	MinigunShot = "Миниган Лазер"
+	ParticleCannonShot = "Снаряд Пушки Частиц"
+	MachineGunBolt = "Пулеметный Энергетический Выстрел"
+
+	//Buffs
+	ParticleCannonBuff = "Усиление Пушки Частиц"
+}

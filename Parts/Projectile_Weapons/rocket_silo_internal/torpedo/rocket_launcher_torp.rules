@@ -1,0 +1,46 @@
+Components : &<../../rocket_silo/torpedo/rocket_launcher_torp.rules>/Components
+{
+	WeaponA : ~/WeaponBase
+	{
+		Location = [0.34375, 1]
+		ShowExplicitTarget = false
+		Emitter = EmitterA
+	}
+
+	EmitterA : ~/EmitterBase
+	{
+		ChainedTo = WeaponA
+		FireTrigger = WeaponA
+		GetTargetFrom = WeaponA
+		AmmoStorage = RocketStorageA
+	}
+
+	WeaponB : ~/WeaponBase
+	{
+		Location = [0.65625, 1]
+		ShowExplicitTarget = false
+		Emitter = EmitterB
+	}
+
+	EmitterB : ~/EmitterBase
+	{
+		ChainedTo = WeaponB
+		FireTrigger = WeaponB
+		GetTargetFrom = WeaponB
+		AmmoStorage = RocketStorageB
+	}
+}
+
+RocketStorageBase = &<../../rocket_silo/torpedo/rocket_launcher_torp.rules>/RocketStorageBase
+
+WeaponBase = &<../../rocket_silo/torpedo/rocket_launcher_torp.rules>/WeaponBase
+
+EmitterBase : &<../../rocket_silo/torpedo/rocket_launcher_torp.rules>/EmitterBase
+{
+	Type = BulletEmitter
+	Bullet = &<torpedo/torpedo.rules>
+}
+
+LaunchEffectBase = &<../../rocket_silo/torpedo/rocket_launcher_torp.rules>/EmitterBase
+
+RocketStats = &<../../rocket_silo/torpedo/rocket_launcher_torp.rules>/EmitterBase/RocketStats

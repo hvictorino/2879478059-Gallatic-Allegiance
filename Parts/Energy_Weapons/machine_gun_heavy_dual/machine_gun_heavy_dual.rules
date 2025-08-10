@@ -1,0 +1,764 @@
+Part : <./Data/ships/terran/base_part_terran.rules>/Part
+{
+	NameKey = "Parts/MachineGunHeavyDual"
+	IconNameKey = "Parts/MachineGunHeavyDualIcon"
+	ID = ultranova.machine_gun_heavy_dual
+	OtherIDs = [ultranova.alliance_heavymachinegun_dual, ultranova.federation_heavymachinegun_dual]
+	EditorGroup = "WeaponsEnergy"
+	DescriptionKey = "Parts/MachineGunHeavyDualDesc"
+	Resources
+	[
+		[steel, 84]
+		[coil, 29]
+	]
+	TypeCategories = [weapon, uses_ammo, is_crewed]
+	Size = [3, 3]
+	PhysicalRect = [0, 1, 3, 2]
+	SaveRect = &PhysicalRect
+	SelectionPriority = 1
+	SelectionTypeByRotation = true
+	SelectionTypeID = "HMG"
+	MaxHealth = 21000
+	InitialPenetrationResistance = 5
+	PenetrationRectType = Normal
+	ProhibitAbove = 2
+	ReceivableBuffs : ^/0/ReceivableBuffs []
+	AllowedDoorLocations
+	[
+		[-1, 1]
+		[-1, 2]
+		[0, 3]
+		[1, 3]
+		[2, 3]
+		[3, 2]
+		[3, 1]
+	]
+	ForceManhattanPathInPart = true
+	BlockedTravelCells
+	[
+		[1, 1]
+	]
+	ExternalWallsByCell
+	[
+		{
+			Key = [0, 1]
+			Value = [TopLeft, Left]
+		}
+		{
+			Key = [1, 1]
+			Value = None
+		}
+		{
+			Key = [2, 1]
+			Value = [TopRight, Right]
+		}
+	]
+	InternalWallsByCell
+	[
+		{
+			Key = [0, 0]
+			Value = [Left, TopLeft, Top, TopRight]
+		}
+		{
+			Key = [1, 0]
+			Value = [TopLeft, Top, TopRight]
+		}
+		{
+			Key = [2, 0]
+			Value = [Right, TopRight, Top, TopLeft]
+		}
+	]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [55.2, 92]
+	}
+	Components : ^/0/Components
+	{
+		IsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, PartCrew]
+			Mode = All
+		}
+
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+			RequiresCommand = false
+		}
+
+		CommandConsumer
+		{
+			Type = CommandConsumer
+			OperationalToggle = PowerToggle
+			CommandPoints = 4
+		}
+
+		FireModeToggle
+		{
+			Type = UIToggle
+			ToggleID = "fire_mode"
+			Default = 1
+			ToggledOnChoices = [0, 1, 2]
+		}
+		AutoTargetToggle
+		{
+			Type = ModeToggle
+			Mode = FireModeToggle
+			OnModes = [1, 2]
+		}
+		AutoFireToggle
+		{
+			Type = ModeToggle
+			Mode = FireModeToggle
+			OnMode = 2
+		}
+
+		BatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 14000
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+		BatteryConsumer
+		{
+			Type = ResourceConsumer
+			ResourceType = battery
+			Storage = BatteryStorage
+			DefaultPriority = &/PRIORITIES/Weapon_Supply
+			ResupplyThreshold = 500
+			OperationalToggle = PowerToggle
+		}
+
+		External_Walls_Graphics
+		{
+			Type = Graphics
+			Location = [1.5, 0.5]
+			Walls
+			{
+				Layer = "external_walls"
+				DamageLevels
+				[
+					{
+						File = "./Data/ships/terran/cannon_large/external_walls.png"
+						NormalsFile = "./Data/ships/terran/cannon_large/external_walls_normals.png"
+						Size = [3, 2]
+					}
+					{
+						File = "./Data/ships/terran/cannon_large/external_walls_33.png"
+						NormalsFile = "./Data/ships/terran/cannon_large/external_walls_normals_33.png"
+						Size = [3, 2]
+					}
+					{
+						File = "./Data/ships/terran/cannon_large/external_walls_66.png"
+						NormalsFile = "./Data/ships/terran/cannon_large/external_walls_normals_66.png"
+						Size = [3, 2]
+					}
+				]
+			}
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [1.5, 1]
+			OperationalToggle = IsOperational
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "floor.png"
+						Size = [3, 4]
+					}
+					{
+						File = "floor_33.png"
+						Size = [3, 4]
+					}
+					{
+						File = "floor_66.png"
+						Size = [3, 4]
+					}
+				]
+			}
+			OperationalLighting
+			{
+				Layer = "lights_add"
+				DamageLevels
+				[
+					{
+						File = "./Data/ships/terran/cannon_large/lights.png"
+						Size = [3, 4]
+					}
+				]
+			}
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "./Data/ships/terran/cannon_large/walls.png"
+						Size = [3, 4]
+					}
+					{
+						File = "./Data/ships/terran/cannon_large/walls_33.png"
+						Size = [3, 4]
+					}
+					{
+						File = "./Data/ships/terran/cannon_large/walls_66.png"
+						Size = [3, 4]
+					}
+				]
+			}
+			Roof
+			{
+				Layer = "roofs"
+				Offset = [0, 0]
+				DamageLevels
+				[
+					{
+						File = "./Data/ships/terran/cannon_large/roof.png"
+						NormalsFile = "./Data/ships/terran/cannon_large/roof_normals.png"
+						Size = [3, 4]
+					}
+					{
+						File = "./Data/ships/terran/cannon_large/roof_33.png"
+						NormalsFile = "./Data/ships/terran/cannon_large/roof_normals_33.png"
+						Size = [3, 4]
+					}
+					{
+						File = "./Data/ships/terran/cannon_large/roof_66.png"
+						NormalsFile = "./Data/ships/terran/cannon_large/roof_normals_66.png"
+						Size = [3, 4]
+					}
+				]
+			}
+			OperationalRoofDoodad
+			{
+				Layer = "roof_doodads"
+				Offset = [0, 0.5]
+				DamageLevels
+				[
+					{
+						File = "./Data/ships/terran/cannon_large/roof_glows.png"
+						Size = [3, 3]
+					}
+					{
+						File = "./Data/ships/terran/cannon_large/roof_glows_33.png"
+						Size = [3, 3]
+					}
+					{
+						File = "./Data/ships/terran/cannon_large/roof_glows_66.png"
+						Size = [3, 3]
+					}
+				]
+			}
+			OperationalRoofLighting
+			{
+				Layer = "roof_lights_fancy"
+				Offset = [0, -0.03125]
+				DamageLevels
+				[
+					{
+						File = "./Data/ships/common/light_blob.png"
+						Size = [6.5, 6.5]
+						Z = 0.5 // Controls the "height" of the light for the purposes of normal mapping. Set to -1 (or any negative number) to disable normal lighting for this light.
+						VertexColor = [255*1.5, 0, 0]
+					}
+				]
+			}
+		}
+
+		Turret
+		{
+			Type = TurretWeapon
+			Location = [1.5, 1] // Relative to upper-left corner of unrotated part.
+			Rotation = -90d // Relative to unrotated part.
+			OperationalToggle = IsOperational
+			AutoFireToggle = AutoFireToggle
+			FireInterval = 0.1
+			FiringArc = 100d
+			RotateSpeed = 30d
+			FireThresholdAngle = 1d
+			AIFirepowerRating = 2400
+			Emitter = BulletEmitterBase
+			FirePermissionToggle = FireModeToggle
+
+			AutoTargets
+			[
+				{
+					TargetType = ShipParts
+					Toggle = AutoTargetToggle
+				}
+			]
+
+			BlueprintArcSprite
+			{
+				Texture = &/INDICATORS/WeaponArc
+				Size = [0, 1.5]
+				Color = [255, 0, 0, 63]
+			}
+			BlueprintArcRadius = 10
+			BlueprintArcSpriteSegments = 64
+
+			CoverageSectorArc
+			{
+				Texture = &/INDICATORS/VerticalGradient
+				VertexColor = [255, 255, 255, 51]
+				QuadCount = 64
+			}
+		}
+
+		ReloadProgressBar
+		{
+			Type = ProgressBar
+			OperationalToggle = IsOperational
+			ShowProgressFor = Turret
+		}
+
+		BulletEmitterBase
+		{
+			Type = BulletEmitter
+			ChainedTo = Turret
+			FireTrigger//None, but field is required
+			GetTargetFrom = Turret
+			Location = [2.5, 0]
+			OperationalToggle = IsOperational
+			Bullet = &<../machine_gun_heavy/energy_shot/energy_shot.rules>
+			Spread = [-1.5d, 1.5d]
+			ResourceStorage = BatteryStorage
+			ResourcesUsed = 50
+			MinResourcesUsed = 1
+		}
+
+		BulletEmitterLeft : &BulletEmitterBase
+		{
+			Type = BulletEmitter
+			ChainedTo = Turret
+			FireTrigger = Turret
+			Location = [2.5, -0.203125]
+		}
+
+		BulletEmitterRight : &BulletEmitterBase
+		{
+			Type = BulletEmitter
+			ChainedTo = Turret
+			FireTrigger = Turret
+			Location = [2.5, 0.203125]
+		}
+
+		FireEffectLeft : &<../machine_gun_heavy/machine_gun_heavy.rules>/Part/Components/FireEffect
+		{
+			Type = TriggeredEffects
+			ChainedTo = BulletEmitterLeft
+			Trigger = BulletEmitterLeft
+			Location = [0.25, 0]
+		}
+
+		FireEffectRight : &<../machine_gun_heavy/machine_gun_heavy.rules>/Part/Components/FireEffect
+		{
+			Type = TriggeredEffects
+			ChainedTo = BulletEmitterRight
+			Trigger = BulletEmitterRight
+			Location = [0.25, 0]
+		}
+
+		CrewLocation1
+		{
+			Type = CrewLocation
+			ChainedTo = Turret
+			Location = [-.365, -.545]
+			Rotation = 45d
+		}
+		CrewLocation2
+		{
+			Type = CrewLocation
+			ChainedTo = Turret
+			Location = [-.365, .6]
+			Rotation = 90d
+		}
+		PartCrew
+		{
+			Type = PartCrew
+			Crew = 2
+			DefaultPriority = &/PRIORITIES/Weapon_Crew
+			PrerequisitesBeforeCrewing = [PowerToggle]
+			HighPriorityPrerequisites = [BatteryStorage]
+			CrewDestinations
+			[
+				[.95, 1.4]
+				[2.1, 1.4]
+			]
+			CrewLocations
+			[
+				CrewLocation1
+				CrewLocation2
+			]
+		}
+
+		TurretCollider
+		{
+			Type = CircleCollider
+			Location = &../Turret/Location
+			Radius = 1.155
+			Density = 1.5
+		}
+
+		TurretGraphics
+		{
+			Type = Graphics
+			ChainedTo = Turret
+			Location = [0, 0]
+			Rotation = 90d
+			OperationalToggle = IsOperational
+			Floor
+			{
+				Layer = "turrets"
+				DamageLevels
+				[
+					{
+						File = "turret_floor.png"
+						Size = [3, 3]
+					}
+					{
+						File = "turret_floor_33.png"
+						Size = [3, 3]
+					}
+					{
+						File = "turret_floor_66.png"
+						Size = [3, 3]
+					}
+				]
+			}
+			OperationalDoodad
+			{
+				Layer = "doodads_low"
+				Offset = [0, -0.09375]
+				DamageLevels
+				[
+					{
+						AnimationFiles
+						[
+							"./Data/ships/terran/cannon_large/console_on1.png"
+							"./Data/ships/terran/cannon_large/console_on2.png"
+							"./Data/ships/terran/cannon_large/console_on3.png"
+							"./Data/ships/terran/cannon_large/console_on4.png"
+							"./Data/ships/terran/cannon_large/console_on5.png"
+							"./Data/ships/terran/cannon_large/console_on6.png"
+							"./Data/ships/terran/cannon_large/console_on7.png"
+							"./Data/ships/terran/cannon_large/console_on8.png"
+						]
+						Size = [2, 1]
+						AnimationInterval = 0.15
+					}
+					{
+						AnimationFiles
+						[
+							"./Data/ships/terran/cannon_large/console_on1_33.png"
+							"./Data/ships/terran/cannon_large/console_on2_33.png"
+							"./Data/ships/terran/cannon_large/console_on3_33.png"
+							"./Data/ships/terran/cannon_large/console_on4_33.png"
+							"./Data/ships/terran/cannon_large/console_on5_33.png"
+							"./Data/ships/terran/cannon_large/console_on6_33.png"
+							"./Data/ships/terran/cannon_large/console_on7_33.png"
+							"./Data/ships/terran/cannon_large/console_on8_33.png"
+						]
+						Size = [2, 1]
+						AnimationInterval = 0.15
+					}
+					{
+						AnimationFiles
+						[
+							"./Data/ships/terran/cannon_large/console_on1_66.png"
+							"./Data/ships/terran/cannon_large/console_on2_66.png"
+							"./Data/ships/terran/cannon_large/console_on3_66.png"
+							"./Data/ships/terran/cannon_large/console_on4_66.png"
+							"./Data/ships/terran/cannon_large/console_on5_66.png"
+							"./Data/ships/terran/cannon_large/console_on6_66.png"
+							"./Data/ships/terran/cannon_large/console_on7_66.png"
+							"./Data/ships/terran/cannon_large/console_on8_66.png"
+						]
+						Size = [2, 1]
+						AnimationInterval = 0.15
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "doodads_low"
+				Offset = [0, -0.09375]
+				DamageLevels
+				[
+					{
+						File = "./Data/ships/terran/cannon_large/console_off.png"
+						Size = [2, 1]
+					}
+					{
+						File = "./Data/ships/terran/cannon_large/console_off_33.png"
+						Size = [2, 1]
+					}
+					{
+						File = "./Data/ships/terran/cannon_large/console_off_66.png"
+						Size = [2, 1]
+					}
+				]
+			}
+		}
+
+		BarrelGraphicsLeft
+		{
+			Type = Sprite
+			ChainedTo = Turret
+			Location = [1.125, -0.203125]
+			Rotation = 90d
+			Layer = "weapons"
+			ResetAnimationTrigger = Turret
+			AtlasSprite
+			{
+				AnimationFiles
+				[
+					"barrel2.png"
+					"barrel3.png"
+					"barrel4.png"
+					"barrel1.png"// Loop back to beginning and clamp there.
+				]
+				NormalsAnimationFiles
+				[
+					"barrel_normals2.png"
+					"barrel_normals3.png"
+					"barrel_normals4.png"
+					"barrel_normals1.png"
+				]
+				Size = [1, 3]
+				AnimationInterval = 0.025
+				AnimationStartTime = MinValue
+				ClampAnimation = true
+			}
+		}
+
+		BarrelGraphicsRight : &BarrelGraphicsLeft
+		{
+			Location = [1.125, 0.203125]
+			AtlasSprite : ^/0/AtlasSprite
+			{
+				MirrorU = true
+			}
+		}
+
+		LoadedBatterySprites
+		{
+			Type = ResourceSprites
+			ChainedTo = Turret
+			Location = [0.15625, 0]
+			Rotation = 90d
+			ResourceStorage = BatteryStorage
+			Layer = "doodads_high"
+			RangeLow = 0
+			RangeHigh = 8000
+			ResourceLevels
+			[
+				{
+					File = "batteries1.png"
+					Size = [1, 1]
+				}
+				{
+					File = "batteries2.png"
+					Size = [1, 1]
+				}
+				{
+					File = "batteries3.png"
+					Size = [1, 1]
+				}
+				{
+					File = "batteries4.png"
+					Size = [1, 1]
+				}
+				{
+					File = "batteries5.png"
+					Size = [1, 1]
+				}
+				{
+					File = "batteries6.png"
+					Size = [1, 1]
+				}
+				{
+					File = "batteries7.png"
+					Size = [1, 1]
+				}
+				{
+					File = "batteries8.png"
+					Size = [1, 1]
+				}
+			]
+		}
+
+		CapacitorBattery1
+		{
+			Type = ResourceSprites
+			Location = [2.09375, 2.5]
+			ResourceStorage = BatteryStorage
+			Layer = "doodads_low"
+			RangeLow = 8001
+			RangeHigh = 10000
+			ResourceLevels
+			[
+				{
+					File = "capacitor_batteries1.png"
+					Size = [1, 1]
+				}
+				{
+					File = "capacitor_batteries2.png"
+					Size = [1, 1]
+				}
+			]
+		}
+
+		CapacitorBattery2
+		{
+			Type = ResourceSprites
+			Location = [1.5, 2.5]
+			ResourceStorage = BatteryStorage
+			Layer = "doodads_low"
+			RangeLow = 10001
+			RangeHigh = 12000
+			ResourceLevels
+			[
+				{
+					File = "capacitor_batteries1.png"
+					Size = [1, 1]
+				}
+				{
+					File = "capacitor_batteries2.png"
+					Size = [1, 1]
+				}
+			]
+		}
+
+		CapacitorBattery3
+		{
+			Type = ResourceSprites
+			Location = [0.90625, 2.5]
+			ResourceStorage = BatteryStorage
+			Layer = "doodads_low"
+			RangeLow = 12001
+			RangeHigh = 14000
+			ResourceLevels
+			[
+				{
+					File = "capacitor_batteries1.png"
+					Size = [1, 1]
+				}
+				{
+					File = "capacitor_batteries2.png"
+					Size = [1, 1]
+				}
+			]
+		}
+
+		OperationEffects
+		{
+			Type = ToggleEffects
+			Location = [1.5, 1.5]
+			Toggle = IsOperational
+			ToggledOnMediaEffects = &/COMMON_EFFECTS/MachinesOn
+			ToggledOffMediaEffects = &/COMMON_EFFECTS/MachinesOff
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/BigPartDestroyed
+			Location = [1.5, 1.5]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [1.5, 1.5]
+			Layer = "indicators"
+			Indicators
+			[
+				// Turned off.
+				{
+					Toggle = PowerToggle
+					AtlasSprite
+					{
+						File = &/INDICATORS/PowerOff
+						Size = [1, 1]
+					}
+				}
+
+				// Out of power.
+				{
+					Toggle = BatteryStorage
+					Delay = &~/Part/Components/Turret/FireInterval
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoPower
+						Size = [1, 1]
+					}
+				}
+
+				// No crew.
+				{
+					Toggle = PartCrew
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoCrew
+						Size = [1, 1]
+					}
+				}
+			]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [3, 5]
+			Offset = [0, -1]
+		}
+	}
+
+	Stats
+	{
+		CrewRequired = &~/Part/Components/PartCrew/Crew
+		PowerCapacity = (&~/Part/Components/BatteryStorage/MaxResources) / 1000
+
+		RecPower = &../StatsByCategory/0/Stats/PowerPerSecond
+		RecCrew = (&CrewRequired) + (&RecPower) * 4
+	}
+
+	StatsByCategory
+	[
+		{
+			NameKey = "StatCategories/MachineGunBolt"
+			Stats
+			{
+				BulletVolley = 2
+				DamagePerShot = &~/Part/Components/BulletEmitterBase/Bullet/Components/Hit/HitOperational/HitEffects/0/Damage
+				DamagePerSecond = (&DamagePerShot) * (&ROF) * (&BulletVolley)
+				Damage = [&../DamagePerShot, &../DamagePerSecond]
+				ROF = 1 / (&~/Part/Components/Turret/FireInterval)
+				Range = &~/Part/Components/BulletEmitterBase/Bullet/Range
+				Arc = deg(&~/Part/Components/Turret/FiringArc)
+				TurretSpeed = deg(&~/Part/Components/Turret/RotateSpeed)
+				ShotSpeed = &~/Part/Components/BulletEmitterBase/Bullet/Speed
+				ShotHP = &~/Part/Components/BulletEmitterBase/Bullet/Components/Targetable/Health
+				PowerPerShot = (&~/Part/Components/BulletEmitterBase/ResourcesUsed) / 1000
+				PowerPerSecond = (&PowerPerShot) * (&ROF)
+				ShotPowerUsage = [&../PowerPerShot, &../PowerPerSecond]
+			}
+		}
+	]
+}

@@ -1,0 +1,40 @@
+Part : &<long_energy_cannon.rules>/Part
+{
+	NameKey = "Parts/EnergyCannonLongLeft"
+	IconNameKey = "Parts/EnergyCannonLongLeftIcon"
+	ID = ultranova.long_fighter_energy_cannon_left
+	OtherIDs = [ultranova.long_fighter_energy_cannon_right]
+	FlipWhenLoadingIDs = [ultranova.long_fighter_energy_cannon_right]
+	DescriptionKey = "Parts/EnergyCannonLongDesc"
+	IsFlippable = true
+	ProhibitRects
+	[
+		[fighter, [-2, -1, 2, 1]]
+	]
+
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon_left.png"
+			SampleMode = Linear
+		}
+		Size = [96, 48]
+	}
+
+	Components : ^/0/Components
+	{
+		Turret : &<long_energy_cannon.rules>/Part/Components/Turret
+		{
+			Rotation = -180d
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints_left.png"
+			Size = [4, 2]
+			Offset = [-1.5, -0.5]
+		}
+	}
+}

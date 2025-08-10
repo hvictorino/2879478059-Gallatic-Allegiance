@@ -1,0 +1,454 @@
+Part : &<../phase_thruster_med/phase_thruster_med.rules>/Part
+{
+	NameKey = "Parts/PhaseThrusterMedAngled"
+	IconNameKey = "Parts/PhaseThrusterMedAngledIcon"
+	ID = ultranova.phase_thruster_med_angled_L
+	OtherIDs = [ultranova.phase_thruster_med_angled_R]
+	FlipWhenLoadingIDs = [ultranova.phase_thruster_med_angled_R]
+	EditorGroup = "Flight"
+	DescriptionKey = "Parts/PhaseThrusterMedDesc"
+	Size = [2, 3]
+	PhysicalRect = [0, 0, 2, 2]
+	SaveRect = &PhysicalRect
+	IsFlippable = true
+	GenerateRectCollider = false
+	CustomCollider
+	[
+		[0, 0]
+		[2, 0]
+		[2, 2]
+		[0, 1]
+	]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [42.66, 64]
+	}
+	ExternalWallsByCell
+	[
+		{
+			Key = [0, 1]
+			Value = [Top, TopRight]
+		}
+		{
+			Key = [1, 1]
+			Value = [TopLeft, Top, TopRight, Right, BottomRight]
+		}
+	]
+	InternalWallsByCell
+	[
+		{
+			Key = [0, 1]
+			Value = [Left, TopLeft, BottomLeft]
+		}
+	]
+	Components : ^/0/Components
+	{
+		Collider
+		{
+			Type = PolygonCollider
+			Vertices
+			[
+				[0, 0]
+				[2, 0]
+				[2, 2]
+				[0, 1]
+			]
+		}
+
+		Graphics = &^/0/Graphics
+		NozzleGraphics
+		{
+			Type = Graphics
+			Location = [1, 1.5]
+			Rotation = -90d
+			Floor
+			{
+				Layer = "structure"
+				Offset = [-.5, 0]
+				DamageLevels
+				[
+					{
+						File = "nozzle.png"
+						NormalsFile = "nozzle_normals.png"
+						Size = [2, 2]
+					}
+				]
+			}
+			Walls
+			{
+				Layer = "external_walls"
+				DamageLevels
+				[
+					{
+						File = "external_walls.png"
+						NormalsFile = "./Data/ships/terran/armor_1x2_wedge/external_wall_normals.png"
+						Size = [1, 2]
+					}
+					{
+						File = "external_walls_33.png"
+						NormalsFile = "./Data/ships/terran/armor_1x2_wedge/external_wall_normals_33.png"
+						Size = [1, 2]
+					}
+					{
+						File = "external_walls_66.png"
+						NormalsFile = "./Data/ships/terran/armor_1x2_wedge/external_wall_normals_66.png"
+						Size = [1, 2]
+					}
+				]
+			}
+			Roof
+			{
+				Layer = "roofs"
+				DamageLevels
+				[
+					{
+						File = "./Data/ships/terran/armor_1x2_wedge/roof.png"
+						NormalsFile = "roof_normals.png"
+						Size = [1, 2]
+					}
+				]
+			}
+		}
+
+		BlueThrustComponents : ^/0/BlueThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = BlueThrustToggle
+			IncludeInBlueprints = true
+			Components : ^/0/Components
+			{
+				BlueGraphics : ^/0/BlueGraphics
+				{
+					Type = Graphics
+					Location = [1, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"blue/lights_B1.png"
+									"blue/lights_B2.png"
+									"blue/lights_B3.png"
+									"blue/lights_B4.png"
+									"blue/lights_B5.png"
+									"blue/lights_B4.png"
+									"blue/lights_B3.png"
+									"blue/lights_B2.png"
+								]
+								Size = [2, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofLighting : ^/0/OperationalRoofLighting
+					{
+						Offset = [0, 1]
+					}
+				}
+
+				BlueThrustEffects : ^/0/BlueThrustEffects
+				{
+					Location = [0.5, 0]
+				}
+			}
+		}
+
+		GreenThrustComponents : ^/0/GreenThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = GreenThrustToggle
+			IncludeInBlueprints = true
+			Components : ^/0/Components
+			{
+				GreenGraphics : ^/0/GreenGraphics
+				{
+					Type = Graphics
+					Location = [1, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"green/lights_G1.png"
+									"green/lights_G2.png"
+									"green/lights_G3.png"
+									"green/lights_G4.png"
+									"green/lights_G5.png"
+									"green/lights_G4.png"
+									"green/lights_G3.png"
+									"green/lights_G2.png"
+								]
+								Size = [2, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofLighting : ^/0/OperationalRoofLighting
+					{
+						Offset = [0, 1]
+					}
+				}
+
+				GreenThrustEffects : ^/0/GreenThrustEffects
+				{
+					Location = [0.5, 0]
+				}
+			}
+		}
+
+		OrangeThrustComponents : ^/0/OrangeThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = OrangeThrustToggle
+			IncludeInBlueprints = true
+			Components : ^/0/Components
+			{
+				OrangeGraphics : ^/0/OrangeGraphics
+				{
+					Type = Graphics
+					Location = [1, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"orange/lights_O1.png"
+									"orange/lights_O2.png"
+									"orange/lights_O3.png"
+									"orange/lights_O4.png"
+									"orange/lights_O5.png"
+									"orange/lights_O4.png"
+									"orange/lights_O3.png"
+									"orange/lights_O2.png"
+								]
+								Size = [2, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofLighting : ^/0/OperationalRoofLighting
+					{
+						Offset = [0, 1]
+					}
+				}
+
+				OrangeThrustEffects : ^/0/OrangeThrustEffects
+				{
+					Location = [0.5, 0]
+				}
+			}
+		}
+
+		PurpleThrustComponents : ^/0/PurpleThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = PurpleThrustToggle
+			IncludeInBlueprints = true
+			Components : ^/0/Components
+			{
+				PurpleGraphics : ^/0/PurpleGraphics
+				{
+					Type = Graphics
+					Location = [1, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"purple/lights_P1.png"
+									"purple/lights_P2.png"
+									"purple/lights_P3.png"
+									"purple/lights_P4.png"
+									"purple/lights_P5.png"
+									"purple/lights_P4.png"
+									"purple/lights_P3.png"
+									"purple/lights_P2.png"
+								]
+								Size = [2, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofLighting : ^/0/OperationalRoofLighting
+					{
+						Offset = [0, 1]
+					}
+				}
+
+				PurpleThrustEffects : ^/0/PurpleThrustEffects
+				{
+					Location = [0.5, 0]
+				}
+			}
+		}
+
+		RedThrustComponents : ^/0/RedThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = RedThrustToggle
+			IncludeInBlueprints = true
+			Components : ^/0/Components
+			{
+				RedGraphics : ^/0/RedGraphics
+				{
+					Type = Graphics
+					Location = [1, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"red/lights_R1.png"
+									"red/lights_R2.png"
+									"red/lights_R3.png"
+									"red/lights_R4.png"
+									"red/lights_R5.png"
+									"red/lights_R4.png"
+									"red/lights_R3.png"
+									"red/lights_R2.png"
+								]
+								Size = [2, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofLighting : ^/0/OperationalRoofLighting
+					{
+						Offset = [0, 1]
+					}
+				}
+
+				RedThrustEffects : ^/0/RedThrustEffects
+				{
+					Location = [0.5, 0]
+				}
+			}
+		}
+
+		YellowThrustComponents : ^/0/YellowThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = YellowThrustToggle
+			IncludeInBlueprints = true
+			Components : ^/0/Components
+			{
+				YellowGraphics : ^/0/YellowGraphics
+				{
+					Type = Graphics
+					Location = [1, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"yellow/lights_Y1.png"
+									"yellow/lights_Y2.png"
+									"yellow/lights_Y3.png"
+									"yellow/lights_Y4.png"
+									"yellow/lights_Y5.png"
+									"yellow/lights_Y4.png"
+									"yellow/lights_Y3.png"
+									"yellow/lights_Y2.png"
+								]
+								Size = [2, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofLighting : ^/0/OperationalRoofLighting
+					{
+						Offset = [0, 1]
+					}
+				}
+
+				YellowThrustEffects : ^/0/YellowThrustEffects
+				{
+					Location = [0.5, 0]
+				}
+			}
+		}
+
+		WhiteThrustComponents : ^/0/WhiteThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = WhiteThrustToggle
+			IncludeInBlueprints = true
+			Components : ^/0/Components
+			{
+				WhiteGraphics : ^/0/WhiteGraphics
+				{
+					Type = Graphics
+					Location = [1, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"white/lights_W1.png"
+									"white/lights_W2.png"
+									"white/lights_W3.png"
+									"white/lights_W4.png"
+									"white/lights_W5.png"
+									"white/lights_W4.png"
+									"white/lights_W3.png"
+									"white/lights_W2.png"
+								]
+								Size = [2, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofLighting : ^/0/OperationalRoofLighting
+					{
+						Offset = [0, 1]
+					}
+				}
+
+				WhiteThrustEffects : ^/0/WhiteThrustEffects
+				{
+					Location = [0.5, 0]
+				}
+			}
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [2, 3]
+		}
+	}
+}

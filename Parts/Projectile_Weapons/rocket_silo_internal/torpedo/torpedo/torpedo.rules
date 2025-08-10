@@ -1,0 +1,19 @@
+ID = ultranova.fighter_torpedo_internal
+Range = 400
+IdealRange = 225
+Speed = 60
+
+Components : &<../../../rocket_silo/torpedo/torpedo/torpedo.rules>/Components
+{
+	Sprite : &<../../../rocket_silo/torpedo/torpedo/torpedo.rules>/Components/Sprite
+	{
+		Type = Sprite
+		RenderBucket = BulletLower1
+	}
+
+	Hit : &<../../../rocket_silo/torpedo/torpedo/torpedo.rules>/Components/Hit
+	{
+		Type = SimpleHit
+		SourceShipLowCollisions = false
+	}
+}

@@ -1,0 +1,146 @@
+ID = "ultranova.assault_cannon_shot"
+Range = 350
+IdealRange = [60, 260]
+IdealRadius = [5, 50]
+Speed = 300
+
+Components
+{
+	Physics
+	{
+		Type = CirclePhysics
+		Radius = 0.2
+		Density = 0.0001
+	}
+
+	Death
+	{
+		Type = DeathByLifetime
+		// Lifetime will be auto-calculated based on range and speed.
+	}
+
+	Targetable
+	{
+		Type = Targetable
+		Health = 1000
+		TargetCategory = "laser"
+	}
+
+	Hit
+	{
+		Type = SimpleHit
+		FactorEffectsWith = Targetable
+
+		CrewCollisions = {Enemies=true; Junk=true}
+		HitCrew = &HitOperational
+
+		HitShield = &HitOperational
+		HitOperational
+		{
+			HitEffects
+			[
+				{
+					Type = ExplosiveDamage
+					TotalDamage = 7500
+					Radius = 3
+					Filter
+					{
+						Friendlies = true
+					}
+				}
+				{
+					Type = Impulse;
+					Impulse = 100;
+				}
+			]
+
+			MediaEffects
+			[
+				&<./Data/shots/laser_bolt_large/particles/laser_bolt_large_hit.rules>
+				&<./Data/shots/laser_bolt_large/particles/laser_bolt_large_flash.rules>
+				&<./Data/shots/laser_bolt_large/particles/laser_bolt_large_sparks.rules>
+				&<./Data/shots/laser_bolt_large/particles/laser_bolt_large_spikes.rules>
+				&<particles/shockwave.rules>
+
+				: /BASE_SOUNDS/AudioExterior
+				{
+					Sound = "./Data/shots/laser_bolt_large/laser_bolt_large_hit.wav"
+					Volume = .4
+					SpeedVariation = .4
+				}
+
+				: /BASE_SHAKE
+				{
+					ShakeAmount = .15
+					Duration = .5
+				}
+			]
+		}
+		HitStructural = &HitOperational
+
+		HitFriendly
+		{
+			MediaEffects
+			[
+				&<./Data/shots/laser_bolt_large/particles/laser_bolt_large_hit.rules>
+				&<particles/shockwave.rules>
+
+				: /BASE_SOUNDS/AudioExterior
+				{
+					Sound = "./Data/shots/laser_bolt_large/laser_bolt_large_hit.wav"
+					Volume = .3
+					SpeedVariation = .4
+				}
+			]
+		}
+	}
+
+	Sprite
+	{
+		Type = AnimatedSprite
+		Offset = [-1, 0]
+		ReduceScaleWith = Hit
+		ReduceScaleExponent = 0.5
+		Animation
+		{
+			AtlasSprite
+			{
+				Texture
+				{
+					File = "./Data/shots/laser_bolt_large/laser_bolt_large.png"
+					SampleMode = Linear
+					MipLevels = max
+				}
+				Size = [5, 2.5]
+			}
+			FrameCount = 8
+			FrameSize = [192, 128]
+			FramesPerRow = 2
+			FramesPerSecond = 30
+		}
+	}
+
+	GlowSprite
+	{
+		Type = Sprite
+		RenderBucket = BulletUpper2
+		Z = 0
+		IsLight = true
+		Sprite
+		{
+			Texture
+			{
+				File = "./Data/common_effects/particles/blob.png"
+				MipLevels = max
+				SampleMode = Linear
+			}
+			Size = [9, 9]
+			VertexColor = [255, 0, 0]
+			TargetBlendMode = Add
+			Shader = "./Data/common_effects/fancy_light.shader"
+			_litReflectiveStrength = 24
+			_litAdditiveStrength = 0.05
+			_unlitAdditiveStrength = 0.25
+		}
+	}
+}

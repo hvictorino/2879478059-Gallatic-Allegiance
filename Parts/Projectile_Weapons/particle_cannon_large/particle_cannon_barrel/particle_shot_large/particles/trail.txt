@@ -1,0 +1,164 @@
+Type = Particles
+Def
+{
+	EmitPerSecond = 0
+	EmitPerOneShot = 0
+	Initializers
+	[
+		{
+			Type = LocationToWorldSpace
+			LocationIn = location
+			LocationOut = location
+			Name = "Location to world space"
+			Enabled = true
+			UpdateAfterInit = false
+		}
+		{
+			Type = RotationToWorldSpace
+			LocationIn = location
+			LocationOut = location
+			Name = "Convert rotation to world space."
+			Enabled = true
+			UpdateAfterInit = false
+			RotationIn = rot
+			RotationOut = rot
+		}
+		{
+		        Type = AddFrameOfReference
+		        Name = "Add frame of reference"
+		        VelocityIn = velocity
+		        VelocityOut = velocity
+		        Enabled = true
+		        UpdateAfterInit = false
+		        VelocityInOut = velocity
+		}
+		{
+			Type = SetValue
+			DataOut = color
+			ValueType = Color
+			Value
+			{
+				Rf = 2
+				Gf = 0.82
+				Bf = 0.12
+				Af = 1//0.75
+			}
+			Name = Color
+			Enabled = false
+			UpdateAfterInit = false
+		}
+	]
+	Updaters
+	[
+		{
+			Type = Lifetime
+			LifeInOut = life
+			Lifetime = 0.25
+			Name = Lifetime
+			Enabled = true
+			UpdateAfterInit = false
+		}
+		{
+			Type = Operator
+			DataType = Vector2D
+			AIn = location
+			BIn = velocity
+			ResultOut = location
+			Operator = AddDt
+			Name = "Apply velocity"
+			Enabled = true
+			UpdateAfterInit = false
+		}
+		{
+			Type = Lerp
+			LerpIn = life
+			DataOut = color
+			Invert = false
+			ValueType = Color
+			FromValue
+			{
+				Rf = 2
+				Gf = 0.82
+				Bf = 0.12
+				Af = 1
+			}
+			ToValue
+			{
+				Rf = 2
+				Gf = 0.82
+				Bf = 0.12
+				Af = 0
+			}
+			Name = "Color lerp"
+			Enabled = true
+			UpdateAfterInit = true
+		}
+	]
+	Renderer
+	{
+		Type = StandardQuadRenderer
+		LocationIn = location
+		ScaleIn
+		RotationIn = rot
+		ColorIn = color
+		UvRectIn
+		BaseSize
+		{
+			X = 12
+			Y = 0.6
+		}
+		MaxScale = 1
+		Name = ""
+	}
+	Material
+	{
+		Texture
+		{
+			File = ./Data/common_effects/particles/blob.png
+			FixTransparentColors = false
+			PreMultiplyByAlpha = false
+			SampleMode = Linear
+			MipLevels = max
+		}
+		TargetBlendMode
+		{
+			SourceRgbFactor = SourceAlpha
+			DestRgbFactor = One
+			RgbOperator = Add
+			SourceAlphaFactor = InverseDestAlpha
+			DestAlphaFactor = One
+			AlphaOperator = Add
+			ChannelWriteMask
+			[
+				None
+				Red
+				Green
+				Blue
+				Alpha
+				All
+			]
+		}
+	}
+	DeleteMode = Fast
+	EnableMultithreading = false
+	InitCapacity = 256
+}
+EmitterDef
+{
+	EmitPerSecond = 500
+	EmitPerOneShot = 0
+	PreInitializers[]
+	PostInitializers[]
+}
+Bucket = Upper3
+PenetratingBucket
+MinIntensity = 0
+IsFancy = false
+Sharing = Global
+DontEmitWhenOffScreen = false
+DontEmitWhenOffScreenSizeInflate = 5
+Delay = 0
+IgnoreIntensity = false
+UseCustomShapeForOffScreenCheck = false
+MaxEmissionZoom = 3.40282347E+38
+ScaleEmissionWithIntensity = false

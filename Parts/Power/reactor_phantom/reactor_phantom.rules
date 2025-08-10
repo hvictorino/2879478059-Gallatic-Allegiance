@@ -1,0 +1,421 @@
+Part : <./Data/ships/terran/base_part_terran.rules>/Part
+{
+	NameKey = "Parts/ReactorPhantom"
+	IconNameKey = "Parts/ReactorPhantomIcon"
+	ID = ultranova.phantom_reactor
+	OtherIDs = [ultrablast.phantom_reactor]
+	EditorGroup = "Power"
+	DescriptionKey = "Parts/ReactorPhantomDesc"
+	Resources
+	[
+		[steel, 32]
+		[coil, 62]
+		[enriched_uranium, 4]
+	]
+	AIValueFactor = 5
+	Size = [2, 1]
+	SelectionPriority = 0
+	SelectionTypeID = "reactors"
+	MaxHealth = 2000
+	AutoDoorMaxPathLength = 5
+	TypeCategories = [reactor, provides_power]
+	ReceivableBuffs : ^/0/ReceivableBuffs []
+	CreatePartPerTileWhenDestroyed = ""
+	IgnoreRotationForMirroredSelection = true
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [64, 32]
+	}
+	Components : ^/0/Components
+	{
+		BatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 4000
+			StartingResources = &MaxResources
+			SuppliesResources = true
+			MinResourcesPickUp = 1000
+			MaxResourcesPickUp = 1000
+			ExpectedResourceGenerationRate = (&../BatteryProducer/ToQuantity) / (&../BatteryProducer/Interval)
+			ToggleOnResources = 1001
+			ToggleOffResources = 1000
+		}
+		BatteryProducer
+		{
+			Type = ResourceConverter
+			ToStorage = BatteryStorage
+			ToQuantity = 1000
+			Interval = 1.25
+		}
+
+		WindowToggle
+		{
+			Type = UIToggle
+			ToggleID = "windows_on_off"
+			Default = 1
+			RequiresCommand = false
+		}
+
+		GraphicsUnderNeath
+		{
+			Type = Graphics
+			Location = [1, .5]
+			OperationalDoodad
+			{
+				Layer = "structure"
+				DamageLevels
+				[
+					{
+						AnimationFiles
+						[
+							"floor_doodads1.png"
+							"floor_doodads2.png"
+							"floor_doodads3.png"
+							"floor_doodads4.png"
+							"floor_doodads5.png"
+							"floor_doodads6.png"
+							"floor_doodads7.png"
+							"floor_doodads8.png"
+						]
+						Size = [2, 1]
+						AnimationInterval = 0.075
+					}
+				]
+			}
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [1, .5]
+			DoodadToggle = WindowToggle
+			ShowToggledDoodadsWhenNotOperational = true
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "floor.png"
+						Size = [2, 1]
+					}
+					{
+						File = "floor_33.png"
+						Size = [2, 1]
+					}
+					{
+						File = "floor_66.png"
+						Size = [2, 1]
+					}
+				]
+			}
+			OperationalDoodad
+			{
+				Layer = "doodads_high"
+				DamageLevels
+				[
+					{
+						File = "reactor.png"
+						Size = [2, 1]
+					}
+					{
+						File = "reactor_33.png"
+						Size = [2, 1]
+					}
+					{
+						File = "reactor_66.png"
+						Size = [2, 1]
+					}
+				]
+			}
+			OperationalLighting
+			{
+				Layer = "lights_add"
+				DamageLevels
+				[
+					{
+						AnimationFiles
+						[
+							"lights1.png"
+							"lights2.png"
+							"lights3.png"
+							"lights4.png"
+							"lights5.png"
+							"lights6.png"
+							"lights7.png"
+							"lights8.png"
+						]
+						Size = [2, 1]
+						AnimationInterval = 0.075
+					}
+				]
+			}
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "walls.png"
+						Size = [2, 1]
+					}
+				]
+			}
+			
+		}
+
+		RoofDetailed
+		{
+			Type = ToggledComponents
+			Toggle = WindowToggle
+			Invert = false
+			Components
+			{
+				RoofGraphics
+				{
+					Type = Graphics
+					Location = [1, .5]
+					Roof
+					{
+						Layer = "roofs"
+						DamageLevels
+						[
+							{
+								File = "roof.png"
+								NormalsFile = "roof_normals.png"
+								Size = [2, 1]
+							}
+							{
+								File = "roof_33.png"
+								NormalsFile = "roof_normals_33.png"
+								Size = [2, 1]
+							}
+							{
+								File = "roof_66.png"
+								NormalsFile = "roof_normals_66.png"
+								Size = [2, 1]
+							}
+						]
+					}
+					OperationalRoofDoodad
+					{
+						Layer = "roof_doodads"
+						DamageLevels
+						[
+							{
+								File = "roof_glows.png"
+								Size = [2, 1]
+							}
+						]
+					}
+
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [4, 4]
+								Z = 2.5 // Controls the "height" of the light for the purposes of normal mapping.
+								VertexColor = [180*1.0,255*1.0, 77*1.0]
+							}
+						]
+					}
+				}
+			}
+		}
+
+		RoofUndetailed
+		{
+			Type = ToggledComponents
+			Toggle = WindowToggle
+			Invert = true
+			Components
+			{
+				RoofGraphicsPlain
+				{
+					Type = SpriteGrid
+					Location = [.5, .5]
+					RandomDamageLevels
+					[
+						[
+							{
+								File = "./Data/ships/terran/corridor/roof.png"
+								NormalsFile = "./Data/ships/terran/corridor/roof_normals.png"
+								Size = [1, 1]
+							}
+							{
+								File = "./Data/ships/terran/corridor/roof_33.png"
+								NormalsFile = "./Data/ships/terran/corridor/roof_normals_33.png"
+								Size = [1, 1]
+							}
+							{
+								File = "./Data/ships/terran/corridor/roof_66.png"
+								NormalsFile = "./Data/ships/terran/corridor/roof_normals_66.png"
+								Size = [1, 1]
+							}
+						]
+					]
+					RandomUVRotation = true
+					Layer = "roofs"
+				}
+			}
+		}
+
+		ReactorHum
+		{
+			Type = ContinuousEffects
+			Location = [1, 1]
+			MediaEffects
+			[
+				: /BASE_SOUNDS/AudioInterior
+				{
+					Sound = "./Data/ships/terran/reactor_small/operating.wav"
+					Volume = .5
+					Speed = .5
+					MaxConcurrent = 1
+					DynamicVolume : ^/0/DynamicVolume
+					{
+						ExteriorVolume = .5
+					}
+				}
+			]
+		}
+
+		BatterySprites
+		{
+			Type = ResourceSprites
+			Location = [1, .5]
+			ResourceStorage = BatteryStorage
+			Layer = "doodads_high"
+			Round = Down
+			ResourceLevels
+			[
+				{
+					File = "batteries1.png"
+					Size = [2, 1]
+				}
+				{
+					File = "batteries2.png"
+					Size = [2, 1]
+				}
+				{
+					File = "batteries3.png"
+					Size = [2, 1]
+				}
+				{
+					File = "batteries4.png"
+					Size = [2, 1]
+				}
+			]
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			Location = [1, .5]
+
+			MediaEffects
+			[
+				&<./Data/ships/terran/reactor_small/particles/reactor_explode_small.rules>
+				&<./Data/ships/terran/reactor_small/particles/reactor_explode_flash_small.rules>
+				&<./Data/ships/terran/reactor_small/particles/reactor_shockwave_small.rules>
+				&<./Data/common_effects/particles/explosions/med_part_explode_debris.rules>
+				&<./Data/common_effects/particles/explosions/big_part_explode_smoke.rules>
+
+				: /BASE_SOUNDS/AudioExterior
+				{
+					Sound = "./Data/ships/terran/reactor_small/destroyed.wav"
+					Volume = 1
+					SpeedVariation = .25
+				}
+
+				: /BASE_SHAKE
+				{
+					ShakeAmount = .25
+					Duration = 2
+				}
+			]
+
+			HitEffects
+			[
+				{
+					Type = ExplosiveDamage
+					TotalDamage = 75000
+					Radius = 6
+					Delay = .05
+					ExpandDuration = .1
+					ExpandStartRadius = 2
+					ExpandLoss = 100%
+					FireChancePerNDamage = 50%
+					ImpulsePerNDamage = 10
+					NDamage = 1000
+					Filter
+					{
+						OperationalHealth = true
+						StructuralHealth = false
+						Friendlies = true
+					}
+				}
+				{
+					Type = ExplosiveDamage
+					TotalDamage = 15000
+					Radius = 4
+					Delay = .05
+					ExpandDuration = .05
+					ExpandStartRadius = 2
+					ExpandLoss = 100%
+					ImpulsePerNDamage = 5
+					NDamage = 1000
+					Filter
+					{
+						OperationalHealth = false
+						StructuralHealth = true
+						Friendlies = true
+					}
+				}
+			]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [1, .5]
+			Layer = "indicators"
+			Indicators
+			[
+				// Out of power.
+				{
+					Toggle = BatteryStorage
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoPower
+						Size = [1, 1]
+					}
+				}
+			]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [2, 1]
+		}
+	}
+
+	Stats
+	{
+		PowerGeneration = (&~/Part/Components/BatteryProducer/ToQuantity) / (&~/Part/Components/BatteryProducer/Interval) / 1000
+		BatterySize = (&~/Part/Components/BatteryStorage/MaxResourcesPickUp) / 1000
+		BatteryFillTime = 0
+		PowerCapacity = (&~/Part/Components/BatteryStorage/MaxResources) / 1000
+	}
+}

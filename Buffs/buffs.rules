@@ -1,0 +1,59 @@
+ParticleCannonExplosive
+{
+	CombineMode = Add
+}
+
+ParticleCannonBuff
+{
+	CombineMode = Add
+}
+
+ParticleCannonShot
+{
+	CombineMode = Add
+	Exponent = 0.8
+	Multiplier = 30%
+	BaseValue = 100%
+
+	IconTextFormatKey = "BuildBox/BuffPercentageFmt"
+	IconTextMultiply = 100
+	IconTextAdd = -100
+	ShowIconTextForZeroValue = false
+}
+
+ParticleCannonOperational
+{
+	CombineMode = Add
+}
+ParticleCannonReverseOperational
+{
+	CombineMode = Add
+
+	RectBorderColor = [0, 255, 84, 160]
+	RectFillColor = [0, 255, 84, 64]
+}
+ParticleCannonNeedsPower
+{
+	CombineMode = Add
+}
+
+PhaseEngine
+{
+	CombineMode = Add
+
+	RectBorderColor = [0, 255, 84, 160]
+	RectFillColor = [0, 255, 84, 64]
+}
+
+BoosterActivate
+{
+	CombineMode = Add
+
+	RectBorderColor = [0, 255, 84, 160]
+	RectFillColor = [0, 255, 84, 64]
+}
+
+CommandBoostLimiter
+{
+	CombineMode = Add
+}

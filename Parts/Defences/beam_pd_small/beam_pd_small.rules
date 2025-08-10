@@ -1,0 +1,506 @@
+Part : <./Data/ships/terran/base_part_terran.rules>/Part
+{
+	NameKey = "Parts/BeamPDSmall"
+	IconNameKey = "Parts/BeamPDSmallIcon"
+	ID = ultranova.beam_pd_small
+	OtherIDs = [ultranova.alliance_point_defense]
+	EditorGroup = "Defenses"
+	DescriptionKey = "Parts/BeamPDSmallDesc"
+	Resources
+	[
+		[steel, 20]
+		[coil2, 5]
+	]
+	TypeCategories = [defense, uses_power]
+	Size = [1, 2]
+	SelectionPriority = 1
+	SelectionTypeByRotation = true
+	MaxHealth = 2000
+	ReceivableBuffs : ^/0/ReceivableBuffs []
+	ProhibitedBy : ^/0/ProhibitedBy [tall]
+	AllowedDoorLocations
+	[
+		[-1, 1]
+		[1, 1]
+		[0, 2]
+	]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [32, 64]
+	}
+	Components : ^/0/Components
+	{
+		IsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, BatteryStorage]
+			Mode = All
+		}
+
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+			RequiresCommand = false
+		}
+
+		CommandConsumer
+		{
+			Type = CommandConsumer
+			OperationalToggle = PowerToggle
+			CommandPoints = 1
+		}
+
+		FireModeToggle
+		{
+			Type = UIToggle
+			ToggleID = "fire_mode"
+			Default = 1
+			ToggledOnChoices = [0, 1, 2]
+		}
+		AutoTargetToggle
+		{
+			Type = ModeToggle
+			Mode = FireModeToggle
+			OnModes = [1, 2]
+		}
+		AutoFireToggle
+		{
+			Type = ModeToggle
+			Mode = FireModeToggle
+			OnMode = 2
+		}
+
+		BatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 2000
+		}
+		BatteryConsumer
+		{
+			Type = ResourceConsumer
+			ResourceType = battery
+			Storage = BatteryStorage
+			ResupplyThreshold = 500
+			DefaultPriority = &/PRIORITIES/Defense_Supply
+			OperationalToggle = PowerToggle
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+
+		PDCanisterStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 100
+			DelayBeforeReadyToUse = 0.75
+		}
+
+		PDCanisterLoaded
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 100
+			DelayBeforeReadyToUse = 0.15
+		}
+
+		PDCanisterFactory
+		{
+			Type = ResourceConverter
+			OperationalToggle = IsOperational
+			FromStorage = BatteryStorage
+			ToStorage = PDCanisterStorage
+			FromQuantity = 100
+			ToQuantity = 100
+			Interval = 0.25
+		}
+
+		PDCanisterLoader
+		{
+			Type = ResourceConverter
+			OperationalToggle = IsOperational
+			FromStorage = PDCanisterStorage
+			ToStorage = PDCanisterLoaded
+			FromQuantity = 100
+			MinFromQuantityForConversion = 100
+			ToQuantity = 100
+			Interval = 0.1
+		}
+
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [.5, 1]
+			OperationalToggle = IsOperational
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "floor.png"
+						Size = [1, 2]
+					}
+					{
+						File = "floor_33.png"
+						Size = [1, 2]
+					}
+					{
+						File = "floor_66.png"
+						Size = [1, 2]
+					}
+				]
+			}
+			OperationalDoodad
+			{
+				Layer = "turrets"
+				DamageLevels
+				[
+					{
+						AnimationFiles
+						[
+							"doodads_on1.png"
+							"doodads_on2.png"
+							"doodads_on3.png"
+							"doodads_on4.png"
+							"doodads_on5.png"
+							"doodads_on6.png"
+							"doodads_on7.png"
+							"doodads_on8.png"
+						]
+						Size = [1, 2]
+						AnimationInterval = 0.1
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "turrets"
+				DamageLevels
+				[
+					{
+						File = "doodads_off.png"
+						Size = [1, 2]
+					}
+				]
+			}
+			OperationalLighting
+			{
+				Layer = "lights_add"
+				DamageLevels
+				[
+					{
+						File = "lights.png"
+						Size = [1, 2]
+					}
+				]
+			}
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "walls.png"
+						Size = [1, 2]
+					}
+				]
+			}
+			Roof
+			{
+				Layer = "roofs"
+				DamageLevels
+				[
+					{
+						File = "roof.png"
+						NormalsFile = "roof_normals.png"
+						Size = [1, 2]
+					}
+					{
+						File = "roof_33.png"
+						NormalsFile = "roof_normals_33.png"
+						Size = [1, 2]
+					}
+					{
+						File = "roof_66.png"
+						NormalsFile = "roof_normals_66.png"
+						Size = [1, 2]
+					}
+				]
+			}
+		}
+
+		Turret
+		{
+			Type = TurretWeapon
+			Location = [.5, .55]// Relative to upper-left corner of unrotated part.
+			Rotation = -90d// Relative to unrotated part.
+			OperationalToggle = IsOperational
+			AutoFireToggle = AutoFireToggle
+			FireInterval = 1
+			FiringArc = 225d
+			RotateSpeed = 225d
+			FireThresholdAngle = 1d
+			AIFirepowerRating = 150
+			CanBeGivenExplicitTarget = false
+			IgnoreSourceShipLowLOSChecks = true
+			Emitter = BeamEmitter
+			TargetSearchesPerSecond = 4 // Default is 2.
+			HoldTargetAfterCancel = .5
+			TargetPathThickness = .2// &../BulletEmitter/Bullet/Components/Physics/Radius
+			AllowDirectControl = false
+
+			AutoTargets
+			[
+				{
+					TargetType = Bullets
+					BulletTargetCategories = [missile, mine, bullet]
+					Toggle = FireModeToggle
+				}
+			]
+
+			BlueprintArcSprite
+			{
+				Texture = &/INDICATORS/WeaponArc
+				Size = [0, 1.5]
+				Color = [255, 0, 0, 63]
+			}
+			BlueprintArcRadius = 10
+			BlueprintArcSpriteSegments = 64
+		}
+
+		ReloadProgressBar
+		{
+			Type = ProgressBar
+			ShowProgressFor = Turret
+		}
+
+		BeamEmitter : <beam_pd_shot/laser_pd_shot.rules>
+		{
+			Type = BeamEmitter
+			ChainedTo = Turret
+			GetTargetFrom = Turret
+			FireTrigger = Turret
+			Location = [0.90, 0]
+			OperationalToggle = IsOperational
+			SourceShipLowCollisions = false
+			ResourceStorage = PDCanisterLoaded
+			FireDelay = .25
+			ResourcesUsed = 100
+			MinResourcesUsed = 100
+			Burst = 1
+		}
+
+		FireEffect
+		{
+			Type = TriggeredEffects
+			ChainedTo = BeamEmitter
+			Trigger = BeamEmitter
+			AnchorMediaEffects = true
+
+			MediaEffects
+			[
+				&<./Data/ships/terran/laser_blaster_small/particles/laser_blaster_small_shoot_flash.rules>
+
+				: /BASE_SOUNDS/AudioExterior
+				{
+					Sound = "./Data/ships/terran/laser_blaster_small/shoot.wav"
+					Volume = .25
+					SpeedVariation = .25
+				}
+			]
+		}
+
+		TurretGraphics
+		{
+			Type = Graphics
+			ChainedTo = Turret
+			Location = [0.5, 0]
+			Rotation = 90d
+			OperationalToggle = IsOperational
+			OperationalDoodad
+			{
+				Layer = "roof_doodads"
+				DamageLevels
+				[
+					{
+						File = "turret_on.png"
+						NormalsFile = "turret_normals.png"
+						Size = [1, 2]
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "roof_doodads"
+				DamageLevels
+				[
+					{
+						File = "turret_off.png"
+						NormalsFile = "turret_normals.png"
+						Size = [1, 2]
+					}
+				]
+			}
+		}
+
+		BatterySprites
+		{
+			Type = ResourceSprites
+			Location = [.5, 1]
+			ResourceStorage = BatteryStorage
+			Layer = "doodads_low"
+			ResourceLevels
+			[
+				{
+					File = "batteries1.png"
+					Size = [1, 2]
+				}
+				{
+					File = "batteries2.png"
+					Size = [1, 2]
+				}
+			]
+		}
+
+		PDCanisterSprites
+		{
+			Type = ResourceSprites
+			Location = [.5, .5]
+			ResourceStorage = PDCanisterStorage
+			Layer = "doodads_low"
+			ResourceLevels
+			[
+				{
+					AnimationFiles
+					[
+						"pd_canister1.png"
+						"pd_canister2.png"
+						"pd_canister3.png"
+						"pd_canister4.png"
+						"pd_canister5.png"
+						"pd_canister6.png"
+						"pd_canister7.png"
+						"pd_canister8.png"
+						"pd_canister9.png"
+						"pd_canister10.png"
+						"pd_canister11.png"
+						"pd_canister12.png"
+						"pd_canister13.png"
+					]
+					Size = [1, 1]
+					AnimationInterval = 0.5 / 13
+					ClampAnimation = true
+				}
+			]
+		}
+
+		PDCanisterLoadedSprites
+		{
+			Type = ResourceSprites
+			Location = [0, 0]
+			ResourceStorage = PDCanisterLoaded
+			ChainedTo = Turret
+			Rotation = 90d
+			Layer = "roof_turrets"
+			ResourceLevels
+			[
+				{
+					File = "pd_canister_roof.png"
+					NormalsFile = "pd_canister_roof_normals.png"
+					Size = [1, 1]
+				}
+			]
+		}
+
+		OperationEffects
+		{
+			Type = ToggleEffects
+			Location = [.5, 1]
+			Toggle = IsOperational
+			ToggledOnMediaEffects = &/COMMON_EFFECTS/PowerOn
+			ToggledOffMediaEffects = &/COMMON_EFFECTS/PowerOff
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/SmallPartDestroyed
+			Location = [.5, 1]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [.5, 1]
+			Layer = "indicators"
+			Indicators
+			[
+				// Turned off.
+				{
+					Toggle = PowerToggle
+					AtlasSprite
+					{
+						File = &/INDICATORS/PowerOff
+						Size = [1, 1]
+					}
+				}
+
+				// Out of power.
+				{
+					Toggle = BatteryStorage
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoPower
+						Size = [1, 1]
+					}
+				}
+			]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [1, 2]
+		}
+	}
+
+	Stats
+	{
+		PowerCapacity = (&~/Part/Components/BatteryStorage/MaxResources) / 1000
+
+		MinPower = (&../StatsByCategory/0/Stats/PowerPerSecond) / 2
+		RecPower = &../StatsByCategory/0/Stats/PowerPerSecond
+		MinCrew = (&MinPower) * 2
+		RecCrew = (&RecPower) * 4
+	}
+
+	StatsByCategory
+	[
+		{
+			NameKey = "StatCategories/BeamPDShot"
+			Stats
+			{
+				DamagePerShot = &~/Part/Components/BeamEmitter/HitNothing/HitEffects/0/TotalDamage
+				DamagePerSecond = (&DamagePerShot) * (&ROF)
+				ShotDamage = [&../DamagePerShot, &../DamagePerSecond]
+				ROF = (&~/Part/Components/BeamEmitter/Burst) / (&~/Part/Components/Turret/FireInterval)
+				Range = &~/Part/Components/BeamEmitter/Range
+				Arc = deg(&~/Part/Components/Turret/FiringArc)
+				TurretSpeed = deg(&~/Part/Components/Turret/RotateSpeed)
+				ShotSpeed = Infinity
+				PowerPerShot = (&~/Part/Components/PDCanisterFactory/FromQuantity) / (&~/Part/Components/BeamEmitter/Burst) / 1000
+				PowerPerSecond = (&PowerPerShot) * (&ROF)
+				ShotPowerUsage = [&../PowerPerShot, &../PowerPerSecond]
+			}
+		}
+	]
+}

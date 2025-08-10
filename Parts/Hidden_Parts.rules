@@ -1,0 +1,10 @@
+Parts
+[
+	//Experimenting
+	&<Projectile_Weapons/rocket_silo_internal/rocket_silo.rules>/Part
+
+	//Needs More Work
+	&<Defences/core_shield_small/core_shield_small.rules>/Part
+
+	//Not the intended GA experience, but useful parts
+]

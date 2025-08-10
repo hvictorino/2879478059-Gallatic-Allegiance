@@ -1,0 +1,542 @@
+Components
+{
+	RocketStorageA : ~/RocketStorageBase
+	{
+		// Nothing different.
+	}
+
+	RocketStorageB : ~/RocketStorageBase
+	{
+		// Nothing different.
+	}
+
+	RocketStorageC : ~/RocketStorageBase
+	{
+		// Nothing different.
+	}
+
+	RocketStorageD : ~/RocketStorageBase
+	{
+		// Nothing different.
+	}
+
+	RocketStorageE : ~/RocketStorageBase
+	{
+		// Nothing different.
+	}
+
+	RocketStorageF : ~/RocketStorageBase
+	{
+		// Nothing different.
+	}
+
+	CombinedRocketStorage
+	{
+		Type = MultiResourceStorage
+		ResourceType = rocket_part
+		ResourceStorages = [RocketStorageA, RocketStorageB, RocketStorageC, RocketStorageD, RocketStorageE, RocketStorageF]
+		AddMode = PrioritizeLeastEmptyCapacity
+	}
+
+	RocketConsumer
+	{
+		Type = ResourceConsumer
+		ResourceType = rocket_part
+		Storage = CombinedRocketStorage
+		DefaultPriority = &/PRIORITIES/Weapon_Supply
+		OverridePriorityKey = RocketStorage
+		OperationalToggle = PowerToggle
+		ReceiveResourceMediaEffects = &/COMMON_EFFECTS/MissileLoad
+	}
+
+	RocketPrereq
+	{
+		Type = MultiToggle
+		Toggles = [RocketStorageA, RocketStorageB, RocketStorageC, RocketStorageD, RocketStorageE, RocketStorageF]
+		Mode = Any
+	}
+
+	ReloadProgressBar
+	{
+		Type = ProgressBar
+		OperationalToggle = IsOperational
+		ShowProgressFor = CommonReloadTimerMed
+		Invert = true
+	}
+
+	WeaponA : ~/WeaponBase
+	{
+		Location = [0.34375, 1]
+		ShowExplicitTarget = false
+		Emitter = EmitterA
+	}
+
+	EmitterA : ~/EmitterBase
+	{
+		ChainedTo = WeaponA
+		FireTrigger = WeaponA
+		GetTargetFrom = WeaponA
+		ResourceStorage = RocketStorageA
+	}
+
+	WeaponB : ~/WeaponBase
+	{
+		Location = [0.609375, 1]
+		ShowExplicitTarget = false
+		Emitter = EmitterB
+	}
+
+	EmitterB : ~/EmitterBase
+	{
+		ChainedTo = WeaponB
+		FireTrigger = WeaponB
+		GetTargetFrom = WeaponB
+		ResourceStorage = RocketStorageB
+	}
+
+	WeaponC : ~/WeaponBase
+	{
+		Location = [0.875, 1]
+		ShowExplicitTarget = false
+		Emitter = EmitterC
+	}
+
+	EmitterC : ~/EmitterBase
+	{
+		ChainedTo = WeaponC
+		FireTrigger = WeaponC
+		GetTargetFrom = WeaponC
+		ResourceStorage = RocketStorageC
+	}
+
+	WeaponD : ~/WeaponBase
+	{
+		Location = [1.285714, 1]
+		ShowExplicitTarget = false
+		Emitter = EmitterD
+	}
+
+	EmitterD : ~/EmitterBase
+	{
+		ChainedTo = WeaponD
+		FireTrigger = WeaponD
+		GetTargetFrom = WeaponD
+		ResourceStorage = RocketStorageD
+	}
+
+	WeaponE : ~/WeaponBase
+	{
+		Location = [1.390625, 1]
+		ShowExplicitTarget = false
+		Emitter = EmitterE
+	}
+
+	EmitterE : ~/EmitterBase
+	{
+		ChainedTo = WeaponE
+		FireTrigger = WeaponE
+		GetTargetFrom = WeaponE
+		ResourceStorage = RocketStorageE
+	}
+
+	WeaponF : ~/WeaponBase
+	{
+		Location = [1.65625, 1]
+		ShowExplicitTarget = false
+		Emitter = EmitterF
+	}
+
+	EmitterF : ~/EmitterBase
+	{
+		ChainedTo = WeaponF
+		FireTrigger = WeaponF
+		GetTargetFrom = WeaponF
+		ResourceStorage = RocketStorageF
+	}
+
+	//Just for the coverage arc
+	GhostWeapon : ~/WeaponBase
+	{
+		Location = [1, 1]
+		Emitter = GhostEmitter
+
+		CoverageSectorArc
+		{
+			Texture = &/INDICATORS/VerticalGradient
+			VertexColor = [255, 255, 255, 51]
+			QuadCount = 64
+		}
+	}
+
+	GhostEmitter : ~/EmitterBase
+	{
+		ChainedTo = GhostWeapon
+		FireTrigger //Not needed.
+		GetTargetFrom = GhostWeapon
+		ResourceStorage = RocketStorageC //It literally won't do anything lol.
+	}
+
+	FirePermissionToggle
+	{
+		Type = MultiToggle
+		Toggles = [CommonReloadTimerMed, FireModeToggle]
+		Mode = All
+	}
+
+	CommonReloadResetTrigger
+	{
+		Type = MultiTrigger
+		Triggers = [WeaponA, WeaponB, WeaponC, WeaponD, WeaponE, WeaponF]
+	}
+
+	LaunchEffectA : ~/LaunchEffectBase
+	{
+		ChainedTo = WeaponA
+		Trigger = WeaponA
+	}
+
+	LaunchEffectB : ~/LaunchEffectBase
+	{
+		ChainedTo = WeaponB
+		Trigger = WeaponB
+	}
+
+	LaunchEffectC : ~/LaunchEffectBase
+	{
+		ChainedTo = WeaponC
+		Trigger = WeaponC
+	}
+
+	LaunchEffectD : ~/LaunchEffectBase
+	{
+		ChainedTo = WeaponD
+		Trigger = WeaponD
+	}
+
+	LaunchEffectE : ~/LaunchEffectBase
+	{
+		ChainedTo = WeaponE
+		Trigger = WeaponE
+	}
+
+	LaunchEffectF : ~/LaunchEffectBase
+	{
+		ChainedTo = WeaponF
+		Trigger = WeaponF
+	}
+
+	RocketSpritesA
+	{
+		Type = ResourceSprites
+		Location = [.5, 1.25]
+		ResourceStorage = RocketStorageA
+		Layer = "doodads_low"
+		HasZeroResourceSprite = true
+		ResourceLevels
+		[
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a0.png"
+				Size = [1, 2]
+			}
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a1.png"
+				Size = [1, 2]
+			}
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a2.png"
+				Size = [1, 2]
+			}
+		]
+	}
+
+	RocketSpritesB
+	{
+		Type = ResourceSprites
+		Location = [0.765625, 1.25]
+		ResourceStorage = RocketStorageB
+		Layer = "doodads_low"
+		HasZeroResourceSprite = true
+		ResourceLevels
+		[
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a0.png"
+				Size = [1, 2]
+			}
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a1.png"
+				Size = [1, 2]
+			}
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a2.png"
+				Size = [1, 2]
+			}
+		]
+	}
+
+	RocketSpritesC
+	{
+		Type = ResourceSprites
+		Location = [1.03125, 1.25]
+		ResourceStorage = RocketStorageC
+		Layer = "doodads_low"
+		HasZeroResourceSprite = true
+		ResourceLevels
+		[
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a0.png"
+				Size = [1, 2]
+			}
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a1.png"
+				Size = [1, 2]
+			}
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a2.png"
+				Size = [1, 2]
+			}
+		]
+	}
+
+	RocketSpritesD
+	{
+		Type = ResourceSprites
+		Location = [0.96875, 1.25]
+		ResourceStorage = RocketStorageD
+		Layer = "doodads_low"
+		HasZeroResourceSprite = true
+		ResourceLevels
+		[
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a0.png"
+				MirrorU = true
+				Size = [1, 2]
+			}
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a1.png"
+				MirrorU = true
+				Size = [1, 2]
+			}
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a2.png"
+				MirrorU = true
+				Size = [1, 2]
+			}
+		]
+	}
+
+	RocketSpritesE
+	{
+		Type = ResourceSprites
+		Location = [1.234375, 1.25]
+		ResourceStorage = RocketStorageE
+		Layer = "doodads_low"
+		HasZeroResourceSprite = true
+		ResourceLevels
+		[
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a0.png"
+				MirrorU = true
+				Size = [1, 2]
+			}
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a1.png"
+				MirrorU = true
+				Size = [1, 2]
+			}
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a2.png"
+				MirrorU = true
+				Size = [1, 2]
+			}
+		]
+	}
+
+	RocketSpritesF
+	{
+		Type = ResourceSprites
+		Location = [1.5, 1.25]
+		ResourceStorage = RocketStorageF
+		Layer = "doodads_low"
+		HasZeroResourceSprite = true
+		ResourceLevels
+		[
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a0.png"
+				MirrorU = true
+				Size = [1, 2]
+			}
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a1.png"
+				MirrorU = true
+				Size = [1, 2]
+			}
+			{
+				File = "../../rocket_silo/he_rocket/rocket_a2.png"
+				MirrorU = true
+				Size = [1, 2]
+			}
+		]
+	}
+
+
+	DestroyedEffects
+	{
+		Type = DeathEffects
+		MediaEffects = &/COMMON_EFFECTS/BigPartDestroyed
+		Location = [1, 2]
+
+		FactorHitEffectsWith = CombinedRocketStorage
+		HitEffects
+		[
+			{
+				Type = ExplosiveDamage
+				TotalDamage = 15000
+				Radius = 3
+				Delay = .05
+				FireChancePerNDamage = 50%
+				NDamage = 1000
+				Filter
+				{
+					OperationalHealth = true
+					StructuralHealth = false
+					Friendlies = true
+				}
+			}
+			{
+				Type = ExplosiveDamage
+				TotalDamage = 5000
+				Radius = 2
+				Delay = .05
+				Filter
+				{
+					OperationalHealth = false
+					StructuralHealth = true
+					Friendlies = true
+				}
+			}
+		]
+	}
+
+	Indicators
+	{
+		Type = IndicatorSprites
+		Location = [1, 2]
+		Layer = "indicators"
+		Indicators
+		[
+			// Turned off.
+			{
+				Toggle = PowerToggle
+				AtlasSprite
+				{
+					File = &/INDICATORS/PowerOff
+					Size = [1, 1]
+				}
+			}
+
+			// Out of rockets.
+			{
+				Toggle = RocketPrereq
+				Delay = &<../rocket_silo_heavy.rules>/Part/Components/CommonReloadTimerMed/Duration
+				AtlasSprite
+				{
+					File = &/INDICATORS/NoMissiles
+					Size = [1.5, 1.5]
+				}
+			}
+
+			// No crew.
+			{
+				Toggle = PartCrew
+				AtlasSprite
+				{
+					File = &/INDICATORS/NoCrew
+					Size = [1.5, 1.5]
+				}
+			}
+		]
+	}
+}
+
+RocketStorageBase
+{
+	Type = ResourceStorage
+	ResourceType = rocket_part
+	MaxResources = 2
+	InitToMaxResourcesPVP = 0
+	ToggleOnResource = 2
+	ToggleOffResource = 1
+	DelayBeforeReadyToUse = .5
+}
+
+WeaponBase
+{
+	Type = TurretWeapon // This has an arc of 0, but we don't want to use FixedWeapon because that will only shoot at things directly in the LOS.
+	Rotation = -90d
+	OperationalToggle = IsOperational
+	AutoFireToggle = AutoFireToggle
+	FireInterval = 0 // Uses common reload timer.
+	FiringArc = 0d;
+	ValidArc = 360d;
+	FireThresholdAngle = 180d;
+	RotateSpeed = 0d
+	AllowFireWithBlockedLOS = true
+	AIFirepowerRating = 1600
+	FirePermissionToggle = FirePermissionToggle
+
+	AutoTargets
+	[
+		{
+			TargetType = ShipParts
+			Toggle = AutoTargetToggle
+			EnableInDirectControlMode = true
+		}
+	]
+}
+
+EmitterBase
+{
+	Type = BulletEmitter
+	OperationalToggle = IsOperational
+	Location = [.5, 0]
+	ResourcesUsed = 2
+	Bullet = &<../../rocket_silo/he_rocket/rocket/rocket.rules>
+	TargetLeadPrediction = false
+	Recoil = 25
+}
+
+LaunchEffectBase
+{
+	Type = TriggeredEffects
+
+	MediaEffects
+	[
+		&<../../rocket_silo/particles/missile_launcher_shoot.rules>
+
+		: /BASE_SOUNDS/AudioExterior
+		{
+			Sound = "./Data/ships/terran/missile_launcher/shoot.wav"
+			SpeedVariation = .25
+		}
+	]
+}
+
+RocketStats
+{
+	NameKey = "StatCategories/RocketHE"
+	Stats
+	{
+		DamagePerShot = &~/EmitterBase/Bullet/Components/Hit/HitOperational/HitEffects/0/TotalDamage
+		DamagePerSecond = (&DamagePerShot) * (&ROF)
+		Damage = [&../DamagePerShot, &../DamagePerSecond]
+		DamageArea = &~/EmitterBase/Bullet/Components/Hit/HitOperational/HitEffects/0/Radius
+		ROF = 1 / (&<../rocket_silo_heavy.rules>/Part/Components/CommonReloadTimerMed/Duration)
+		Range = &~/EmitterBase/Bullet/Range
+		Arc = deg(&~/WeaponBase/ValidArc)
+		ShotLaunchSpeed = &~/EmitterBase/Bullet/Speed
+		Acceleration = &~/EmitterBase/Bullet/Components/Acceleration/Acceleration
+		ShotGuidance = deg(&~/EmitterBase/Bullet/Components/Homing/TurnVelocity)
+		ShotHP = &~/EmitterBase/Bullet/Components/Targetable/Health
+		RocketParts = &~/EmitterBase/ResourcesUsed
+	}
+}

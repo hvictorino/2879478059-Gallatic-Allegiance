@@ -1,0 +1,533 @@
+Part : &<../phase_thruster_med/phase_thruster_med.txt>/Part
+{
+	NameKey = "Parts/PhaseThrusterMedAngledSL"
+	IconNameKey = "Parts/PhaseThrusterMedAngledSLIcon"
+	ID = ultranova.phase_thruster_med_S_angled_L
+	EditorGroup = "Flight"
+	DescriptionKey = "Parts/PhaseThrusterMedAngledSLDesc"
+	UsePartWhenFlipped = ultranova.phase_thruster_med_S_angled_R
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [42.66, 42.66]
+	}
+	Components : ^/0/Components
+	{
+		Graphics
+		{
+			Type = Graphics
+			Location = [1, .5]
+			OperationalToggle = IsOperational
+			Floor = &<../phase_thruster_med/phase_thruster_med.txt>/Part/Components/Graphics/Floor
+			OperationalDoodad
+			{
+				Layer = "doodads_high"
+				Offset = [0, .5]
+				DamageLevels
+				[
+					{
+						File = "doodads.png"
+						Size = [2, 2]
+					}
+				]
+			}
+			NonOperationalDoodad = &OperationalDoodad
+			Walls = &<../phase_thruster_med/phase_thruster_med.txt>/Part/Components/Graphics/Walls
+			Roof = &<../phase_thruster_med/phase_thruster_med.txt>/Part/Components/Graphics/Roof
+		}
+
+		BlueThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = BlueThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				BlueGraphics
+				{
+					Type = Graphics
+					Location = [1, 1]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"blue/lights_B1.png"
+									"blue/lights_B2.png"
+									"blue/lights_B3.png"
+									"blue/lights_B4.png"
+									"blue/lights_B5.png"
+									"blue/lights_B4.png"
+									"blue/lights_B3.png"
+									"blue/lights_B2.png"
+								]
+								Size = [2, 2]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofDoodad
+					{
+						Layer = "roof_doodads"
+						Offset = [0, .5]
+						DamageLevels
+						[
+							{
+								File = "../phase_thruster_med/blue/thruster_glow_B.png"
+								Size = [5, 5]
+							}
+						]
+					}
+				}
+
+				BlueThrustEffects
+				{
+					Type = ContinuousEffects
+					ChainedTo = MainThruster
+					FactorMediaEffectsIntensityWith = MainThruster
+					MediaEffects
+					[
+						&<../phase_thruster_med/blue/particles/thruster_trail_small.txt>
+						//&<particles/thruster_glow_small.txt>
+
+						: /COMMON_SOUNDS/ThrusterRumble
+						{
+							Volume = .075
+							Speed = 2
+							MaxConcurrentVolume = .15
+						}
+					]
+				}
+			}
+		}
+
+		GreenThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = GreenThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				GreenGraphics
+				{
+					Type = Graphics
+					Location = [1, 1]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"green/lights_G1.png"
+									"green/lights_G2.png"
+									"green/lights_G3.png"
+									"green/lights_G4.png"
+									"green/lights_G5.png"
+									"green/lights_G4.png"
+									"green/lights_G3.png"
+									"green/lights_G2.png"
+								]
+								Size = [2, 2]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofDoodad
+					{
+						Layer = "roof_doodads"
+						Offset = [0, .5]
+						DamageLevels
+						[
+							{
+								File = "../phase_thruster_med/green/thruster_glow_G.png"
+								Size = [5, 5]
+							}
+						]
+					}
+				}
+
+				GreenThrustEffects
+				{
+					Type = ContinuousEffects
+					ChainedTo = MainThruster
+					FactorMediaEffectsIntensityWith = MainThruster
+					MediaEffects
+					[
+						&<../phase_thruster_med/green/particles/thruster_trail_small.txt>
+						//&<particles/thruster_glow_small.txt>
+
+						: /COMMON_SOUNDS/ThrusterRumble
+						{
+							Volume = .075
+							Speed = 2
+							MaxConcurrentVolume = .15
+						}
+					]
+				}
+			}
+		}
+
+		OrangeThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = OrangeThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				OrangeGraphics
+				{
+					Type = Graphics
+					Location = [1, 1]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"orange/lights_O1.png"
+									"orange/lights_O2.png"
+									"orange/lights_O3.png"
+									"orange/lights_O4.png"
+									"orange/lights_O5.png"
+									"orange/lights_O4.png"
+									"orange/lights_O3.png"
+									"orange/lights_O2.png"
+								]
+								Size = [2, 2]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofDoodad
+					{
+						Layer = "roof_doodads"
+						Offset = [0, .5]
+						DamageLevels
+						[
+							{
+								File = "../phase_thruster_med/orange/thruster_glow_O.png"
+								Size = [5, 5]
+							}
+						]
+					}
+				}
+
+				OrangeThrustEffects
+				{
+					Type = ContinuousEffects
+					ChainedTo = MainThruster
+					FactorMediaEffectsIntensityWith = MainThruster
+					MediaEffects
+					[
+						&<../phase_thruster_med/orange/particles/thruster_trail_small.txt>
+						//&<particles/thruster_glow_small.txt>
+
+						: /COMMON_SOUNDS/ThrusterRumble
+						{
+							Volume = .075
+							Speed = 2
+							MaxConcurrentVolume = .15
+						}
+					]
+				}
+			}
+		}
+
+		PurpleThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = PurpleThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				PurpleGraphics
+				{
+					Type = Graphics
+					Location = [1, 1]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"purple/lights_P1.png"
+									"purple/lights_P2.png"
+									"purple/lights_P3.png"
+									"purple/lights_P4.png"
+									"purple/lights_P5.png"
+									"purple/lights_P4.png"
+									"purple/lights_P3.png"
+									"purple/lights_P2.png"
+								]
+								Size = [2, 2]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofDoodad
+					{
+						Layer = "roof_doodads"
+						Offset = [0, .5]
+						DamageLevels
+						[
+							{
+								File = "../phase_thruster_med/purple/thruster_glow_P.png"
+								Size = [5, 5]
+							}
+						]
+					}
+				}
+
+				PurpleThrustEffects
+				{
+					Type = ContinuousEffects
+					ChainedTo = MainThruster
+					FactorMediaEffectsIntensityWith = MainThruster
+					MediaEffects
+					[
+						&<../phase_thruster_med/purple/particles/thruster_trail_small.txt>
+						//&<particles/thruster_glow_small.txt>
+
+						: /COMMON_SOUNDS/ThrusterRumble
+						{
+							Volume = .075
+							Speed = 2
+							MaxConcurrentVolume = .15
+						}
+					]
+				}
+			}
+		}
+
+		RedThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = RedThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				RedGraphics
+				{
+					Type = Graphics
+					Location = [1, 1]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"red/lights_R1.png"
+									"red/lights_R2.png"
+									"red/lights_R3.png"
+									"red/lights_R4.png"
+									"red/lights_R5.png"
+									"red/lights_R4.png"
+									"red/lights_R3.png"
+									"red/lights_R2.png"
+								]
+								Size = [2, 2]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofDoodad
+					{
+						Layer = "roof_doodads"
+						Offset = [0, .5]
+						DamageLevels
+						[
+							{
+								File = "../phase_thruster_med/red/thruster_glow_R.png"
+								Size = [5, 5]
+							}
+						]
+					}
+				}
+
+				RedThrustEffects
+				{
+					Type = ContinuousEffects
+					ChainedTo = MainThruster
+					FactorMediaEffectsIntensityWith = MainThruster
+					MediaEffects
+					[
+						&<../phase_thruster_med/red/particles/thruster_trail_small.txt>
+						//&<particles/thruster_glow_small.txt>
+
+						: /COMMON_SOUNDS/ThrusterRumble
+						{
+							Volume = .075
+							Speed = 2
+							MaxConcurrentVolume = .15
+						}
+					]
+				}
+			}
+		}
+
+		YellowThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = YellowThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				YellowGraphics
+				{
+					Type = Graphics
+					Location = [1, 1]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"yellow/lights_Y1.png"
+									"yellow/lights_Y2.png"
+									"yellow/lights_Y3.png"
+									"yellow/lights_Y4.png"
+									"yellow/lights_Y5.png"
+									"yellow/lights_Y4.png"
+									"yellow/lights_Y3.png"
+									"yellow/lights_Y2.png"
+								]
+								Size = [2, 2]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofDoodad
+					{
+						Layer = "roof_doodads"
+						Offset = [0, .5]
+						DamageLevels
+						[
+							{
+								File = "../phase_thruster_med/yellow/thruster_glow_Y.png"
+								Size = [5, 5]
+							}
+						]
+					}
+				}
+
+				YellowThrustEffects
+				{
+					Type = ContinuousEffects
+					ChainedTo = MainThruster
+					FactorMediaEffectsIntensityWith = MainThruster
+					MediaEffects
+					[
+						&<../phase_thruster_med/yellow/particles/thruster_trail_small.txt>
+						//&<particles/thruster_glow_small.txt>
+
+						: /COMMON_SOUNDS/ThrusterRumble
+						{
+							Volume = .075
+							Speed = 2
+							MaxConcurrentVolume = .15
+						}
+					]
+				}
+			}
+		}
+
+		WhiteThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = WhiteThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				WhiteGraphics
+				{
+					Type = Graphics
+					Location = [1, 1]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"white/lights_W1.png"
+									"white/lights_W2.png"
+									"white/lights_W3.png"
+									"white/lights_W4.png"
+									"white/lights_W5.png"
+									"white/lights_W4.png"
+									"white/lights_W3.png"
+									"white/lights_W2.png"
+								]
+								Size = [2, 2]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+					OperationalRoofDoodad
+					{
+						Layer = "roof_doodads"
+						Offset = [0, .5]
+						DamageLevels
+						[
+							{
+								File = "../phase_thruster_med/white/thruster_glow_W.png"
+								Size = [5, 5]
+							}
+						]
+					}
+				}
+
+				WhiteThrustEffects
+				{
+					Type = ContinuousEffects
+					ChainedTo = MainThruster
+					FactorMediaEffectsIntensityWith = MainThruster
+					MediaEffects
+					[
+						&<../phase_thruster_med/white/particles/thruster_trail_small.txt>
+						//&<particles/thruster_glow_small.txt>
+
+						: /COMMON_SOUNDS/ThrusterRumble
+						{
+							Volume = .075
+							Speed = 2
+							MaxConcurrentVolume = .15
+						}
+					]
+				}
+			}
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [2, 2]
+		}
+	}
+}

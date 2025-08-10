@@ -1,0 +1,191 @@
+Part : <./Data/ships/terran/base_part_terran.rules>/Part
+{
+	NameKey = "Parts/FireRoom"
+	IconNameKey = "Parts/FireRoomIcon"
+	ID = ultranova.fire_room
+	OtherIDs = [ultrablast.fire_room, fire_extinguisher_shrine]
+	EditorGroup = "Defenses"
+	DescriptionKey = "Parts/FireRoomDesc"
+	Resources
+	[
+		[steel, 24]
+		[coil, 2]
+	]
+	TypeCategories = [fire_extinguisher]
+	ReceivableBuffs : ^/0/ReceivableBuffs []
+	Size = [1, 4]
+	MaxHealth = 4000
+	CrewSpeedFactor = 0.75
+	FireDamageFactor = 0.5
+	AllowedDoorLocations
+	[
+		[-1, 1]
+		[-1, 2]
+		[1, 1]
+		[1, 2]
+	]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [16, 64]
+	}
+	Components : ^/0/Components
+	{
+		ExtinguisherStorageTop
+		{
+			Type = ResourceStorage
+			ResourceType = fire_extinguisher
+			MaxResources = &<./Data/resources/fire_extinguisher/fire_extinguisher.rules>/MaxPerNugget
+			PickUpLocation = [.5, .5]
+			StartingResources = &MaxResources
+			SuppliesResources = true
+		}
+
+		ExtinguisherProducerTop
+		{
+			Type = ResourceConverter
+			ToStorage = ExtinguisherStorageTop
+			ToQuantity = &../ExtinguisherStorageTop/MaxResources
+			Interval = 5
+		}
+
+		ExtinguisherStorageBottom
+		{
+			Type = ResourceStorage
+			ResourceType = fire_extinguisher
+			MaxResources = &<./Data/resources/fire_extinguisher/fire_extinguisher.rules>/MaxPerNugget
+			PickUpLocation = [.5, 3.5]
+			StartingResources = &MaxResources
+			SuppliesResources = true
+		}
+
+		ExtinguisherProducerBottom
+		{
+			Type = ResourceConverter
+			ToStorage = ExtinguisherStorageBottom
+			ToQuantity = &../ExtinguisherStorageBottom/MaxResources
+			Interval = 5
+		}
+		
+		ProgressBar1
+		{
+			Type = ProgressBar
+			OperationalToggle = ExtinguisherProducerTop
+			ShowProgressFor = ExtinguisherProducerTop
+		}
+		
+		ProgressBar2
+		{
+			Type = ProgressBar
+			OperationalToggle = ExtinguisherProducerBottom
+			ShowProgressFor = ExtinguisherProducerBottom
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [.5, 2]
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "floor.png"
+						Size = [1, 4]
+					}
+					{
+						File = "floor_33.png"
+						Size = [1, 4]
+					}
+					{
+						File = "floor_66.png"
+						Size = [1, 4]
+					}
+				]
+			}
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "walls.png"
+						Size = [1, 4]
+					}
+				]
+			}
+			Roof
+			{
+				Layer = "roofs"
+				DamageLevels
+				[
+					{
+						File = "roof.png"
+						NormalsFile = "roof_normals.png"
+						Size = [1, 4]
+					}
+					{
+						File = "roof_33.png"
+						NormalsFile = "roof_normals_33.png"
+						Size = [1, 4]
+					}
+				]
+			}
+		}
+
+		ExtinguisherSpriteTop
+		{
+			Type = ResourceSprites
+			Location = [.5, .5]
+			ResourceStorage = ExtinguisherStorageTop
+			Layer = "doodads_high"
+			ResourceLevels
+			[
+				{
+					File = "./Data/ships/terran/fire_extinguisher/extinguisher.png"
+					Size = [1, 1]
+				}
+			]
+		}
+
+		ExtinguisherSpriteBottom
+		{
+			Type = ResourceSprites
+			Location = [.5, 3.5]
+			ResourceStorage = ExtinguisherStorageBottom
+			Layer = "doodads_high"
+			ResourceLevels
+			[
+				{
+					File = "./Data/ships/terran/fire_extinguisher/extinguisher.png"
+					MirrorV = true
+					Size = [1, 1]
+				}
+			]
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/SmallPartDestroyedDry
+			Location = [.5, .5]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [1, 4]
+		}
+	}
+
+	Stats
+	{
+		AbilityCooldown = &~/Part/Components/ExtinguisherProducerTop/Interval
+	}
+}

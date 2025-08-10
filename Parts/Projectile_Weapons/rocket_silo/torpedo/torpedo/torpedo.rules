@@ -1,0 +1,154 @@
+ID = ultranova.fighter_torpedo
+Range = 500
+IdealRange = 225
+Speed = 60
+
+Components
+{
+	Physics
+	{
+		Type = BoxPhysics
+		Size = [1.25, 0.125]
+		Density = 0.1
+	}
+
+	Retarget
+	{
+		Type = SameShipRetarget
+	}
+
+	Acceleration
+	{
+		Type = Acceleration
+		Acceleration = 100
+	}
+
+	NegativeAcceleration
+	{
+		Type = Acceleration
+		Acceleration = [-75, 0]
+		AccelerationOverTime = [0, .75]
+		Direction = FrameOfReferenceVelocity
+	}
+
+	DeathByLifetime
+	{
+		Type = DeathByLifetime
+		Lifetime = 10
+		HasTarget = true
+	}
+
+	DeathByDistanceTraveled
+	{
+		Type = DeathByDistanceTraveled
+		// Distance auto-computed from range.
+		HasTarget = false
+	}
+
+	Sprite
+	{
+		Type = Sprite
+		IsLit = true
+		Sprite
+		{
+			Texture
+			{
+				File = "torpedo.png"
+				SampleMode = Linear
+				MipLevels = max
+			}
+			Size = [2, 1]
+		}
+
+		NormalsTexture
+		{
+			File = "torpedo_normals.png"
+			MipLevels = max
+		}
+	}
+
+	MediaEffects
+	{
+		Type = MediaEffects
+		Offset = [-0.75 + 3/64, 0]
+		Rotation = 180d
+		MediaEffects
+		[
+			&<particles/torpedo_thruster_fire.rules>
+			&<particles/torpedo_thruster_plume.rules>
+			&<particles/torpedo_thruster_plume_light.rules>
+		]
+	}
+
+	Targetable
+	{
+		Type = Targetable
+		Health = 400
+		TargetCategory = "missile"
+
+		// No AOE damage when shot down.
+		OnDeath = &../Hit/HitFriendly
+	}
+
+	Hit
+	{
+		Type = SimpleHit
+		SourcePartCollisionDelay = 1.5/30
+
+		HitShield = &HitOperational
+		HitOperational
+		{
+			HitEffects
+			[
+				{
+					Type = ExplosiveDamage
+					TotalDamage = 20000
+					Radius = 2
+					Filter
+					{
+						Friendlies = true
+					}
+				}
+				{
+					Type = Impulse;
+					Impulse = 75;
+				}
+			]
+
+			MediaEffects
+			[
+				&<particles/torpedo_hit.rules>
+				&<./Data/shots/missile_he/particles/missile_he_flash.rules>
+
+				: /BASE_SOUNDS/AudioExterior
+				{
+					Sound = "./Data/shots/missile_he/missile_he_hit.wav"
+					Volume = .75
+					SpeedVariation = .4
+				}
+
+				: /BASE_SHAKE
+				{
+					ShakeAmount = .15
+					Duration = .75
+				}
+			]
+		}
+		HitStructural = &HitOperational
+
+		HitFriendly
+		{
+			MediaEffects
+			[
+				&<particles/torpedo_hit.rules>
+
+				: /BASE_SOUNDS/AudioExterior
+				{
+					Sound = "./Data/shots/missile_he/missile_he_hit.wav"
+					Volume = .75
+					SpeedVariation = .4
+				}
+			]
+		}
+	}
+}

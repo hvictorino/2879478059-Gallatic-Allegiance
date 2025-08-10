@@ -1,0 +1,91 @@
+Parts
+[
+	//Energy Weapons
+		//Fighter Cannons
+	&<Energy_Weapons/fighter_weapons/energy_cannon/energy_cannon.rules>/Part
+	&<Energy_Weapons/fighter_weapons/energy_cannon/energy_cannon_left.rules>/Part
+	&<Energy_Weapons/fighter_weapons/long_energy_cannon/long_energy_cannon.rules>/Part
+	&<Energy_Weapons/fighter_weapons/long_energy_cannon/long_energy_cannon_left.rules>/Part
+	&<Energy_Weapons/fighter_weapons/very_long_energy_cannon/long_energy_cannon.rules>/Part
+	&<Energy_Weapons/fighter_weapons/very_long_energy_cannon/long_energy_cannon_left.rules>/Part
+
+		//Miniguns
+	&<Energy_Weapons/fighter_weapons/energy_minigun/energy_minigun.rules>/Part
+	&<Energy_Weapons/fighter_weapons/energy_minigun/energy_minigun_left.rules>/Part
+	&<Energy_Weapons/fighter_weapons/long_energy_minigun/long_energy_minigun.rules>/Part
+	&<Energy_Weapons/fighter_weapons/long_energy_minigun/long_energy_minigun_left.rules>/Part
+
+	&<Energy_Weapons/machine_gun_heavy/machine_gun_heavy.rules>/Part
+	&<Energy_Weapons/machine_gun_heavy_dual/machine_gun_heavy_dual.rules>/Part
+
+		//Turrets
+	&<Energy_Weapons/fighter_turret/fighter_turret.rules>/Part
+	&<Energy_Weapons/med_turret/med_turret.rules>/Part
+	&<Energy_Weapons/large_turret/large_turret.rules>/Part
+	&<Energy_Weapons/capital_turret/capital_turret.rules>/Part
+
+		//Assault Cannons
+	&<Energy_Weapons/assault_cannon/assault_cannon.rules>/Part
+
+	//Projectile Weapons
+	&<Projectile_Weapons/cannon_gauss/cannon_gauss.rules>/Part
+	&<Projectile_Weapons/missile_silo/missile_silo.rules>/Part
+	
+		//Small Particle Cannon
+	&<Projectile_Weapons/particle_cannon_small/particle_cannon_loader.rules>/Part
+	&<Projectile_Weapons/particle_cannon_small/particle_cannon_barrel_extender.rules>/Part
+	&<Projectile_Weapons/particle_cannon_small/particle_cannon_barrel.rules>/Part
+
+		//Large Particle Cannon
+	&<Projectile_Weapons/particle_cannon_large/particle_cannon_loader/particle_cannon_loader.rules>/Part
+	&<Projectile_Weapons/particle_cannon_large/particle_cannon_extender/particle_cannon_extender.rules>/Part
+	&<Projectile_Weapons/particle_cannon_large/particle_cannon_extender_external/particle_cannon_extender_external.rules>/Part
+	&<Projectile_Weapons/particle_cannon_large/particle_cannon_barrel/particle_cannon_barrel.rules>/Part
+
+		//Rocket Parts
+	&<Projectile_Weapons/factory_rocket/factory_rocket.rules>/Part
+	&<Projectile_Weapons/rocket_silo/rocket_silo.rules>/Part
+	&<Projectile_Weapons/rocket_silo_heavy/rocket_silo_heavy.rules>/Part
+	&<Projectile_Weapons/rocket_turret_small/rocket_turret_small.rules>/Part
+	&<Projectile_Weapons/rocket_turret_medium/rocket_turret_medium.rules>/Part
+
+		//Ballistics Weapons
+	&<Projectile_Weapons/factory_light_ammo/factory_light_ammo.rules>/Part
+	&<Projectile_Weapons/light_gun_turret/light_gun_turret.rules>/Part
+
+	//Defences
+	&<Defences/ciws_small/ciws_small.rules>/Part
+	&<Defences/ciws_large/ciws_large.rules>/Part
+	&<Defences/beam_pd_small/beam_pd_small.rules>/Part
+	&<Defences/beam_pd_large/beam_pd_large.rules>/Part
+	&<Defences/fire_room/fire_room.rules>/Part
+	&<Defences/core_shield_small/core_shield_small.rules>/Part
+
+	//Flight
+	&<Flight/command_booster/command_booster.rules>/Part
+
+	&<Flight/thruster_plasma_small/thruster_plasma_small.rules>/Part
+	&<Flight/thruster_plasma_med/thruster_plasma_med.rules>/Part
+	&<Flight/thruster_plasma_large/thruster_plasma_large.rules>/Part
+	//&<Flight/thruster_plasma_huge/thruster_plasma_huge.rules>/Part
+	//&<Flight/thruster_plasma_core_small/thruster_plasma_core_small.rules>/Part
+
+	&<Flight/antigrav_small/antigrav_small.rules>/Part
+
+	&<Flight/thrusters_phase/phase_thruster_small/phase_thruster_small.rules>/Part
+	&<Flight/thrusters_phase/phase_thruster_small_angled/phase_thruster_small_angled_L.rules>/Part
+	&<Flight/thrusters_phase/phase_thruster_small_angled_E/phase_thruster_small_angled_L.rules>/Part
+	&<Flight/thrusters_phase/phase_thruster_small_inset/phase_thruster_small_inset_L.rules>/Part
+
+	&<Flight/thrusters_phase/phase_thruster_med/phase_thruster_med.rules>/Part
+	&<Flight/thrusters_phase/phase_thruster_med_angled/phase_thruster_med_angled_L.rules>/Part
+	&<Flight/thrusters_phase/phase_thruster_med_angled_E/phase_thruster_med_angled_L.rules>/Part
+	&<Flight/thrusters_phase/phase_thruster_med_inset/phase_thruster_med_inset_L.rules>/Part
+
+	//Power
+	&<Power/reactor_phantom/reactor_phantom.rules>/Part
+
+	//Crew
+	&<Crew/airlock_large/airlock_large.rules>/Part
+	&<Crew/crew_quarters_walkthrough/crew_quarters_walkthrough.rules>/Part
+]

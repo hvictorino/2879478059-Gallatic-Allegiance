@@ -1,0 +1,313 @@
+Part : <./Data/ships/terran/base_part_terran.rules>/Part
+{
+	NameKey = "Parts/RocketSilo"
+	IconNameKey = "Parts/RocketSiloIcon"
+	ID = ultranova.rocket_launcher
+	OtherIDs = [ultranova.smallmissile_launcher, ultrablast.smallmissile_launcher]
+	EditorGroup = "WeaponsProjectile"
+	DescriptionKey = "Parts/RocketSiloDesc"
+	Resources
+	[
+		[steel, 40]
+		[coil2, 10]
+		[processor, 1]
+	]
+	Size = [1, 3]
+	SaveRect = [0, 1, 1, 2]
+	SelectionPriority = 1
+	SelectionTypeByRotation = true
+	MaxHealth = 6000
+	InitialPenetrationResistance = 1
+	TypeCategories = [weapon, uses_rockets, uses_launcher_parts, is_crewed]
+	ProhibitAbove = 3
+	ExternalWalls
+	[
+		Left
+		Right
+		Bottom
+	]
+	AllowedDoorLocations
+	[
+		[-1, 1]
+		[1, 1]
+	]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [30.67, 92]
+	}
+	Components : ^/0/Components
+	{
+		IsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, PartCrew]
+			Mode = All
+		}
+		
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+		}
+
+		CommandConsumer
+		{
+			Type = CommandConsumer
+			OperationalToggle = PowerToggle
+			CommandPoints = 2
+		}
+
+		FireModeToggle
+		{
+			Type = UIToggle
+			ToggleID = "fire_mode"
+			Default = 1
+			ToggledOnChoices = [0, 1, 2]
+		}
+		AutoTargetToggle
+		{
+			Type = ModeToggle
+			Mode = FireModeToggle
+			OnModes = [1, 2]
+		}
+		AutoFireToggle
+		{
+			Type = ModeToggle
+			Mode = FireModeToggle
+			OnMode = 2
+		}
+
+		RocketType
+		{
+			Type = UIToggle
+			ToggleID = "rocket_type"
+			AvailableChoices = [0, 1]
+			Default = 0
+			AlwaysAllowInBuildMode = true
+		}
+
+		HERocketToggle
+		{
+			Type = ModeToggle
+			Mode = RocketType
+			OnMode = 0
+		}
+		HERocketComponents
+		{
+			Type = ToggledComponents
+			Toggle = HERocketToggle
+			IncludeInBlueprints = true
+			Components = &<he_rocket/rocket_launcher_he.rules>/Components
+		}
+
+		TorpedoToggle
+		{
+			Type = ModeToggle
+			Mode = RocketType
+			OnMode = 1
+		}
+		TorpedoComponents
+		{
+			Type = ToggledComponents
+			Toggle = TorpedoToggle
+			IncludeInBlueprints = true
+			Components = &<torpedo/rocket_launcher_torp.rules>/Components
+		}
+		
+		CommonReloadTimerShort
+		{
+			Type = Timer
+			Duration = 0.5
+			AutoStart = true
+			StartTrigger = CommonReloadResetTriggerProxy
+		}
+		CommonReloadTimerMed
+		{
+			Type = Timer
+			Duration = 1
+			AutoStart = true
+			StartTrigger = CommonReloadResetTriggerProxy
+		}
+		CommonReloadTimerLong
+		{
+			Type = Timer
+			Duration = 3
+			AutoStart = true
+			StartTrigger = CommonReloadResetTriggerProxy
+		}
+		CommonReloadResetTriggerProxy
+		{
+			Type = TriggerProxy
+			ComponentID = CommonReloadResetTrigger
+		}
+
+		RocketPrereqProxy
+		{
+			Type = ToggleProxy
+			ComponentID = RocketPrereq
+		}
+		
+		CrewLocation
+		{
+			Type = CrewLocation
+			Location = [.5, 2.4375]
+			Rotation = 180d
+		}
+		PartCrew
+		{
+			Type = PartCrew
+			Crew = 1
+			DefaultPriority = &/PRIORITIES/Weapon_Crew
+			PrerequisitesBeforeCrewing = [RocketPrereqProxy, PowerToggle]
+			CrewDestinations
+			[
+				[.5, 2.4375]
+			]
+			CrewLocations
+			[
+				CrewLocation
+			]
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [0.5, 1.5]
+			OperationalToggle = IsOperational
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "floor.png"
+						Size = [1, 3]
+					}
+					{
+						File = "floor_33.png"
+						Size = [1, 3]
+					}
+					{
+						File = "floor_66.png"
+						Size = [1, 3]
+					}
+				]
+			}
+			OperationalDoodad
+			{
+				Layer = "doodads_low"
+				Offset = [0, 1]
+				DamageLevels
+				[
+					{
+						AnimationFiles
+						[
+							"doodads_on1.png"
+							"doodads_on2.png"
+							"doodads_on3.png"
+							"doodads_on4.png"
+							"doodads_on5.png"
+							"doodads_on6.png"
+							"doodads_on7.png"
+							"doodads_on8.png"
+						]
+						Size = [1, 1]
+						AnimationInterval = 0.1
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "doodads_low"
+				Offset = [0, 1]
+				DamageLevels
+				[
+					{
+						File = "doodads_off.png"
+						Size = [1, 1]
+					}
+				]
+			}
+			OperationalLighting
+			{
+				Layer = "lights_add"
+				DamageLevels
+				[
+					{
+						File = "lights.png"
+						Size = [1, 3]
+					}
+				]
+			}
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "walls.png"
+						Size = [1, 3]
+					}
+				]
+			}
+			Roof
+			{
+				Layer = "roofs"
+				DamageLevels
+				[
+					{
+						File = "roof.png"
+						NormalsFile = "roof_normals.png"
+						Size = [1, 3]
+					}
+					{
+						File = "roof_33.png"
+						NormalsFile = "roof_normals_33.png"
+						Size = [1, 3]
+					}
+					{
+						File = "roof_66.png"
+						NormalsFile = "roof_normals_66.png"
+						Size = [1, 3]
+					}
+				]
+			}
+		}
+
+		OperationEffects
+		{
+			Type = ToggleEffects
+			Location = [0.5, 1.5]
+			Toggle = IsOperational
+			ToggledOnMediaEffects = &/COMMON_EFFECTS/MachinesOn
+			ToggledOffMediaEffects = &/COMMON_EFFECTS/MachinesOff
+		}
+
+		BlueprintsHE
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [1, 3]
+		}
+	}
+	
+	Stats
+	{
+		CrewRequired = &~/Part/Components/PartCrew/Crew
+		RocketCapacity = 2
+
+		RecCrew = (&CrewRequired) + (&<he_rocket/rocket_launcher_he.rules>/RocketStats/Stats/ROF) * (&<he_rocket/rocket_launcher_he.rules>/RocketStats/Stats/RocketParts) * 2
+	}
+
+	StatsByCategory
+	[
+		&<he_rocket/rocket_launcher_he.rules>/RocketStats
+		&<torpedo/rocket_launcher_torp.rules>/RocketStats
+	]
+}

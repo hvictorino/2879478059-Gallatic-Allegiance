@@ -1,0 +1,53 @@
+ID = "ultranova.bullet"
+Range = 150
+IdealRange = 65
+Speed = 500
+
+Components : &<./Data/shots/pd_shot/pd_shot.rules>/Components
+{
+	Hit
+	{
+		Type = SimpleHit
+
+        BulletCollisions
+        {
+            Enemies = true
+            Junk = true
+            Friendlies = true
+            OnlyBulletCategories = [missile, mine, bullet]
+        }
+		HitBullet
+		{
+			Offset = [-0.15, 0]
+
+			HitEffects
+			[
+				{
+					Type = Damage
+					Damage = 150
+				}
+			]
+
+			MediaEffects = &<./Data/shots/pd_shot/pd_shot.rules>/Components/Hit/HitBullet/MediaEffects
+		}
+
+		CrewCollisions = {Enemies=true; Junk=true}
+		HitCrew = &HitOperational
+
+		HitShield = &HitOperational
+		HitOperational
+		{
+			Offset = [-0.15, 0]
+
+			HitEffects
+			[
+				{
+					Type = Damage
+					Damage = 150
+				}
+			]
+			MediaEffects = &../HitBullet/MediaEffects
+		}
+		HitStructural = &HitOperational
+	}
+}

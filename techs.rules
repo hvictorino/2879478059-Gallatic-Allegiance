@@ -1,0 +1,302 @@
+Techs
+[
+	{	
+		ID = ultranova.airlock_large
+		NameKey = &<Parts/Crew/airlock_large/airlock_large.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Crew/airlock_large/airlock_large.rules>/Part/DescriptionKey
+		Icon = &<Parts/Crew/airlock_large/airlock_large.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Crew/airlock_large/airlock_large.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Crew/airlock_large/airlock_large.rules>/Part/ID]
+		Cost = 2500
+	}
+	{
+		ID = ultranova.ciws_small
+		NameKey = &<Parts/Defences/ciws_small/ciws_small.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Defences/ciws_small/ciws_small.rules>/Part/DescriptionKey
+		Icon = &<Parts/Defences/ciws_small/ciws_small.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Defences/ciws_small/ciws_small.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Defences/ciws_small/ciws_small.rules>/Part/ID]
+		Cost = 2000
+	}
+	{
+		ID = ultranova.ciws_large
+		NameKey = &<Parts/Defences/ciws_large/ciws_large.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Defences/ciws_large/ciws_large.rules>/Part/DescriptionKey
+		Icon = &<Parts/Defences/ciws_large/ciws_large.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Defences/ciws_large/ciws_large.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Defences/ciws_large/ciws_large.rules>/Part/ID]
+		Cost = 3000
+		Prerequisites = [ultranova.ciws_small]
+	}
+	{
+		ID = ultranova.beam_pd_small
+		NameKey = &<Parts/Defences/beam_pd_small/beam_pd_small.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Defences/beam_pd_small/beam_pd_small.rules>/Part/DescriptionKey
+		Icon = &<Parts/Defences/beam_pd_small/beam_pd_small.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Defences/beam_pd_small/beam_pd_small.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Defences/beam_pd_small/beam_pd_small.rules>/Part/ID]
+		Cost = 4000
+		Prerequisites = [ultranova.ciws_small]
+	}
+	{
+		ID = ultranova.beam_pd_large
+		NameKey = &<Parts/Defences/beam_pd_large/beam_pd_large.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Defences/beam_pd_large/beam_pd_large.rules>/Part/DescriptionKey
+		Icon = &<Parts/Defences/beam_pd_large/beam_pd_large.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Defences/beam_pd_large/beam_pd_large.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Defences/beam_pd_large/beam_pd_large.rules>/Part/ID]
+		Cost = 6000
+		Prerequisites = [ultranova.beam_pd_small, ultranova.ciws_large]
+	}
+	{
+		ID = ultranova.core_shield_small
+		NameKey = &<Parts/Defences/core_shield_small/core_shield_small.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Defences/core_shield_small/core_shield_small.rules>/Part/DescriptionKey
+		Icon = &<Parts/Defences/core_shield_small/core_shield_small.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Defences/core_shield_small/core_shield_small.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Defences/core_shield_small/core_shield_small.rules>/Part/ID]
+		Cost = 25000
+		Prerequisites = [cosmoteer.shield_gen_large]
+	}
+	{
+		ID = ultranova.fighter_energy_cannon
+		NameKey = "Parts/EnergyCannons"
+		DescriptionKey = "Parts/EnergyCannonsDesc"
+		Icon = &<Parts/Energy_Weapons/fighter_weapons/energy_cannon/energy_cannon.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Energy_Weapons/fighter_weapons/energy_cannon/energy_cannon.rules>/Part/EditorGroup
+		PartsUnlocked
+		[
+			&<Parts/Energy_Weapons/fighter_weapons/energy_cannon/energy_cannon.rules>/Part/ID
+			&<Parts/Energy_Weapons/fighter_weapons/energy_cannon/energy_cannon_left.rules>/Part/ID
+			&<Parts/Energy_Weapons/fighter_weapons/long_energy_cannon/long_energy_cannon.rules>/Part/ID
+			&<Parts/Energy_Weapons/fighter_weapons/long_energy_cannon/long_energy_cannon_left.rules>/Part/ID
+			&<Parts/Energy_Weapons/fighter_weapons/very_long_energy_cannon/long_energy_cannon.rules>/Part/ID
+			&<Parts/Energy_Weapons/fighter_weapons/very_long_energy_cannon/long_energy_cannon_left.rules>/Part/ID
+		]
+		Cost = 8000
+		Prerequisites = [cosmoteer.laser_blaster_small]
+	}
+	{
+		ID = ultranova.fighter_energy_minigun
+		NameKey = "Parts/EnergyMiniguns"
+		DescriptionKey = "Parts/EnergyMinigunsDesc"
+		Icon = &<Parts/Energy_Weapons/fighter_weapons/energy_minigun/energy_minigun.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Energy_Weapons/fighter_weapons/energy_minigun/energy_minigun.rules>/Part/EditorGroup
+		PartsUnlocked
+		[
+			&<Parts/Energy_Weapons/fighter_weapons/energy_minigun/energy_minigun.rules>/Part/ID
+			&<Parts/Energy_Weapons/fighter_weapons/energy_minigun/energy_minigun_left.rules>/Part/ID
+			&<Parts/Energy_Weapons/fighter_weapons/long_energy_minigun/long_energy_minigun.rules>/Part/ID
+			&<Parts/Energy_Weapons/fighter_weapons/long_energy_minigun/long_energy_minigun_left.rules>/Part/ID
+		]
+		Cost = 8000
+		Prerequisites = [ultranova.fighter_energy_cannon]
+	}
+	{
+		ID = ultranova.fighter_turret
+		NameKey = &<Parts/Energy_Weapons/fighter_turret/fighter_turret.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Energy_Weapons/fighter_turret/fighter_turret.rules>/Part/DescriptionKey
+		Icon = &<Parts/Energy_Weapons/fighter_turret/fighter_turret.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Energy_Weapons/fighter_turret/fighter_turret.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Energy_Weapons/fighter_turret/fighter_turret.rules>/Part/ID]
+		Cost = 3000
+		Prerequisites = [cosmoteer.laser_blaster_small, ultranova.fighter_energy_cannon]
+	}
+	{
+		ID = ultranova.medium_turret
+		NameKey = &<Parts/Energy_Weapons/med_turret/med_turret.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Energy_Weapons/med_turret/med_turret.rules>/Part/DescriptionKey
+		Icon = &<Parts/Energy_Weapons/med_turret/med_turret.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Energy_Weapons/med_turret/med_turret.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Energy_Weapons/med_turret/med_turret.rules>/Part/ID]
+		Cost = 6000
+		Prerequisites = [ultranova.fighter_turret]
+	}
+	{
+		ID = ultranova.large_turret
+		NameKey = &<Parts/Energy_Weapons/large_turret/large_turret.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Energy_Weapons/large_turret/large_turret.rules>/Part/DescriptionKey
+		Icon = &<Parts/Energy_Weapons/large_turret/large_turret.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Energy_Weapons/large_turret/large_turret.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Energy_Weapons/large_turret/large_turret.rules>/Part/ID]
+		Cost = 12000
+		Prerequisites = [ultranova.medium_turret]
+	}
+	{
+		ID = ultranova.capital_turret
+		NameKey = &<Parts/Energy_Weapons/capital_turret/capital_turret.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Energy_Weapons/capital_turret/capital_turret.rules>/Part/DescriptionKey
+		Icon = &<Parts/Energy_Weapons/capital_turret/capital_turret.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Energy_Weapons/capital_turret/capital_turret.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Energy_Weapons/capital_turret/capital_turret.rules>/Part/ID]
+		Cost = 18000
+		Prerequisites = [ultranova.large_turret]
+	}
+	{
+		ID = ultranova.machine_gun_heavy
+		NameKey = &<Parts/Energy_Weapons/machine_gun_heavy/machine_gun_heavy.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Energy_Weapons/machine_gun_heavy/machine_gun_heavy.rules>/Part/DescriptionKey
+		Icon = &<Parts/Energy_Weapons/machine_gun_heavy/machine_gun_heavy.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Energy_Weapons/machine_gun_heavy/machine_gun_heavy.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Energy_Weapons/machine_gun_heavy/machine_gun_heavy.rules>/Part/ID]
+		Cost = 4000
+		Prerequisites = [ultranova.fighter_energy_minigun]
+	}
+	{
+		ID = ultranova.machine_gun_heavy_dual
+		NameKey = &<Parts/Energy_Weapons/machine_gun_heavy_dual/machine_gun_heavy_dual.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Energy_Weapons/machine_gun_heavy_dual/machine_gun_heavy_dual.rules>/Part/DescriptionKey
+		Icon = &<Parts/Energy_Weapons/machine_gun_heavy_dual/machine_gun_heavy_dual.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Energy_Weapons/machine_gun_heavy_dual/machine_gun_heavy_dual.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Energy_Weapons/machine_gun_heavy_dual/machine_gun_heavy_dual.rules>/Part/ID]
+		Cost = 8000
+		Prerequisites = [ultranova.machine_gun_heavy]
+	}
+
+	{
+		ID = ultranova.gauss_cannon
+		NameKey = &<Parts/Projectile_Weapons/cannon_gauss/cannon_gauss.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Projectile_Weapons/cannon_gauss/cannon_gauss.rules>/Part/DescriptionKey
+		Icon = &<Parts/Projectile_Weapons/cannon_gauss/cannon_gauss.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Projectile_Weapons/cannon_gauss/cannon_gauss.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Projectile_Weapons/cannon_gauss/cannon_gauss.rules>/Part/ID]
+		Cost = 8000
+		Prerequisites = [cosmoteer.cannon_large]
+	}
+	{
+		ID = ultranova.missile_silo
+		NameKey = &<Parts/Projectile_Weapons/missile_silo/missile_silo.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Projectile_Weapons/missile_silo/missile_silo.rules>/Part/DescriptionKey
+		Icon = &<Parts/Projectile_Weapons/missile_silo/missile_silo.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Projectile_Weapons/missile_silo/missile_silo.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Projectile_Weapons/missile_silo/missile_silo.rules>/Part/ID]
+		Cost = 5000
+		Prerequisites = [cosmoteer.missile_launcher]
+	}
+	{
+		ID = ultranova.small_particle_cannon
+		NameKey = "Parts/ParticleCannonSmall"
+		DescriptionKey = "Parts/ParticleCannonSmallDesc"
+		Icon = &<Parts/Projectile_Weapons/particle_cannon_small/particle_cannon_barrel.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Projectile_Weapons/particle_cannon_small/particle_cannon_barrel.rules>/Part/EditorGroup
+		PartsUnlocked
+		[
+			&<Parts/Projectile_Weapons/particle_cannon_small/particle_cannon_barrel.rules>/Part/ID
+			&<Parts/Projectile_Weapons/particle_cannon_small/particle_cannon_barrel_extender.rules>/Part/ID
+			&<Parts/Projectile_Weapons/particle_cannon_small/particle_cannon_loader.rules>/Part/ID
+		]
+		Cost = 6000
+	}
+	{
+		ID = ultranova.large_particle_cannon
+		NameKey = "Parts/ParticleCannonLarge"
+		DescriptionKey = "Parts/ParticleCannonLargeDesc"
+		Icon = &<Parts/Projectile_Weapons/particle_cannon_large/particle_cannon_barrel/particle_cannon_barrel.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Projectile_Weapons/particle_cannon_large/particle_cannon_barrel/particle_cannon_barrel.rules>/Part/EditorGroup
+		PartsUnlocked
+		[
+			&<Parts/Projectile_Weapons/particle_cannon_large/particle_cannon_barrel/particle_cannon_barrel.rules>/Part/ID
+			&<Parts/Projectile_Weapons/particle_cannon_large/particle_cannon_extender/particle_cannon_extender.rules>/Part/ID
+			&<Parts/Projectile_Weapons/particle_cannon_large/particle_cannon_extender_external/particle_cannon_extender_external.rules>/Part/ID
+			&<Parts/Projectile_Weapons/particle_cannon_large/particle_cannon_loader/particle_cannon_loader.rules>/Part/ID
+		]
+		Cost = 12000
+		Prerequisites = [cosmoteer.missile_launcher]
+	}
+	{
+		ID = ultranova.rocket_silo_heavy
+		NameKey = "Parts/RocketSiloHeavy"
+		DescriptionKey = "Parts/RocketSiloHeavyDesc"
+		Icon = &<Parts/Projectile_Weapons/rocket_silo_heavy/rocket_silo_heavy.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Projectile_Weapons/rocket_silo_heavy/rocket_silo_heavy.rules>/Part/EditorGroup
+		PartsUnlocked
+		[
+			&<Parts/Projectile_Weapons/rocket_silo_heavy/rocket_silo_heavy.rules>/Part/ID
+		]
+		Cost = 4000
+	}
+	{
+		ID = ultranova.rocket_turret_small
+		NameKey = "Parts/RocketTurretSmall"
+		DescriptionKey = "Parts/RocketTurretSmallDesc"
+		Icon = &<Parts/Projectile_Weapons/rocket_turret_small/rocket_turret_small.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Projectile_Weapons/rocket_turret_small/rocket_turret_small.rules>/Part/EditorGroup
+		PartsUnlocked
+		[
+			&<Parts/Projectile_Weapons/rocket_turret_small/rocket_turret_small.rules>/Part/ID
+		]
+		Cost = 6000
+		Prerequisites = [ultranova.rocket_silo_heavy]
+	}
+
+
+	{
+		ID = ultranova.command_booster
+		NameKey = &<Parts/Flight/command_booster/command_booster.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Flight/command_booster/command_booster.rules>/Part/DescriptionKey
+		Icon = &<Parts/Flight/command_booster/command_booster.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Flight/command_booster/command_booster.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Flight/command_booster/command_booster.rules>/Part/ID]
+		Cost = 4000
+	}
+	{
+		ID = ultranova.plasma_thruster_small
+		NameKey = &<Parts/Flight/thruster_plasma_small/thruster_plasma_small.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Flight/thruster_plasma_small/thruster_plasma_small.rules>/Part/DescriptionKey
+		Icon = &<Parts/Flight/thruster_plasma_small/thruster_plasma_small.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Flight/thruster_plasma_small/thruster_plasma_small.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Flight/thruster_plasma_small/thruster_plasma_small.rules>/Part/ID]
+		Cost = 1000
+	}
+	{
+		ID = ultranova.plasma_thruster_med
+		NameKey = &<Parts/Flight/thruster_plasma_med/thruster_plasma_med.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Flight/thruster_plasma_med/thruster_plasma_med.rules>/Part/DescriptionKey
+		Icon = &<Parts/Flight/thruster_plasma_med/thruster_plasma_med.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Flight/thruster_plasma_med/thruster_plasma_med.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Flight/thruster_plasma_med/thruster_plasma_med.rules>/Part/ID]
+		Cost = 2000
+		Prerequisites = [ultranova.plasma_thruster_small]
+	}
+	{
+		ID = ultranova.plasma_thruster_large
+		NameKey = &<Parts/Flight/thruster_plasma_large/thruster_plasma_large.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Flight/thruster_plasma_large/thruster_plasma_large.rules>/Part/DescriptionKey
+		Icon = &<Parts/Flight/thruster_plasma_large/thruster_plasma_large.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Flight/thruster_plasma_large/thruster_plasma_large.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Flight/thruster_plasma_large/thruster_plasma_large.rules>/Part/ID]
+		Cost = 4000
+		Prerequisites = [ultranova.plasma_thruster_med, cosmoteer.thruster_large]
+	}
+	{
+		ID = ultranova.plasma_thruster_huge
+		NameKey = &<Parts/Flight/thruster_plasma_huge/thruster_plasma_huge.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Flight/thruster_plasma_huge/thruster_plasma_huge.rules>/Part/DescriptionKey
+		Icon = &<Parts/Flight/thruster_plasma_huge/thruster_plasma_huge.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Flight/thruster_plasma_huge/thruster_plasma_huge.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Flight/thruster_plasma_huge/thruster_plasma_huge.rules>/Part/ID]
+		Cost = 8000
+		Prerequisites = [ultranova.plasma_thruster_large, cosmoteer.thruster_huge]
+	}
+	{
+		ID = ultranova.antigrav_small
+		NameKey = &<Parts/Flight/antigrav_small/antigrav_small.rules>/Part/NameKey
+		DescriptionKey = &<Parts/Flight/antigrav_small/antigrav_small.rules>/Part/DescriptionKey
+		Icon = &<Parts/Flight/antigrav_small/antigrav_small.rules>/Part/EditorIcon
+		EditorGroup = &<Parts/Flight/antigrav_small/antigrav_small.rules>/Part/EditorGroup
+		PartsUnlocked = [&<Parts/Flight/antigrav_small/antigrav_small.rules>/Part/ID]
+		Cost = 1000
+	}
+]
+/*
+	{
+		ID =
+		NameKey =
+		DescriptionKey =
+		Icon =
+		EditorGroup =
+		PartsUnlocked = []
+		Cost = 
+		Prerequisites = []
+	}
+*/

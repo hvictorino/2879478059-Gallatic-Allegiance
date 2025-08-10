@@ -1,0 +1,336 @@
+Part : &<../phase_thruster_small/phase_thruster_small.rules>/Part
+{
+	NameKey = "Parts/PhaseThrusterSmallInset"
+	IconNameKey = "Parts/PhaseThrusterSmallInsetIcon"
+	ID = ultranova.phase_thruster_small_inset_L
+	OtherIDs = [ultranova.phase_thruster_small_inset_R]
+	FlipWhenLoadingIDs = [ultranova.phase_thruster_small_inset_R]
+	IsFlippable = true
+	GenerateRectCollider = false
+	DescriptionKey = "Parts/PhaseThrusterSmallDesc"
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [21.33, 42.66]
+	}
+	ExternalWallsByCell
+	[
+		{
+			Key = [0, 1]
+			Value = [TopLeft, Left, BottomLeft, Top, TopRight]
+		}
+	]
+	InternalWallsByCell
+	[
+		{
+			Key = [0, 1]
+			Value = [Right, BottomRight]
+		}
+	]
+	Components : ^/0/Components
+	{
+		Collider
+		{
+			Type = PolygonCollider
+			Vertices
+			[
+				[0, 0]
+				[1, 0]
+				[1, 1]
+				[0, 2]
+			]
+		}
+
+		Graphics : ^/0/Graphics
+		{
+			Type = Graphics
+			Location = [.5, .5]
+			OperationalToggle = IsOperational
+			Walls = &<../phase_thruster_small_angled_E/phase_thruster_small_angled_L.rules>/Part/Components/Graphics/Walls
+		}
+		NozzleGraphics : ^/0/NozzleGraphics
+		{
+			Type = Graphics
+			Location = [.5, 1.5]
+			Walls = &<../phase_thruster_small_angled_E/phase_thruster_small_angled_L.rules>/Part/Components/NozzleGraphics/Walls
+			Roof = &<../phase_thruster_small_angled_E/phase_thruster_small_angled_L.rules>/Part/Components/NozzleGraphics/Roof
+		}
+
+		BlueThrustComponents : ^/0/BlueThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = BlueThrustToggle
+			IncludeInBlueprints = true
+			Components : ^/0/Components
+			{
+				BlueGraphics : ^/0/BlueGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"blue/lights_B1.png"
+									"blue/lights_B2.png"
+									"blue/lights_B3.png"
+									"blue/lights_B4.png"
+									"blue/lights_B5.png"
+									"blue/lights_B4.png"
+									"blue/lights_B3.png"
+									"blue/lights_B2.png"
+								]
+								Size = [1, 2]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+
+		GreenThrustComponents : ^/0/GreenThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = GreenThrustToggle
+			IncludeInBlueprints = true
+			Components : ^/0/Components
+			{
+				GreenGraphics : ^/0/GreenGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"green/lights_G1.png"
+									"green/lights_G2.png"
+									"green/lights_G3.png"
+									"green/lights_G4.png"
+									"green/lights_G5.png"
+									"green/lights_G4.png"
+									"green/lights_G3.png"
+									"green/lights_G2.png"
+								]
+								Size = [1, 2]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+
+		OrangeThrustComponents : ^/0/OrangeThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = OrangeThrustToggle
+			IncludeInBlueprints = true
+			Components : ^/0/Components
+			{
+				OrangeGraphics : ^/0/OrangeGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"orange/lights_O1.png"
+									"orange/lights_O2.png"
+									"orange/lights_O3.png"
+									"orange/lights_O4.png"
+									"orange/lights_O5.png"
+									"orange/lights_O4.png"
+									"orange/lights_O3.png"
+									"orange/lights_O2.png"
+								]
+								Size = [1, 2]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+
+		PurpleThrustComponents : ^/0/PurpleThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = PurpleThrustToggle
+			IncludeInBlueprints = true
+			Components : ^/0/Components
+			{
+				PurpleGraphics : ^/0/PurpleGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"purple/lights_P1.png"
+									"purple/lights_P2.png"
+									"purple/lights_P3.png"
+									"purple/lights_P4.png"
+									"purple/lights_P5.png"
+									"purple/lights_P4.png"
+									"purple/lights_P3.png"
+									"purple/lights_P2.png"
+								]
+								Size = [1, 2]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+
+		RedThrustComponents : ^/0/RedThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = RedThrustToggle
+			IncludeInBlueprints = true
+			Components : ^/0/Components
+			{
+				RedGraphics : ^/0/RedGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"red/lights_R1.png"
+									"red/lights_R2.png"
+									"red/lights_R3.png"
+									"red/lights_R4.png"
+									"red/lights_R5.png"
+									"red/lights_R4.png"
+									"red/lights_R3.png"
+									"red/lights_R2.png"
+								]
+								Size = [1, 2]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+
+		YellowThrustComponents : ^/0/YellowThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = YellowThrustToggle
+			IncludeInBlueprints = true
+			Components : ^/0/Components
+			{
+				YellowGraphics : ^/0/YellowGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"yellow/lights_Y1.png"
+									"yellow/lights_Y2.png"
+									"yellow/lights_Y3.png"
+									"yellow/lights_Y4.png"
+									"yellow/lights_Y5.png"
+									"yellow/lights_Y4.png"
+									"yellow/lights_Y3.png"
+									"yellow/lights_Y2.png"
+								]
+								Size = [1, 2]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+
+		WhiteThrustComponents : ^/0/WhiteThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = WhiteThrustToggle
+			IncludeInBlueprints = true
+			Components : ^/0/Components
+			{
+				WhiteGraphics : ^/0/WhiteGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"white/lights_W1.png"
+									"white/lights_W2.png"
+									"white/lights_W3.png"
+									"white/lights_W4.png"
+									"white/lights_W5.png"
+									"white/lights_W4.png"
+									"white/lights_W3.png"
+									"white/lights_W2.png"
+								]
+								Size = [1, 2]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [1, 2]
+		}
+	}
+}

@@ -1,0 +1,241 @@
+Name = "Galactic Allegiance" //GA may also mean "Go Away". If I abandon this mod then I'll make sure I completely disappear also.
+ID = "ultranova.galactic_allegiance"
+Version = BLUE v0.1.14.1
+CompatibleGameVersions = ["0.30.0"]
+ModifiesMultiplayer = true
+Author = "Ultranova"
+Description = "The modern version of Galactic Allegiance. Work in progress, adds some new weapons, thrusters and various other parts. New parts will be added soon, stay tuned. \n\n(Note: ships made with GA in Classic should load fine, but may need some modifications.)"
+
+Logo = "ga_logo.png"
+Stringsfolder = Strings
+
+Actions
+[
+	//Add resources and the doodads associated
+	{	
+		Action = AddMany
+		AddTo = "<resources/resources.rules>/Resources"
+		ManyToAdd
+		[
+			&<Resources/rocket/rocket.rules>
+			&<Resources/bullet_box/bullet_box.rules>
+		]
+	}
+	{	
+		Action = AddMany
+		AddTo = "<doodads/doodads.rules>/Doodads"
+		ManyToAdd
+		[
+			&<Resources/rocket/doodad_rocket.rules>
+			&<Resources/bullet_box/doodad_bullet_box.rules>
+		]
+	}
+
+	//Adds buffs for better functionality
+	{
+		Action = Overrides
+		OverrideIn = "<./Data/buffs/buffs.rules>"
+		Overrides = &<Buffs/buffs.rules>
+	}
+
+	{
+		Action = AddMany
+		AddTo = "<gui/game/parts/part_toggles.rules>/PartToggles"
+		ManyToAdd
+		[
+			&<Gui/part_toggles.rules>/ThrusterColor
+			&<Gui/part_toggles.rules>/WindowsOnOff
+			&<Gui/part_toggles.rules>/ShieldRadius
+			&<Gui/part_toggles.rules>/RocketType
+		]
+	}
+
+	//Add Parts to the game.
+	{ 
+		Action = AddMany
+		AddTo = "<ships/terran/terran.rules>/terran/parts"
+		ManyToAdd = &<Parts/Parts.rules>/Parts
+	}
+
+	//Adds new indicators. 
+	{
+		Action = Overrides
+		OverrideIn = "<./Data/gui/game/indicators/indicators.rules>"
+		Overrides
+		{
+			NoRockets = "Gui/indicator_rocket.png"
+		}
+	}
+
+	//Tech Stuff
+	{
+		Action = AddMany
+		AddTo = "<modes/career/techs.rules>/Techs"
+		ManyToAdd = &<techs.rules>/Techs
+	}
+
+	//Add Custom Stats
+	{
+		Action = AddMany
+		AddTo = "<gui/game/parts/part_stats.rules>/PartStats"
+		ManyToAdd
+		[
+			{
+				ID = BulletVolley
+				FormatKey = "Stats/BulletVolleyFmt"
+			}
+		]
+	}
+
+	
+	{ //Add to symbols folder
+		Action = AddMany
+		AddTo = "<roof_decals/roof_decals.rules>/Groups/1/Folders"
+		ManyToAdd
+		[
+			"Decals"
+		]
+	}
+
+	//Hidden parts are parts that are generally WIP, somewhat broken or not ready for official release for other reasons. To use them, uncomment out this block of code, but do it at your own risk.
+	//It is unlikely you will get help if you encounter problems using a part from this list.
+	/*
+	{ 
+		Action = AddMany
+		AddTo = "<ships/terran/terran.rules>/terran/parts"
+		ManyToAdd = &<Parts/Hidden_Parts.rules>/Parts
+	}
+	*/
+
+	//Command Booster Logic
+	{
+		Action = AddBase
+		AddBaseTo = "<ships/terran/control_room_small/control_room_small.rules>/Part/Components"
+		BaseToAdd = &<booster_components.rules>
+	}
+	{
+		Action = AddMany
+		AddTo = "<ships/terran/control_room_small/control_room_small.rules>/Part/ReceivableBuffs"
+		ManyToAdd = [CommandBoostLimiter]
+	}
+	{
+		Action = AddBase
+		AddBaseTo = "<ships/terran/control_room_med/control_room_med.rules>/Part/Components"
+		BaseToAdd = &<booster_components.rules>
+	}
+	{
+		Action = AddMany
+		AddTo = "<ships/terran/control_room_med/control_room_med.rules>/Part/ReceivableBuffs"
+		ManyToAdd = [CommandBoostLimiter]
+	}
+	{
+		Action = AddBase
+		AddBaseTo = "<ships/terran/control_room_large/control_room_large.rules>/Part/Components"
+		BaseToAdd = &<booster_components.rules>
+	}
+	{
+		Action = AddMany
+		AddTo = "<ships/terran/control_room_large/control_room_large.rules>/Part/ReceivableBuffs"
+		ManyToAdd = [CommandBoostLimiter]
+	}
+
+	//GIMME THE NORMALS
+	{
+		Action = Overrides
+		OverrideIn = "<ships/terran/terran.rules>/terran/RenderLayers/4"
+		Overrides
+		{
+			Key = "doodads_low"// Ship bucket layer.
+			Value // The actual material.
+			{
+				UniqueBucket = -500
+				RenderStage = Low
+				HasNormals = true
+				AtlasTextureParams
+				{
+					MipLevels = 7 // Assumes 64x64 min part sprite size.
+				}
+				Material
+				{
+					Shader = "./Data/ships/common/parts_lit.shader"
+				}
+				DiffuseMaterial
+				{
+					Shader = "./Data/ships/common/parts.shader"
+				}
+				NormalsMaterial
+				{
+					Shader = "./Data/ships/common/normals.shader"
+				}
+			}
+		}
+	}
+	{
+		Action = Overrides
+		OverrideIn = "<ships/terran/terran.rules>/terran/RenderLayers/3"
+		Overrides
+		{
+			Key = "turrets"// Ship bucket layer.
+			Value // The actual material.
+			{
+				UniqueBucket = -600
+				RenderStage = Low
+				HasNormals = true
+				AtlasTextureParams
+				{
+					MipLevels = 7 // Assumes 64x64 min part sprite size.
+				}
+				Material
+				{
+					Shader = "./Data/ships/common/parts_lit.shader"
+				}
+				DiffuseMaterial
+				{
+					Shader = "./Data/ships/common/parts.shader"
+				}
+				GhostMaterial
+				{
+					Shader = "./Data/ships/common/parts_ghost.shader"
+				}
+				NormalsMaterial
+				{
+					Shader = "./Data/ships/common/normals.shader"
+				}
+			}
+		}
+	}
+
+	//Category limits for certain parts
+	{
+		Action = Add
+		AddTo = "<ships/terran/terran.rules>/Terran"
+		Name = CategoryLimits
+		OnlyIfNotExisting = true
+		ToAdd = []
+	}
+	{
+		Action = AddMany
+		AddTo = "<ships/terran/terran.rules>/Terran/CategoryLimits"
+		ManyToAdd
+		[
+			{
+				Category = "core_shield"
+				Max = 1
+			}
+		]
+	}
+	{
+		Action = AddMany
+		AddTo = "<ships/terran/terran.rules>/Terran/CategoryNouns"
+		ManyToAdd
+		[
+			{
+				Category=core_shield
+				SingularKey="CategoryNouns/CoreShieldSingular"
+				PluralKey="CategoryNouns/CoreShieldPlural"
+			}
+		]
+	}
+]
+
+//Make sure to balance your brackets if you're copying code :)

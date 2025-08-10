@@ -1,0 +1,520 @@
+Part : <./Data/ships/terran/base_part_terran.rules>/Part
+{
+	NameKey = "Parts/PlasmaThrusterLarge"
+	IconNameKey = "Parts/PlasmaThrusterLargeIcon"
+	ID = ultranova.plasma_thruster_large // Part IDs must always be in the form of "author_name.part_name". If making your own mod, do *not* use "cosmoteer" as your author name, because it may conflict with future vanilla parts.
+	OtherIDs = [ultranova.ion7_thruster_large]
+	EditorGroup = "Flight"
+	DescriptionKey = "Parts/PlasmaThrusterLargeDesc"
+	Resources
+	[
+		[steel, 60]
+		[coil2, 15]
+	]
+	TypeCategories = [thruster, uses_power]
+	Size = [2, 3]
+	PhysicalRect = [0, 0, 2, 2]
+	SaveRect = &PhysicalRect
+	BoundingRectType = Physical
+	SelectionPriority = 1
+	SelectionTypeByRotation = true
+	SelectionTypeID = "thrusters"
+	MaxHealth = 4000
+	ProhibitBelow = 7
+	ThrusterForce = floor(3200 * 1.5)
+	ThrustIncreaseTime = { BaseValue=2; BuffType=Engine; BuffMode=Divide; }
+	ThrustRecoveryTime = 2
+	FuelUsage = ceil(200 * 1.5)
+	ReceivableBuffs : ^/0/ReceivableBuffs [Engine, EnginePowerDistribution]
+	AllowedDoorLocations
+	[
+		[-1, 0]
+		[0, -1]
+		[1, -1]
+		[2, 0]
+	]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [42.66, 64]
+	}
+	Components : ^/0/Components
+	{
+		IsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, BatteryStorage]
+			Mode = All
+		}
+
+		WindowToggle
+		{
+			Type = UIToggle
+			ToggleID = "windows_on_off"
+			Default = 1
+			RequiresCommand = false
+		}
+
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+			RequiresCommand = false
+		}
+
+		CommandConsumer
+		{
+			Type = CommandConsumer
+			OperationalToggle = PowerToggle
+			CommandPoints = 4
+		}
+
+		BatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 4000
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+
+		PowerDistributionBuffToggle
+		{
+			Type = BuffToggle
+			BuffType = EnginePowerDistribution
+		}
+		ToggledBatteryConsumer
+		{
+			Type = ToggledComponents
+			Toggle = PowerDistributionBuffToggle
+			Invert = true
+			Components
+			{
+				BatteryConsumer
+				{
+					Type = ResourceConsumer
+					ResourceType = battery
+					Storage = BatteryStorage
+					DefaultPriority = &/PRIORITIES/Thruster_Supply
+					ResupplyThreshold = 500
+					OperationalToggle = PowerToggle
+				}
+			}
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [1, 1]
+			OperationalToggle = IsOperational
+			AnimationSpeedFactor = MainThruster
+			AnimationSpeedFactorRenormalize = [0.75, 2.0]
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "./Data/ships/terran/thruster_large/floor.png"
+						Size = [2, 2]
+					}
+					{
+						File = "./Data/ships/terran/thruster_large/floor_33.png"
+						Size = [2, 2]
+					}
+					{
+						File = "./Data/ships/terran/thruster_large/floor_66.png"
+						Size = [2, 2]
+					}
+				]
+			}
+			OperationalDoodad
+			{
+				Layer = "doodads_high"
+				DamageLevels
+				[
+					{
+						AnimationFiles
+						[
+							"doodads_on1.png"
+							"doodads_on2.png"
+							"doodads_on3.png"
+							"doodads_on4.png"
+							"doodads_on5.png"
+							"doodads_on6.png"
+							"doodads_on7.png"
+							"doodads_on8.png"
+						]
+						Size = [2, 2]
+						AnimationInterval = 0.075
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "doodads_high"
+				DamageLevels
+				[
+					{
+						File = "doodads_off.png"
+						Size = [2, 2]
+					}				
+				]
+			}
+			OperationalLighting
+			{
+				Layer = "lights_add"
+				Offset = [0, .5]
+				DamageLevels
+				[
+					{
+						AnimationFiles
+						[
+							"lights.png"
+							"lights2.png"
+						]
+						Size = [2, 3]
+						AnimationInterval = 0.1
+					}
+				]
+			}
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "./Data/ships/terran/thruster_large/walls.png"
+						Size = [2, 2]
+					}
+					{
+						File = "./Data/ships/terran/thruster_large/walls_33.png"
+						Size = [2, 2]
+					}
+					{
+						File = "./Data/ships/terran/thruster_large/walls_66.png"
+						Size = [2, 2]
+					}
+				]
+			}
+		}
+
+		RoofDetailed
+		{
+			Type = ToggledComponents
+			Toggle = WindowToggle
+			Invert = false
+			Components
+			{
+				RoofGraphics
+				{
+					Type = Graphics
+					OperationalToggle = IsOperational
+					Location = [1, 1]
+					Roof
+					{
+						Layer = "roofs"
+						DamageLevels
+						[
+							{
+								File = "roof.png"
+								NormalsFile = "roof_normals.png"
+								Size = [2, 2]
+							}
+							{
+								File = "roof_33.png"
+								NormalsFile = "roof_normals_33.png"
+								Size = [2, 2]
+							}
+							{
+								File = "roof_66.png"
+								NormalsFile = "roof_normals_66.png"
+								Size = [2, 2]
+							}
+						]
+					}
+					OperationalRoofDoodad
+					{
+						Layer = "roof_doodads"
+						DamageLevels
+						[
+							{
+								File = "roof_glows.png"
+								Size = [2, 2]
+							}
+						]
+					}
+					OperationalRoofLighting
+					{
+						Layer = "roof_lights_fancy"
+						Offset = [0, 0.35]
+						DamageLevels
+						[
+							{
+								File = "./Data/ships/common/light_blob.png"
+								Size = [3.5, 3.5]
+								Z = 1.30 // Controls the "height" of the light for the purposes of normal mapping.
+								VertexColor = [0*1.0,255*1.0, 255*1.0]
+							}
+						]
+					}
+				}
+			}
+		}
+
+		RoofUndetailed
+		{
+			Type = ToggledComponents
+			Toggle = WindowToggle
+			Invert = true
+			Components
+			{
+				RoofGraphicsPlain
+				{
+					Type = SpriteGrid
+					Location = [.5, .5]
+					GridSize = [2, 2]
+					RandomDamageLevels
+					[
+						[
+							{
+								File = "./Data/ships/terran/corridor/roof.png"
+								NormalsFile = "./Data/ships/terran/corridor/roof_normals.png"
+								Size = [1, 1]
+							}
+							{
+								File = "./Data/ships/terran/corridor/roof_33.png"
+								NormalsFile = "./Data/ships/terran/corridor/roof_normals_33.png"
+								Size = [1, 1]
+							}
+							{
+								File = "./Data/ships/terran/corridor/roof_66.png"
+								NormalsFile = "./Data/ships/terran/corridor/roof_normals_66.png"
+								Size = [1, 1]
+							}
+						]
+					]
+					RandomUVRotation = true
+					Layer = "roofs"
+				}
+			}
+		}
+
+		NozzleGraphics
+		{
+			Type = Graphics
+			Location = [1, 2.5]
+			Floor
+			{
+				Layer = "weapons"
+				DamageLevels
+				[
+					{
+						File = "nozzle.png"
+						NormalsFile = "nozzle_normals.png"
+						Size = [2, 1]
+					}
+					{
+						File = "nozzle_33.png"
+						NormalsFile = "nozzle_normals.png"
+						Size = [2, 1]
+					}
+					{
+						File = "nozzle_66.png"
+						NormalsFile = "nozzle_normals.png"
+						Size = [2, 1]
+					}
+				]
+			}
+		}
+
+		BatterySprites
+		{
+			Type = ResourceSprites
+			Location = [1, 0.5]
+			ResourceStorage = BatteryStorage
+			Layer = "doodads_low"
+			ResourceLevels
+			[
+				{
+					File = "./Data/ships/terran/thruster_large/batteries1.png"
+					Offset = [-0.11, 0]
+					Size = [1, 1]
+				}
+				{
+					File = "./Data/ships/terran/thruster_large/batteries2.png"
+					Offset = [-0.11, 0]
+					Size = [1, 1]
+				}
+				{
+					File = "./Data/ships/terran/thruster_large/batteries3.png"
+					Offset = [-0.11, 0]
+					Size = [1, 1]
+				}
+				{
+					File = "./Data/ships/terran/thruster_large/batteries4.png"
+					Size = [2, 1]
+				}
+			]
+		}
+
+		MainThruster
+		{
+			Type = Thruster
+			Location = [1, 2.5]// Relative to upper-left corner of unrotated part.
+			Rotation = 90d// Relative to unrotated part.
+			OperationalToggle = IsOperational
+			Force = &../../ThrusterForce
+			MinActivation = 0
+			MaxActivation = { BaseValue=1; BuffType=Engine; BuffMode=Multiply; }
+			MinUncommandedActivation = &MinActivation
+			MaxUncommandedActivation = &MaxActivation
+			ActivationIncreaseTime = &../../ThrustIncreaseTime
+			ActivationRecoveryTime = &../../ThrustRecoveryTime
+			FuelStorage = BatteryStorage
+			FuelUsagePerSecond = &../../FuelUsage
+		}
+
+		NozzleCollider
+		{
+			Type = PolygonCollider
+			Vertices
+			[
+				[.125, 2]
+				[1.875, 2]
+				[1.5, 2.72]
+				[.5, 2.72]
+			]
+			Density = 1
+		}
+
+		ThrustEffects
+		{
+			Type = ContinuousEffects
+			ChainedTo = MainThruster
+			Location = [19/64, 0]
+			FactorMediaEffectsIntensityWith = MainThruster
+			MediaEffects
+			[
+				&<particles/thruster_plume_large.rules>
+				&<particles/thruster_plume_light_large.rules>
+				&<particles/thruster_fire_large.rules>
+
+				: /COMMON_SOUNDS/ThrusterRumble
+				{
+					Volume = .25
+					Speed = 1
+					MaxConcurrentVolume = .5
+				}
+			]
+		}
+
+		BurstTrigger
+		{
+			Type = ThresholdTrigger
+			AmountFrom = MainThruster
+			MinAmount = .5
+		}
+
+		BurstEffects
+		{
+			Type = TriggeredEffects
+			ChainedTo = MainThruster
+			Trigger = BurstTrigger
+			FactorMediaEffectsIntensityWith = MainThruster
+			AnchorMediaEffects = true
+			MediaEffects
+			[
+				: /COMMON_SOUNDS/ThrusterBurst
+				{
+					Volume = .5
+					Speed = 1
+					MaxConcurrentVolume = 1
+				}
+			]
+		}
+
+		OperationEffects
+		{
+			Type = ToggleEffects
+			Location = [1, 1]
+			Toggle = IsOperational
+			ToggledOnMediaEffects = &/COMMON_EFFECTS/MachinesOn
+			ToggledOffMediaEffects = &/COMMON_EFFECTS/MachinesOff
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/MedPartDestroyed
+			Location = [1, 1]
+		}
+
+		ThrusterHum
+		{
+			Type = ContinuousEffects
+			Location = [1, 1]
+			OperationalToggle = IsOperational
+			MediaEffects
+			[
+				: /COMMON_SOUNDS/ThrusterHum
+				{
+					Volume = .2
+					Speed = 1
+					MaxConcurrentVolume = 1
+				}
+			]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [1, 1]
+			Layer = "indicators"
+			Indicators
+			[
+				// Turned off.
+				{
+					Toggle = PowerToggle
+					AtlasSprite
+					{
+						File = &/INDICATORS/PowerOff
+						Size = [1, 1]
+					}
+				}
+
+				// Out of power.
+				{
+					Toggle = BatteryStorage
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoPower
+						Size = [1, 1]
+					}
+				}
+			]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [2, 3]
+		}
+	}
+
+	Stats
+	{
+		ThrusterForce = &~/Part/ThrusterForce
+		ThrusterRampUp = &~/Part/ThrustIncreaseTime/BaseValue
+		ThrusterPowerUsage = (&~/Part/FuelUsage) / 1000
+		PowerCapacity = (&~/Part/Components/BatteryStorage/MaxResources) / 1000
+
+		RecPower = (&ThrusterPowerUsage) / 2
+		RecCrew = (&RecPower) * 4
+	}
+}

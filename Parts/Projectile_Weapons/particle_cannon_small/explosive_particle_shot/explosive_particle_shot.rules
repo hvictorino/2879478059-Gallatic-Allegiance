@@ -1,0 +1,211 @@
+ID = "ultranova.explosive_particle_shot"
+Range = { BaseValue=190; BuffType=ParticleCannonShot; BuffMode=Multiply; MaxValue=400; }
+IdealRange
+[
+	{ BaseValue=50; BuffType=ParticleCannonShot; BuffMode=Multiply; MaxValue=75; }
+	{ BaseValue=190; BuffType=ParticleCannonShot; BuffMode=Multiply; MaxValue=400; }
+]
+IdealRadius = [5, 50]
+Speed = { BaseValue=200; BuffType=ParticleCannonShot; BuffMode=Multiply; MaxValue=600; }
+ReceivableBuffs = [ParticleCannonShot]
+
+Components
+{
+	Physics
+	{
+		Type = CirclePhysics
+		Radius = 0.15
+		Density = 0.0001
+	}
+
+	Death
+	{
+		Type = DeathByLifetime
+		// Lifetime will be auto-calculated based on range and speed.
+	}
+
+	Targetable
+	{
+		Type = Targetable
+		Health = 250
+		TargetCategory = "bullet"
+
+		OnDeath
+		{
+			MediaEffects = &~/Components/Hit/HitOperational/MediaEffects
+		}
+	}
+
+	Hit
+	{
+		Type = PenetratingHit
+		SourceShipCollisionDelay = 0.08
+		Penetration = { BaseValue=5; BuffType=ParticleCannonShot; BuffMode=Multiply; }
+		PenetrationSpeed = 25
+
+		CrewCollisions = {Enemies=true; Junk=true}
+		PenetratesCrew = true
+		HitCrew = &HitOperational
+
+		HitShield = &HitOperational
+		HitOperational
+		{
+			ReduceEffectsByPenetration = true
+
+			HitEffects
+			[
+				{
+					Type = Damage
+					Damage = { BaseValue=1800; BuffType=ParticleCannonShot; BuffMode=Multiply; }
+				}
+				{
+					Type = Impulse
+					Impulse = { BaseValue=20; BuffType=ParticleCannonShot; BuffMode=Multiply; }
+				}
+			]
+
+			MediaEffects
+			[
+				&<./Data/shots/bullet_med/particles/bullet_hit_med.rules>
+				&<./Data/shots/bullet_med/particles/bullet_hit_med_sparks.rules>
+				&<./Data/shots/bullet_med/particles/bullet_smoke_med.rules>
+				&<./Data/shots/bullet_med/particles/bullet_flash_med.rules>
+
+				: /BASE_SOUNDS/AudioExterior
+				{
+					Sound = "./Data/shots/bullet_med/bullet_med_hit.wav"
+					Volume = .4
+					SpeedVariation = .4
+				}
+
+				: /BASE_SHAKE
+				{
+					ShakeAmount = .05
+					Duration = .5
+				}
+			]
+		}
+		HitStructural
+		{
+			ReduceEffectsByPenetration = true
+
+			HitEffects
+			[
+				{
+					Type = Damage
+					Damage = { BaseValue=600; BuffType=ParticleCannonShot; BuffMode=Multiply; }
+				}
+				{
+					Type = Impulse
+					Impulse = { BaseValue=10; BuffType=ParticleCannonShot; BuffMode=Multiply; }
+				}
+			]
+
+			MediaEffects
+			[
+				&<./Data/shots/bullet_med/particles/bullet_hit_med_struct.rules>
+				&<./Data/shots/bullet_med/particles/bullet_hit_med_sparks.rules>
+				&<./Data/shots/bullet_med/particles/bullet_flash_med_struct.rules>
+
+				: /BASE_SOUNDS/AudioExterior
+				{
+					Sound = "./Data/shots/bullet_med/bullet_med_hit_structure.wav"
+					Volume = .3
+					SpeedVariation = .4
+				}
+			]
+		}
+		PenetratingOperational
+		{
+			ReduceEffectsByPenetration = true
+
+			HitEffects
+			[
+				{
+					Type = Damage
+					Damage = { BaseValue=900; BuffType=ParticleCannonShot; BuffMode=Multiply; }
+				}
+				{
+					Type = StatusApplication
+					StatusType = cosmoteer.fire
+					StatusChance = { BaseValue = .4; EffectScaleExponent = 1 }
+					ValueType = Interpolated
+				}
+				{
+					Type = Impulse
+					Impulse = { BaseValue=20; BuffType=ParticleCannonShot; BuffMode=Multiply; }
+				}
+			]
+
+			MediaEffects
+			[
+				&<./Data/shots/bullet_med/particles/bullet_hit_med.rules>
+				&<./Data/shots/bullet_med/particles/bullet_hit_med_sparks.rules>
+			]
+		}
+		PenetratingStructural
+		{
+			// No effect.
+		}
+		FinishedPenetratingOperational = &PenetratingOperational
+		FinishedPenetratingStructural = &PenetratingStructural
+	}
+
+	Sprite
+	{
+		Type = AnimatedSprite
+		ReduceScaleWith = Hit
+		ReduceScaleExponent = 0.5
+		Animation
+		{
+			AtlasSprite
+			{
+				Texture
+				{
+					File = "bullet_med.png"
+					SampleMode = Linear
+					MipLevels = max
+				}
+				Size = [2, 2]
+			}
+			FrameCount = 16
+			FrameSize = [128, 128]
+			FramesPerRow = 4
+			FramesPerSecond = 60
+		}
+	}
+
+	GlowSprite
+	{
+		Type = Sprite
+		RenderBucket = BulletUpper2
+		Z = 0
+		IsLight = true
+		Offset = [-0.5, 0]
+		Sprite
+		{
+			Texture
+			{
+				File = "./Data/common_effects/particles/blob.png"
+				MipLevels = max
+				SampleMode = Linear
+			}
+			Size = [8, 4]
+			VertexColor = [255, 100, 0]
+			TargetBlendMode = Add
+			Shader = "./Data/common_effects/fancy_light.shader"
+			_litReflectiveStrength = 24
+			_litAdditiveStrength = 0.05
+			_unlitAdditiveStrength = 0.125
+		}
+	}
+
+	MediaEffects
+	{
+		Type = MediaEffects
+		MediaEffects
+		[
+			&<./Data/shots/bullet_med/particles/bullet_trail_med.rules>
+		]
+	}
+}

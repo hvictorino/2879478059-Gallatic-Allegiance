@@ -1,0 +1,13 @@
+ID = ultranova.resource_bbox
+Type = Resource
+DescriptionKey = "Resource/BBox"
+CategoryKey = "Doodads/Resources"
+Icon
+{
+	Texture
+	{
+		File = "bullet_box.png"
+		MipLevels = 2
+	}
+}
+ResourceType = bullet_box

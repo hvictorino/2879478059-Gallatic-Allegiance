@@ -1,0 +1,13 @@
+ID = ultranova.resource_rocket_part
+Type = Resource
+DescriptionKey = "Resource/Rocket"
+CategoryKey = "Doodads/Resources"
+Icon
+{
+	Texture
+	{
+		File = "rocketpart.png"
+		MipLevels = 2
+	}
+}
+ResourceType = rocket_part

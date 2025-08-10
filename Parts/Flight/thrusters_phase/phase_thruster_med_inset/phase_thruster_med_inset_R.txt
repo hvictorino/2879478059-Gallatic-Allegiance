@@ -1,0 +1,77 @@
+Part : &<../phase_thruster_med/phase_thruster_med.txt>/Part
+{
+	NameKey = "Parts/PhaseThrusterMedInsetR"
+	IconNameKey = "Parts/PhaseThrusterMedInsetRIcon"
+	ID = ultranova.phase_thruster_med_inset_R
+	EditorGroup = "Flight"
+	DescriptionKey = "Parts/PhaseThrusterMedInsetRDesc"
+	UsePartWhenFlipped = ultranova.phase_thruster_med_inset_L
+	CustomCollider
+	[
+		[0, 0]
+		[2, 0]
+		[2, 1]
+		[0, 2]
+	]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		UVRect
+		{
+			Left = 1
+			Right = 0
+			Top = 0
+			Bottom = 1
+		}
+		Size = [42.66, 42.66]
+	}
+	ExternalWallsByCell
+	[
+		{
+			Key = [2, 1]
+			Value = [TopLeft]
+		}
+		{
+			Key = [0, 1]
+			Value = [TopLeft, Top, TopRight, Left, BottomLeft]
+		}
+		{
+			Key = [1, 1]
+			Value = [TopLeft, Top]
+		}
+	]
+	InternalWallsByCell
+	[
+		{
+			Key = [1, 1]
+			Value = [Right, TopRight, BottomRight]
+		}
+		{
+			Key = [0, 1]
+			Value = [None]
+		}
+	]
+	Components : ^/0/Components
+	{
+		Graphics : &<../phase_thruster_med/phase_thruster_med.txt>/Part/Components/Graphics
+		{
+			Type = Graphics
+			Location = [1, .5]
+			OperationalToggle = IsOperational
+			Walls = &<../phase_thruster_med_angled_E/phase_thruster_med_angled_R.txt>/Part/Components/Graphics/Walls
+			Roof = &<../phase_thruster_med_angled_E/phase_thruster_med_angled_R.txt>/Part/Components/Graphics/Roof
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			MirrorU = true
+			Size = [2, 2]
+		}
+	}
+}

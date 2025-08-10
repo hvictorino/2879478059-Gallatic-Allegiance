@@ -1,0 +1,131 @@
+ID = rocket_part
+NameKey = "Resource/Rocket"
+PluralNameKey = "Resource/RocketPlural"
+DescriptionKey = "Resource/RocketDesc"
+BuyPrice = 6
+SellPrice = (&BuyPrice) / 2
+MaxPerNugget = 1
+MaxStackSize = 12
+FlexGridPriorityKey = "flex_grid_rocket"
+FlexGridDefaultPriority = 1
+DropRates = &<./data/resources/resources.rules>/AmmoDropRates
+
+Icon
+{
+	Texture
+	{
+		File = "icon.png"
+		MipLevels = max
+	}
+	Size = [64, 64]
+}
+
+Overlay
+{
+	Texture
+	{
+		File = "overlay.png"
+		SampleMode = Linear
+		MipLevels = max
+	}
+	Size = [1, 1]
+}
+
+DeathHitEffects // Scaled with stack size.
+[
+	{
+		Type = ExplosiveDamage
+		TotalDamage = 6000
+		Radius = 3
+		Delay = .05
+		FireChancePerNDamage = 50%
+		NDamage = 1000
+		CrewKillChance = 10%
+		Filter
+		{
+			OperationalHealth = true
+			StructuralHealth = false
+			Friendlies = true
+		}
+	}
+	{
+		Type = ExplosiveDamage
+		TotalDamage = 1200
+		Radius = 2
+		Delay = .05
+		Filter
+		{
+			OperationalHealth = false
+			StructuralHealth = true
+			Friendlies = true
+			Crew = false
+		}
+	}
+]
+
+DeathMediaEffects = &/COMMON_EFFECTS/MedPartDestroyed
+
+NuggetSprite
+{
+	File = "rocketpart.png"
+	NormalsFile = "rocketpart_n.png"
+	Size = [1, 1]
+	Offset = [.25, 0]
+	UVRotation = 1
+}
+
+StackSprites
+[
+	{
+		File = "stack1.png"
+		Size = [1, 1]
+	}
+	{
+		File = "stack2.png"
+		Size = [1, 1]
+	}
+	{
+		File = "stack3.png"
+		Size = [1, 1]
+	}
+	{
+		File = "stack4.png"
+		Size = [1, 1]
+	}
+	{
+		File = "stack5.png"
+		Size = [1, 1]
+	}
+	{
+		File = "stack6.png"
+		Size = [1, 1]
+	}
+	{
+		File = "stack7.png"
+		Size = [1, 1]
+	}
+	{
+		File = "stack8.png"
+		Size = [1, 1]
+	}
+	{
+		File = "stack9.png"
+		Size = [1, 1]
+	}
+	{
+		File = "stack10.png"
+		Size = [1, 1]
+	}
+	{
+		File = "stack11.png"
+		Size = [1, 1]
+	}
+	{
+		File = "stack12.png"
+		Size = [1, 1]
+	}
+]
+
+StackReceiveMediaEffects = &/COMMON_EFFECTS/MissileDeliver
+StackPickupMediaEffects = &/COMMON_EFFECTS/ResourcePickup
+NuggetPickupMediaEffects = &/COMMON_EFFECTS/NuggetPickup

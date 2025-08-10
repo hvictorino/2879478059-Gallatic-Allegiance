@@ -1,0 +1,1256 @@
+Part : <./Data/ships/terran/base_part_terran.rules>/Part
+{
+	NameKey = "Parts/RocketTurretMedium"
+	IconNameKey = "Parts/RocketTurretMediumIcon"
+	ID = ultranova.rocket_turret_medium
+	OtherIDs = [ultranova.rocket_turret_small_large]
+	EditorGroup = "WeaponsProjectile"
+	DescriptionKey = "Parts/RocketTurretMediumDesc"
+	Resources
+	[
+		[steel, 160]
+		[coil2, 50]
+		[processor, 2]
+	]
+	TypeCategories = [weapon, uses_rockets, uses_launcher_parts, is_crewed]
+	Size = [4, 4]
+	SelectionPriority = 1
+	SelectionTypeByRotation = true
+	MaxHealth = 16000
+	InitialPenetrationResistance = 3
+	ReceivableBuffs : ^/0/ReceivableBuffs []
+	ProhibitedBy : ^/0/ProhibitedBy [tall]
+	ProhibitRects
+	[
+		//Top
+		[tall, [-1, -1, 6, 1]]
+		//Sides
+		[tall, [-1, 0, 1, 4]]
+		[tall, [4, 0, 1, 4]]
+	]
+	AllowedDoorLocations
+	[	
+		//Right
+		[-1, 1]
+		[-1, 2]
+
+		//Bottom
+		[1, 4]
+		[2, 4]
+
+		//Left
+		[4, 1]
+		[4, 2]
+	]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [64, 64]
+	}
+	BlockedTravelCellDirections
+	[
+		{
+			Key = [1, 1]
+			Value = [Down]
+		}
+		{
+			Key = [1, 2]
+			Value = [Down]
+		}
+		{
+			Key = [2, 1]
+			Value = [Up, Right]
+		}
+		{
+			Key = [2, 2]
+			Value = [Up, Left]
+		}
+	]
+	ForceManhattanPathInPart = true
+	Components : ^/0/Components
+	{
+		IsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, PartCrew]
+			Mode = All
+		}
+
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+		}
+
+		FireModeToggle
+		{
+			Type = UIToggle
+			ToggleID = "fire_mode"
+			Default = 1
+			ToggledOnChoices = [0, 1, 2]
+		}
+		AutoTargetToggle
+		{
+			Type = ModeToggle
+			Mode = FireModeToggle
+			OnModes = [1, 2]
+		}
+		AutoFireToggle
+		{
+			Type = ModeToggle
+			Mode = FireModeToggle
+			OnMode = 2
+		}
+
+		CommandConsumer
+		{
+			Type = CommandConsumer
+			OperationalToggle = PowerToggle
+			CommandPoints = 8
+		}
+
+		//Storages
+		LoadedRockets
+		{
+			Type = ResourceStorage
+			ResourceType = rocket_part
+			MaxResources = 18
+			AnticipateMoreResourcesFrom = ["RocketStorage"]
+			UITileRect = [1.5 + 7/64, 1.75 + 7/64, 1 - 14/64, 1 - 14/64]
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/AmmoLoad
+			DropResourcesWhenDestroyed = true
+		}
+
+		RocketStorage
+		{
+			Type = TypedResourceGrid
+			ResourceType = rocket_part
+			GridRect = [0, 0, 4, 4]
+			DisableCells
+			[
+				//JANI!!!!!!!!!!!!!!!!!!! WHY DID YOU DO THE FLOOR LIKE THIS!!!!!!!!!!!!!!!!!!!
+
+				//Top
+				[1, 0]
+				[2, 0]
+
+				//Middle
+				[0, 1]
+				[1, 1]
+				[2, 1]
+				[3, 1]
+				
+				[0, 2]
+				[1, 2]
+				[2, 2]
+				[3, 2]
+
+				//Bottom
+				[1, 3]
+				[2, 3]
+			]
+			Layer = "doodads_low"
+			SpriteInset = [8/64, 11/64, 8/64, 8/64]
+		}
+		RocketConsumer
+		{
+			Type = TypedResourceGridConsumer
+			ResourceType = rocket_part
+			Storage = RocketStorage
+			DefaultPriority = &/PRIORITIES/Weapon_Supply
+			AdditionalStorageForJobPriority = [LoadedRockets]
+			OperationalToggle = PowerToggle
+			ConsumptionToggleButtonOffset = [0, -.8]
+		}
+
+		//Rocket types
+		RocketType
+		{
+			Type = UIToggle
+			ToggleID = "rocket_type"
+			AvailableChoices = [0, 1, 2] //Regular, torpedo, micro
+			Default = 0
+			AlwaysAllowInBuildMode = true
+		}
+
+		HERocketToggle
+		{
+			Type = ModeToggle
+			Mode = RocketType
+			OnMode = 0
+		}
+		TorpedoToggle
+		{
+			Type = ModeToggle
+			Mode = RocketType
+			OnMode = 1
+		}
+		MicroRocketToggle
+		{
+			Type = ModeToggle
+			Mode = RocketType
+			OnMode = 2
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [2, 2]
+			OperationalToggle = IsOperational
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "floor.png"
+						Size = [4, 4]
+					}
+					{
+						File = "floor_33.png"
+						Size = [4, 4]
+					}
+					{
+						File = "floor_66.png"
+						Size = [4, 4]
+					}
+				]
+			}
+			OperationalLighting
+			{
+				Layer = "lights_add"
+				DamageLevels
+				[
+					{
+						File = "lights.png"
+						Size = [4, 4]
+					}
+				]
+			}
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "walls.png"
+						Size = [4, 4]
+					}
+				]
+			}
+			Roof
+			{
+				Layer = "roofs"
+				DamageLevels
+				[
+					{
+						File = "roof.png"
+						NormalsFile = "roof_normals.png"
+						Size = [4, 4]
+					}
+					{
+						File = "roof_33.png"
+						NormalsFile = "roof_normals_33.png"
+						Size = [4, 4]
+					}
+					{
+						File = "roof_66.png"
+						NormalsFile = "roof_normals_66.png"
+						Size = [4, 4]
+					}
+				]
+			}
+		}
+
+		TurretCollider
+		{
+			Type = CircleCollider
+			Location = &../Turret/Location
+			Radius = 1.5
+			IsHigh = true
+		}
+
+		//Turret components
+		Turret
+		{
+			Type = TurretWeapon
+			Location = [2, 2]// Relative to upper-left corner of unrotated part.
+			Rotation = -90d// Relative to unrotated part.
+			OperationalToggle = IsOperational
+			FireInterval = 0 // Uses separate fire timer.
+			FiringArc = 245d
+			RotateSpeed = 50d
+			FireThresholdAngle = 1d
+			TargetSearchTriesPerFrame = 1
+			AIFirepowerRating = 1000
+			AutoFireToggle = AutoFireToggle
+			IgnoreSourceShipLowLOSChecks = true
+			Emitter = BulletEmitterBase
+			FirePermissionToggle = FirePermissionToggle
+
+			BlueprintArcSprite
+			{
+				Texture = &/INDICATORS/WeaponArc
+				Size = [0, 1.5]
+				Color = [255, 0, 0, 63]
+			}
+			BlueprintArcRadius = 10
+			BlueprintArcSpriteSegments = 64
+
+			CoverageSectorArc
+			{
+				Texture = &/INDICATORS/VerticalGradient
+				VertexColor = [255, 255, 255, 51]
+				QuadCount = 64
+			}
+			
+			AutoTargets
+			[
+				{
+					TargetType = ShipParts
+					Toggle = AutoTargetToggle
+				}
+			]
+		}
+
+		BulletEmitterBase
+		{
+			Type = BulletEmitter
+			Location = [1, 0]
+			ChainedTo = Turret
+			FireTrigger//This won't shoot but this field is not optional.
+			GetTargetFrom = Turret
+			OperationalToggle = IsOperational
+			Bullet = &<../rocket_turret_small/rocket/rocket.rules>
+			ResourceStorage = LoadedRockets
+			ResourcesUsed = 2
+		}
+
+		FireTimerProxy
+		{
+			Type = ToggleProxy
+			ComponentID = FireTimer
+		}
+		FirePermissionToggle
+		{
+			Type = MultiToggle
+			Toggles = [FireTimerProxy, FireModeToggle]
+			Mode = All
+		}
+
+		// Components for non-optional alternating fire.
+		ShootCycle
+		{
+			Type = ModeCycle
+			ModeRange = [0, 2]
+			IncrementTrigger = Turret
+			StartingMode = 2 // First shot will switch to mode 0.
+		}
+
+		ShootLeftTrigger
+		{
+			Type = ModeTrigger
+			Mode = ShootCycle
+			TriggerInModes = [0]
+		}
+
+		ShootMiddleTrigger
+		{
+			Type = ModeTrigger
+			Mode = ShootCycle
+			TriggerInModes = [1]
+		}
+
+		ShootRightTrigger
+		{
+			Type = ModeTrigger
+			Mode = ShootCycle
+			TriggerInModes = [2]
+		}
+		// -----------------------------------------------------
+
+		HERocketComponents
+		{
+			Type = ToggledComponents
+			Toggle = HERocketToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				RocketLoader
+				{
+					Type = ResourceConverter
+					FromStorage = RocketStorage
+					ToStorage = LoadedRockets
+					FromQuantity = 1
+					ToQuantity = 1
+					Interval = .15
+					//DelayTrigger = Turret
+					//DelayAfterTrigger = .5
+				}
+
+				FireTimer
+				{
+					Type = Timer
+					OperationalToggle = IsOperational
+					Duration = 0.4
+					AutoStart = true
+					StartTrigger = Turret
+				}
+
+				ReloadProgressBar
+				{
+					Type = ProgressBar
+					OperationalToggle = IsOperational
+					ShowProgressFor = FireTimer
+					Invert = true
+				}
+
+				BulletEmitterMiddle
+				{
+					Type = BulletEmitter
+					Location = [2, 0]
+					ChainedTo = Turret
+					FireTrigger = ShootMiddleTrigger
+					GetTargetFrom = Turret
+					OperationalToggle = IsOperational
+					Bullet = &<../rocket_turret_small/rocket/rocket.rules>
+					ResourceStorage = LoadedRockets
+					ResourcesUsed = 2
+					Recoil = 40
+				}
+
+				BulletEmitterLeft : BulletEmitterMiddle
+				{
+					Type = BulletEmitter
+					FireTrigger = ShootLeftTrigger
+					Location = [2, -0.71875]
+				}
+
+				BulletEmitterRight : BulletEmitterMiddle
+				{
+					Type = BulletEmitter
+					FireTrigger = ShootRightTrigger
+					Location = [2, 0.71875]
+				}
+
+				FireEffectLeft
+				{
+					Type = TriggeredEffects
+					ChainedTo = Turret
+					Trigger = BulletEmitterLeft
+					Location = [1.5, -0.71875]
+					AnchorMediaEffects = true
+
+					MediaEffects = &<../rocket_turret_small/rocket_turret_small.rules>/Part/Components/HERocketComponents/Components/FireEffectLeft/MediaEffects
+				}
+
+				FireEffectMiddle : FireEffectLeft
+				{
+					Type = TriggeredEffects
+					ChainedTo = Turret
+					Trigger = BulletEmitterMiddle
+					Location = [1.5, 0]
+				}
+
+				FireEffectRight : FireEffectLeft
+				{
+					Type = TriggeredEffects
+					ChainedTo = Turret
+					Trigger = BulletEmitterRight
+					Location = [1.5, 0.71875]
+				}
+
+				TurretDetailGraphics
+				{
+					Type = Graphics
+					ChainedTo = Turret
+					Location = [0, 0]
+					Rotation = 90d
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "lights_turret_N.png" //Red lights when active
+								Size = [3, 3]
+								Offset = [0, -0.3125]
+							}
+						]
+					}
+					OperationalRoofDoodad
+					{
+						Layer = "roof_turrets"
+						DamageLevels
+						[
+							{
+								File = "turret_doodads_on_Nrocket.png" //Red lights when active
+								Size = [4, 4]
+							}
+						]
+					}
+					NonOperationalRoofDoodad
+					{
+						Layer = "roof_turrets"
+						DamageLevels
+						[
+							{
+								File = "turret_doodads_off.png"
+								Size = [4, 4]
+							}
+						]
+					}
+				}
+
+				
+				LoadedRocketSprites
+				{
+					Type = ResourceSprites
+					ChainedTo = Turret
+					Location = [-.5, 0]
+					Rotation = 90d
+					ResourceStorage = LoadedRockets
+					HasZeroResourceSprite = true
+					Layer = "doodads_low"
+					ResourceLevels
+					[
+						{
+							File = "N_rocket0.png"
+							Size = [1, 2]
+						}
+						{
+							File = "N_rocket1.png"
+							Size = [1, 2]
+						}
+						{
+							File = "N_rocket2.png"
+							Size = [1, 2]
+						}
+						{
+							File = "N_rocket3.png"
+							Size = [1, 2]
+						}
+						{
+							File = "N_rocket4.png"
+							Size = [1, 2]
+						}
+						{
+							File = "N_rocket5.png"
+							Size = [1, 2]
+						}
+						{
+							File = "N_rocket6.png"
+							Size = [1, 2]
+						}
+						{
+							File = "N_rocket7.png"
+							Size = [1, 2]
+						}
+						{
+							File = "N_rocket8.png"
+							Size = [1, 2]
+						}
+						{
+							File = "N_rocket9.png"
+							Size = [1, 2]
+						}
+					]
+				}
+			}
+		}
+
+		TorpedoComponents
+		{
+			Type = ToggledComponents
+			Toggle = TorpedoToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				RocketLoader
+				{
+					Type = ResourceConverter
+					FromStorage = RocketStorage
+					ToStorage = LoadedRockets
+					FromQuantity = 1
+					ToQuantity = 1
+					Interval = .15
+					//DelayTrigger = Turret
+					//DelayAfterTrigger = .5
+				}
+
+				FireTimer
+				{
+					Type = Timer
+					OperationalToggle = IsOperational
+					Duration = 0.5
+					AutoStart = true
+					StartTrigger = Turret
+				}
+
+				ReloadProgressBar
+				{
+					Type = ProgressBar
+					OperationalToggle = IsOperational
+					ShowProgressFor = FireTimer
+					Invert = true
+				}
+
+				BulletEmitterMiddle
+				{
+					Type = BulletEmitter
+					Location = [2, 0]
+					ChainedTo = Turret
+					FireTrigger = ShootMiddleTrigger
+					GetTargetFrom = Turret
+					OperationalToggle = IsOperational
+					Bullet = &<torpedo/torpedo.rules>
+					ResourceStorage = LoadedRockets
+					ResourcesUsed = 3
+					Recoil = 60
+				}
+
+				BulletEmitterLeft : BulletEmitterMiddle
+				{
+					Type = BulletEmitter
+					FireTrigger = ShootLeftTrigger
+					Location = [2, -0.71875]
+				}
+
+				BulletEmitterRight : BulletEmitterMiddle
+				{
+					Type = BulletEmitter
+					FireTrigger = ShootRightTrigger
+					Location = [2, 0.71875]
+				}
+
+				FireEffectLeft
+				{
+					Type = TriggeredEffects
+					ChainedTo = Turret
+					Trigger = BulletEmitterLeft
+					Location = [1.5, -0.71875]
+					AnchorMediaEffects = true
+
+					MediaEffects
+					[
+						&<../rocket_turret_small/rocket_turret_small.rules>/Part/Components/HERocketComponents/Components/FireEffectLeft/MediaEffects/0
+
+						: &<../rocket_silo/particles/missile_launcher_shoot_flash_blue.rules>
+						{
+							EmitterDef : ^/0/EmitterDef
+							{
+								PreInitializers
+								[
+									: &<../rocket_silo/particles/missile_launcher_shoot_flash_blue.rules>/EmitterDef/PreInitializers/0
+									{
+										Type = SetValue
+									}
+									: &<../rocket_silo/particles/missile_launcher_shoot_flash_blue.rules>/EmitterDef/PreInitializers/1
+									{
+										Type = ScaleFromIntensity
+									}
+									: &<../rocket_silo/particles/missile_launcher_shoot_flash_blue.rules>/EmitterDef/PreInitializers/2
+									{
+										Type = SetValue
+										Value
+										{
+											X = 0
+											Y = 0
+										}
+									}
+								]
+							}
+							Bucket = Upper4
+						}
+
+						&<../rocket_turret_small/rocket_turret_small.rules>/Part/Components/HERocketComponents/Components/FireEffectLeft/MediaEffects/2
+					]
+				}
+
+				FireEffectMiddle : FireEffectLeft
+				{
+					Type = TriggeredEffects
+					ChainedTo = Turret
+					Trigger = BulletEmitterMiddle
+					Location = [1.5, 0]
+				}
+
+				FireEffectRight : FireEffectLeft
+				{
+					Type = TriggeredEffects
+					ChainedTo = Turret
+					Trigger = BulletEmitterRight
+					Location = [1.5, 0.71875]
+				}
+
+				TurretDetailGraphics
+				{
+					Type = Graphics
+					ChainedTo = Turret
+					Location = [0, 0]
+					Rotation = 90d
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "lights_turret_T.png" //Cyan lights when active
+								Size = [3, 3]
+								Offset = [0, -0.3125]
+							}
+						]
+					}
+					OperationalRoofDoodad
+					{
+						Layer = "roof_turrets"
+						DamageLevels
+						[
+							{
+								File = "turret_doodads_on_Torpedo.png" //Cyan lights when active
+								Size = [4, 4]
+							}
+						]
+					}
+					NonOperationalRoofDoodad
+					{
+						Layer = "roof_turrets"
+						DamageLevels
+						[
+							{
+								File = "turret_doodads_off.png"
+								Size = [4, 4]
+							}
+						]
+					}
+				}
+
+				
+				LoadedRocketSprites
+				{
+					Type = ResourceSprites
+					ChainedTo = Turret
+					Location = [-.5, 0]
+					Rotation = 90d
+					ResourceStorage = LoadedRockets
+					HasZeroResourceSprite = true
+					Layer = "doodads_low"
+					ResourceLevels
+					[
+						{
+							File = "torpedo0.png"
+							Size = [1, 2]
+						}
+						{
+							File = "torpedo1.png"
+							Size = [1, 2]
+						}
+						{
+							File = "torpedo2.png"
+							Size = [1, 2]
+						}
+						{
+							File = "torpedo3.png"
+							Size = [1, 2]
+						}
+						{
+							File = "torpedo4.png"
+							Size = [1, 2]
+						}
+						{
+							File = "torpedo5.png"
+							Size = [1, 2]
+						}
+						{
+							File = "torpedo6.png"
+							Size = [1, 2]
+						}
+					]
+				}
+			}
+		}
+
+		MicroRocketComponents
+		{
+			Type = ToggledComponents
+			Toggle = MicroRocketToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				RocketLoader : &../../HERocketComponents/Components/RocketLoader
+				{
+					DelayTrigger = Turret
+					DelayAfterTrigger = .5
+				}
+
+				FireTimer
+				{
+					Type = Timer
+					OperationalToggle = IsOperational
+					Duration = 3.5
+					AutoStart = true
+					StartTrigger = Turret
+				}
+
+				ReloadProgressBar
+				{
+					Type = ProgressBar
+					OperationalToggle = IsOperational
+					ShowProgressFor = FireTimer
+					Invert = true
+				}
+
+				MicroRocketEmitterBase
+				{
+					Type = BulletEmitter
+					Location = [2, 0]
+					ChainedTo = Turret
+					FireTrigger//None.
+					GetTargetFrom = Turret
+					OperationalToggle = IsOperational
+					ResourceStorage = LoadedRockets
+					Bullet = &<../rocket_turret_small/micro_rocket/micro_rocket.rules>
+					ResourcesUsed = 6
+					Burst = 6 //Since there are three emitters, the rocket launcher fires in third bursts.
+					BurstDelay = .15
+					Recoil = 20
+				}
+
+				BulletEmitterLeft : MicroRocketEmitterBase
+				{
+					Type = BulletEmitter
+					FireTrigger = Turret
+					Location = [1.75, -0.71875]
+				}
+
+				BulletEmitterMiddle : MicroRocketEmitterBase
+				{
+					Type = BulletEmitter
+					FireTrigger = Turret
+					Location = [1.75, 0]
+				}
+
+				BulletEmitterRight : MicroRocketEmitterBase
+				{
+					Type = BulletEmitter
+					FireTrigger = Turret
+					Location = [1.75, 0.71875]
+				}
+
+				FireEffectLeft
+				{
+					Type = TriggeredEffects
+					ChainedTo = Turret
+					Trigger = BulletEmitterLeft
+					Location = [1.5, -0.71875]
+					AnchorMediaEffects = true
+
+					MediaEffects = &<../rocket_turret_small/rocket_turret_small.rules>/Part/Components/HERocketComponents/Components/FireEffectLeft/MediaEffects
+				}
+
+				FireEffectMiddle : FireEffectLeft
+				{
+					Type = TriggeredEffects
+					ChainedTo = Turret
+					Trigger = BulletEmitterMiddle
+					Location = [1.5, 0]
+				}
+
+				FireEffectRight : FireEffectLeft
+				{
+					Type = TriggeredEffects
+					ChainedTo = Turret
+					Trigger = BulletEmitterRight
+					Location = [1.5, 0.71875]
+				}
+
+				TurretDetailGraphics
+				{
+					Type = Graphics
+					ChainedTo = Turret
+					Location = [0, 0]
+					Rotation = 90d
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								File = "lights_turret_M.png" //Blue lights when active
+								Size = [3, 3]
+								Offset = [0, -0.3125]
+							}
+						]
+					}
+					OperationalRoofDoodad
+					{
+						Layer = "roof_turrets"
+						DamageLevels
+						[
+							{
+								File = "turret_doodads_on_Mrocket.png" //Blue lights when active
+								Size = [4, 4]
+							}
+						]
+					}
+					NonOperationalRoofDoodad
+					{
+						Layer = "roof_turrets"
+						DamageLevels
+						[
+							{
+								File = "turret_doodads_off.png"
+								Size = [4, 4]
+							}
+						]
+					}
+				}
+
+				LoadedRocketSprites
+				{
+					Type = ResourceSprites
+					ChainedTo = Turret
+					Location = [-.5, 0]
+					Rotation = 90d
+					ResourceStorage = LoadedRockets
+					HasZeroResourceSprite = true
+					Layer = "doodads_low"
+					ResourceLevels
+					[
+						{
+							File = "M_rocket0.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket1.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket2.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket3.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket4.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket5.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket6.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket7.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket8.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket9.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket10.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket11.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket12.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket13.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket14.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket15.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket16.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket17.png"
+							Size = [1, 2]
+						}
+						{
+							File = "M_rocket18.png"
+							Size = [1, 2]
+						}
+					]
+				}
+			}
+		}
+
+
+		CrewLocation1
+		{
+			Type = CrewLocation
+			ChainedTo = Turret
+			Location = [1.28125, 0]
+			Rotation = 270d
+		}
+		CrewLocation2
+		{
+			Type = CrewLocation
+			ChainedTo = Turret
+			Location = [-.796875, -0.75]
+			Rotation = 90d
+		}
+		CrewLocation3
+		{
+			Type = CrewLocation
+			ChainedTo = Turret
+			Location = [-.796875, 0.75]
+			Rotation = 90d
+		}
+		PartCrew
+		{
+			Type = PartCrew
+			Crew = 3
+			DefaultPriority = &/PRIORITIES/Weapon_Crew
+			PrerequisitesBeforeCrewing = [RocketStorage, PowerToggle]
+			CrewDestinations
+			[
+				[2, 0.71875]
+				[1.25, 2.796875]
+				[2.75, 2.796875]
+			]
+			CrewLocations
+			[
+				CrewLocation1
+				CrewLocation2
+				CrewLocation3
+			]
+		}
+
+		//A lonely old turret graphic
+		TurretGraphics
+		{
+			Type = Graphics
+			ChainedTo = Turret
+			Location = [0, 0]
+			Rotation = 90d
+			OperationalToggle = IsOperational
+			OperationalDoodad
+			{
+				Layer = "turrets"
+				DamageLevels
+				[
+					{
+						AnimationFiles
+						[
+							"doodads_on1.png"
+							"doodads_on2.png"
+							"doodads_on3.png"
+							"doodads_on4.png"
+							"doodads_on5.png"
+							"doodads_on6.png"
+							"doodads_on7.png"
+							"doodads_on8.png"
+						]
+						Size = [3, 3]
+						Offset = [0, -0.3125]
+						AnimationInterval = 0.1
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "turrets"
+				DamageLevels
+				[
+					{
+						File = "doodads_off.png"
+						Size = [3, 3]
+						Offset = [0, -0.3125]
+					}
+				]
+			}
+			Walls
+			{
+				Layer = "roof_doodads"
+				DamageLevels
+				[
+					{
+						File = "turret.png"
+						NormalsFile = "turret_normals.png"
+						Size = [4, 4]
+					}
+				]
+			}
+		}
+
+		OperationEffects
+		{
+			Type = ToggleEffects
+			Location = [2, 2]
+			Toggle = IsOperational
+			ToggledOnMediaEffects = &/COMMON_EFFECTS/PowerOn
+			ToggledOffMediaEffects = &/COMMON_EFFECTS/PowerOff
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/BigPartDestroyed
+			Location = [2, 2]
+
+			HitEffects
+			[
+				{
+					Type = ExplosiveDamage
+					TotalDamage = 20000
+					Radius = 5
+					Delay = .05
+					DamagesOperationalHealth = true
+					DamagesStructuralHealth = false
+					AllowFriendlyDamage = true
+					FireChancePerNDamage = 50%
+					NDamage = 1000
+				}
+				{
+					Type = ExplosiveDamage
+					TotalDamage = 6777
+					Radius = 4
+					Delay = .05
+					DamagesOperationalHealth = false
+					DamagesStructuralHealth = true
+					AllowFriendlyDamage = true
+				}
+			]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [2, 2]
+			Layer = "indicators"
+			Indicators
+			[
+				// Turned off.
+				{
+					Toggle = PowerToggle
+					AtlasSprite
+					{
+						File = &/INDICATORS/PowerOff
+						Size = [1.5, 1.5]
+					}
+				}
+
+				// Out of power.
+				{
+					Toggle = RocketStorage
+					Delay = 5 //I'm hard coding this because it's fairly dumb how much it flickers
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoRockets
+						Size = [1.5, 1.5]
+					}
+				}
+
+				// No crew.
+				{
+					Toggle = PartCrew
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoCrew
+						Size = [1.5, 1.5]
+					}
+				}
+			]
+		}
+		
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [4, 4]
+		}
+	}
+	
+	Stats
+	{
+		WeaponTier = 1
+		CrewRequired = &~/Part/Components/PartCrew/Crew
+		MinCrew = (&CrewRequired) * 2
+		RecCrew = (&CrewRequired) * 4
+	}
+
+	StatsByCategory
+	[
+		{
+			NameKey = "StatCategories/RocketHE"
+			Stats
+			{
+				DamagePerShot = &~/Part/Components/BulletEmitterBase/Bullet/Components/Hit/HitOperational/HitEffects/0/TotalDamage
+				DamagePerSecond = (&DamagePerShot) * (&ROF)
+				Damage = [&../DamagePerShot, &../DamagePerSecond]
+				DamageArea = &~/Part/Components/BulletEmitterBase/Bullet/Components/Hit/HitOperational/HitEffects/0/Radius
+				ROF = 1 / (&~/Part/Components/HERocketComponents/Components/FireTimer/Duration)
+				Range = &~/Part/Components/BulletEmitterBase/Bullet/Range
+				Arc = deg(&~/Part/Components/Turret/FiringArc)
+				ShotLaunchSpeed = &~/Part/Components/BulletEmitterBase/Bullet/Speed
+				ShotHP = &~/Part/Components/BulletEmitterBase/Bullet/Components/Targetable/Health
+				RocketParts = &~/Part/Components/BulletEmitterBase/ResourcesUsed
+			}
+		}
+		{
+			NameKey = "StatCategories/Torpedo"
+			Stats
+			{
+				DamagePerShot = &~/Part/Components/TorpedoComponents/Components/BulletEmitterMiddle/Bullet/Components/Hit/HitOperational/HitEffects/0/TotalDamage
+				DamagePerSecond = (&DamagePerShot) * (&ROF)
+				Damage = [&../DamagePerShot, &../DamagePerSecond]
+				DamageArea = &~/Part/Components/TorpedoComponents/Components/BulletEmitterMiddle/Bullet/Components/Hit/HitOperational/HitEffects/0/Radius
+				ROF = 1 / (&~/Part/Components/TorpedoComponents/Components/FireTimer/Duration)
+				Range = &~/Part/Components/TorpedoComponents/Components/BulletEmitterMiddle/Bullet/Range
+				Arc = deg(&~/Part/Components/Turret/FiringArc)
+				ShotLaunchSpeed = &~/Part/Components/TorpedoComponents/Components/BulletEmitterMiddle/Bullet/Speed
+				ShotHP = &~/Part/Components/TorpedoComponents/Components/BulletEmitterMiddle/Bullet/Components/Targetable/Health
+				RocketParts = &~/Part/Components/TorpedoComponents/Components/BulletEmitterMiddle/ResourcesUsed
+			}
+		}
+		{
+			NameKey = "StatCategories/MicroRocket"
+			Stats
+			{
+				DamagePerShot = &~/Part/Components/MicroRocketComponents/Components/MicroRocketEmitterBase/Bullet/Components/Hit/HitOperational/HitEffects/0/TotalDamage
+				DamagePerSecond = (&DamagePerShot) * (&ROF) * (&Salvo/0)
+				Damage = [&../DamagePerShot, &../DamagePerSecond]
+				DamageArea = &~/Part/Components/MicroRocketComponents/Components/MicroRocketEmitterBase/Bullet/Components/Hit/HitOperational/HitEffects/0/Radius
+				ROF = 1 / (&~/Part/Components/MicroRocketComponents/Components/FireTimer/Duration)
+				Salvo = [(&~/Part/Components/MicroRocketComponents/Components/MicroRocketEmitterBase/Burst) * 2, (&~/Part/Components/MicroRocketComponents/Components/FireTimer/Duration)]
+				Range = &~/Part/Components/MicroRocketComponents/Components/MicroRocketEmitterBase/Bullet/Range
+				Arc = deg(&~/Part/Components/Turret/FiringArc)
+				ShotLaunchSpeed = &~/Part/Components/MicroRocketComponents/Components/MicroRocketEmitterBase/Bullet/Speed
+				ShotHP = &~/Part/Components/MicroRocketComponents/Components/MicroRocketEmitterBase/Bullet/Components/Targetable/Health
+				RocketParts = &~/Part/Components/MicroRocketComponents/Components/MicroRocketEmitterBase/ResourcesUsed
+			}
+		}
+	]
+}

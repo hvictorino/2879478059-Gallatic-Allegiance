@@ -1,0 +1,38 @@
+ID = ultranova.fighter_torpedo_roof
+Range = 400
+IdealRange = 225
+Speed = 60
+
+Components : &<../../rocket_silo/torpedo/torpedo/torpedo.rules>/Components
+{
+	Sprite : ^/0/Sprite
+	{
+		Type = Sprite
+		RenderBucket = BulletUpper3
+	}
+
+	MediaEffects
+	{
+		Type = MediaEffects
+		Offset = [-0.75 + 3/64, 0]
+		Rotation = 180d
+		MediaEffects
+		[
+			: &<../../rocket_silo/torpedo/torpedo/particles/torpedo_thruster_fire.rules>
+			{
+				Bucket = Upper1
+			}
+			: &<../../rocket_silo/torpedo/torpedo/particles/torpedo_thruster_plume.rules>
+			{
+				Bucket = BulletUpper3
+			}
+			&<../../rocket_silo/torpedo/torpedo/particles/torpedo_thruster_plume_light.rules>
+		]
+	}
+
+	Hit : &<../../rocket_silo/torpedo/torpedo/torpedo.rules>/Components/Hit
+	{
+		Type = SimpleHit
+		FriendlyShipLowCollisions = false
+	}
+}

@@ -1,0 +1,527 @@
+Part : &<./Data/ships/terran/base_part_terran.rules>/Part
+{
+	NameKey = "Parts/CIWSLarge"
+	IconNameKey = "Parts/CIWSLargeIcon"
+	ID = ultranova.ciws_large
+	OtherIDs = [ultranova.federation_med_point_defense]
+	EditorGroup = "Defenses"
+	DescriptionKey = "Parts/CIWSLargeDesc"
+	Resources
+	[
+		[steel, 40]
+		[coil, 20]
+	]
+	AIValue = 1
+	TypeCategories = [defense, point_defense]
+	Size = [2, 2]
+	SelectionPriority = 1
+	SelectionTypeByRotation = true
+	MaxHealth = 4000
+	InitialPenetrationResistance = 2
+	PenetrationRectType = Normal
+	//ReceivableBuffs = []
+	ProhibitedBy : ^/0/ProhibitedBy [tall]
+	AllowedDoorLocations
+	[
+		[-1, 1]
+		[2, 1]
+		[0, 2]
+		[1, 2]
+	]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		Size = [64, 64]
+	}
+	Components : ^/0/Components
+	{
+		IsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, BatteryStorage]
+			Mode = All
+		}
+
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+			RequiresCommand = false
+		}
+
+		CommandConsumer
+		{
+			Type = CommandConsumer
+			OperationalToggle = PowerToggle
+			CommandPoints = 1
+		}
+
+		FireModeToggle
+		{
+			Type = UIToggle
+			ToggleID = "fire_mode"
+			Default = 1
+			ToggledOnChoices = [0, 1, 2]
+		}
+		AutoTargetToggle
+		{
+			Type = ModeToggle
+			Mode = FireModeToggle
+			OnModes = [1, 2]
+		}
+		AutoFireToggle
+		{
+			Type = ModeToggle
+			Mode = FireModeToggle
+			OnMode = 2
+		}
+
+		FirePrefToggle
+		{
+			Type = UIToggle
+			ToggleID = "fire_pref"
+			Default = 1
+		}
+		FirePrefAttack
+		{
+			Type = ModeToggle
+			Mode = FirePrefToggle
+			OnModes = [0, 2]
+		}
+		FirePrefDefend
+		{
+			Type = ModeToggle
+			Mode = FirePrefToggle
+			OnModes = [1, 2]
+		}
+		AttackToggle
+		{
+			Type = MultiToggle
+			Toggles = [FireModeToggle, FirePrefAttack]
+			Mode = All
+		}
+		DefendToggle
+		{
+			Type = MultiToggle
+			Toggles = [FireModeToggle, FirePrefDefend]
+			Mode = All
+		}
+
+		BatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 6000			
+		}
+		BatteryConsumer
+		{
+			Type = ResourceConsumer
+			ResourceType = battery
+			Storage = BatteryStorage
+			ResupplyThreshold = 500
+			DefaultPriority = &/PRIORITIES/Defense_Supply
+			OperationalToggle = PowerToggle
+			ReceiveResourceMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [1, 1]
+			OperationalToggle = IsOperational
+			Floor
+			{
+				Layer = "floors"
+				DamageLevels
+				[
+					{
+						File = "floor.png"
+						Size = [2, 2]
+					}
+					{
+						File = "floor_33.png"
+						Size = [2, 2]
+					}
+					{
+						File = "floor_66.png"
+						Size = [2, 2]
+					}
+				]
+			}
+			OperationalDoodad
+			{
+				Layer = "turrets"
+				DamageLevels
+				[
+					{
+						AnimationFiles
+						[
+							"doodads_on1.png"
+							"doodads_on2.png"
+							"doodads_on3.png"
+							"doodads_on4.png"
+							"doodads_on5.png"
+							"doodads_on6.png"
+							"doodads_on7.png"
+							"doodads_on8.png"
+						]
+						Size = [2, 2]
+						AnimationInterval = 0.1
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "turrets"
+				DamageLevels
+				[
+					{
+						File = "doodads_off.png"
+						Size = [2, 2]
+					}
+				]
+			}
+			OperationalLighting
+			{
+				Layer = "lights_add"
+				DamageLevels
+				[
+					{
+						File = "lights.png"
+						Size = [2, 2]
+					}
+				]
+			}
+			Walls
+			{
+				Layer = "walls"
+				DamageLevels
+				[
+					{
+						File = "walls.png"
+						Size = [2, 2]
+					}
+				]
+			}
+			Roof
+			{
+				Layer = "roofs"
+				DamageLevels
+				[
+					{
+						File = "roof.png"
+						NormalsFile = "roof_normals.png"
+						Size = [2, 2]
+					}
+					{
+						File = "roof_33.png"
+						NormalsFile = "roof_normals_33.png"
+						Size = [2, 2]
+					}
+					{
+						File = "roof_66.png"
+						NormalsFile = "roof_normals_66.png"
+						Size = [2, 2]
+					}
+				]
+			}
+		}
+		
+		Turret
+		{
+			Type = TurretWeapon
+			Location = [1, 1]// Relative to upper-left corner of unrotated part.
+			Rotation = -90d// Relative to unrotated part.
+			OperationalToggle = IsOperational
+			AutoFireToggle = AutoFireToggle
+			FireInterval = .1
+			FiringArc = 270d
+			RotateSpeed = 100d
+			FireThresholdAngle = 1d
+			AIFirepowerRating = 150
+			CanBeGivenExplicitTarget = false
+			Emitter = BulletEmitterBase
+			TargetingRange = 200
+			TargetingArc = 270
+			TargetSearchesPerSecond = 4 // Default is 2.
+			HoldTargetAfterDeath = .5
+			TargetPathThickness = .2// &../BulletEmitter/Bullet/Components/Physics/Radius
+			EstimateFirepowerToggle = AttackToggle
+			AllowDirectControl = false
+			IgnoreSourceShipLowLOSChecks = true
+
+			AutoTargets
+			[
+				{
+					TargetType = Bullets
+					BulletTargetCategories = [missile, mine, bullet]
+					Toggle = FirePrefDefend
+				}
+				{
+					TargetType = ShipParts
+					Toggle = FirePrefAttack
+					Overridable = true
+				}
+			]
+
+			BlueprintArcSprite
+			{
+				Texture = &/INDICATORS/WeaponArc
+				Size = [0, 1.5]
+				Color = [255, 0, 0, 63]
+			}
+			BlueprintArcRadius = 10
+			BlueprintArcSpriteSegments = 64
+		}
+		
+		BulletEmitterBase
+		{
+			Type = BulletEmitter
+			ChainedTo = Turret
+			FireTrigger // none, but field is required
+			GetTargetFrom = Turret
+			Location = [0.890625, 0]
+			OperationalToggle = IsOperational
+			Bullet = &<../ciws_small/pd_shot/pd_shot.rules>
+			Spread = [-4d, 4d]
+			ResourceStorage = BatteryStorage
+			ResourcesUsed = 50
+		}
+		
+		BulletEmitterLeft : BulletEmitterBase
+		{
+			Type = BulletEmitter
+			Location = [1.25, -0.140625]
+			FireTrigger = Turret
+		}
+		
+		BulletEmitterRight : BulletEmitterBase
+		{
+			Type = BulletEmitter
+			Location = [1.25, 0.140625]
+			FireTrigger = Turret
+		}
+
+		FireEffectLeft : &<../ciws_small/ciws_small.rules>/Part/Components/FireEffect
+		{
+			Type = TriggeredEffects
+			ChainedTo = BulletEmitterLeft
+			Trigger = Turret
+			AnchorMediaEffects = true
+		}
+		
+		FireEffectRight : FireEffectLeft
+		{
+			ChainedTo = BulletEmitterRight
+			Trigger = BulletEmitterRight
+		}
+		
+		ReloadProgressBar
+		{
+			Type = ProgressBar
+			ShowProgressFor = Turret
+		}
+
+		TurretGraphics
+		{
+			Type = Graphics
+			ChainedTo = Turret
+			Location = [0, 0]
+			Rotation = 90d
+			OperationalToggle = IsOperational
+			OperationalDoodad
+			{
+				Layer = "roof_turrets"
+				DamageLevels
+				[
+					{
+						File = "turret_on.png"
+						NormalsFile = "turret_normals.png"
+						Size = [2, 2]
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "roof_turrets"
+				DamageLevels
+				[
+					{
+						File = "turret_off.png"
+						NormalsFile = "turret_normals.png"
+						Size = [2, 2]
+					}
+				]
+			}
+		}
+
+		BarrelSpriteLeft : &<../ciws_small/ciws_small.rules>/Part/Components/BarrelSprite
+		{
+			Type = Sprite
+			ChainedTo = Turret
+			Location = [0.8125, 0.140625]
+			Rotation = 90d
+			Layer = "roof_doodads"
+			ResetAnimationTrigger = BulletEmitterLeft
+		}
+
+		BarrelSpriteRight : &<../ciws_small/ciws_small.rules>/Part/Components/BarrelSprite
+		{
+			Type = Sprite
+			ChainedTo = Turret
+			Location = [0.8125, -0.140625]
+			Rotation = 90d
+			Layer = "roof_doodads"
+			ResetAnimationTrigger = BulletEmitterRight
+			AtlasSprite : ^/0/AtlasSprite
+			{
+				ClampAnimation = true
+			}
+		}
+
+		BatterySpritesLeft
+		{
+			Type = ResourceSprites
+			Location = [.5, 1]
+			ResourceStorage = BatteryStorage
+			Layer = "doodads_low"
+			RangeLow = 0
+			RangeHigh = 3000
+			ResourceLevels
+			[
+				{
+					File = "batteries1.png"
+					Size = [1, 1]
+				}
+				{
+					File = "batteries2.png"
+					Size = [1, 1]
+				}
+				{
+					File = "batteries3.png"
+					Size = [1, 1]
+				}
+			]
+		}
+
+		BatterySpritesRight
+		{
+			Type = ResourceSprites
+			Location = [1.5, 1]
+			ResourceStorage = BatteryStorage
+			Layer = "doodads_low"
+			RangeLow = 3001
+			RangeHigh = 6000
+			ResourceLevels
+			[
+				{
+					File = "batteries1.png"
+					MirrorU = true
+					Size = [1, 1]
+				}
+				{
+					File = "batteries2.png"
+					MirrorU = true
+					Size = [1, 1]
+				}
+				{
+					File = "batteries3.png"
+					MirrorU = true
+					Size = [1, 1]
+				}
+			]
+		}
+
+		OperationEffects
+		{
+			Type = ToggleEffects
+			Location = [1, 1.5]
+			Toggle = IsOperational
+			ToggledOnMediaEffects = &/COMMON_EFFECTS/PowerOn
+			ToggledOffMediaEffects = &/COMMON_EFFECTS/PowerOff
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/MedPartDestroyed
+			Location = [1.5, 1.5]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [1, 1]
+			Layer = "indicators"
+			Indicators
+			[
+				// Turned off.
+				{
+					Toggle = PowerToggle
+					AtlasSprite
+					{
+						File = &/INDICATORS/PowerOff
+						Size = [1.5, 1.5]
+					}
+				}
+
+				// Out of power.
+				{
+					Toggle = BatteryStorage
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoPower
+						Size = [1.5, 1.5]
+					}
+				}
+			]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			Size = [2, 2]
+		}
+	}
+	
+	Stats
+	{
+		PowerCapacity = (&~/Part/Components/BatteryStorage/MaxResources) / 1000
+
+		MinPower = (&../StatsByCategory/0/Stats/PowerPerSecond) / 2
+		RecPower = &../StatsByCategory/0/Stats/PowerPerSecond
+		MinCrew = (&MinPower) * 2
+		RecCrew = (&RecPower) * 4
+	}
+
+	StatsByCategory
+	[
+		{
+			NameKey = "StatCategories/CIWSShot"
+			Stats
+			{
+				DamagePerShot = &~/Part/Components/BulletEmitterBase/Bullet/Components/Hit/HitOperational/HitEffects/0/Damage
+				DamagePerSecond = (&DamagePerShot) * (&ROF)
+				Damage = [&../DamagePerShot, &../DamagePerSecond]
+				ShotDamagePerShot = &~/Part/Components/BulletEmitterBase/Bullet/Components/Hit/HitBullet/HitEffects/0/Damage
+				ShotDamagePerSecond = (&ShotDamagePerShot) * (&ROF)
+				ShotDamage = [&../ShotDamagePerShot, &../ShotDamagePerSecond]
+				ROF = 1 / (&~/Part/Components/Turret/FireInterval)
+				Range = &~/Part/Components/Turret/TargetingRange
+				Arc = deg(&~/Part/Components/Turret/FiringArc)
+				Spread = deg(&~/Part/Components/BulletEmitterBase/Spread/1)
+				TurretSpeed = deg(&~/Part/Components/Turret/RotateSpeed)
+				ShotSpeed = &~/Part/Components/BulletEmitterBase/Bullet/Speed
+				PowerPerShot = (&~/Part/Components/BulletEmitterBase/ResourcesUsed) / 1000
+				PowerPerSecond = (&PowerPerShot) * (&ROF)
+				ShotPowerUsage = [&../PowerPerShot, &../PowerPerSecond]
+			}
+		}
+	]
+}

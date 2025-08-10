@@ -1,0 +1,536 @@
+Part : /BASE_PART
+{
+	NameKey = "Parts/PhaseThrusterModularExtension"
+	IconNameKey = "Parts/PhaseThrusterModularExtensionIcon"
+	ID = ultranova.phase_thruster_modular_extension
+	EditorGroup = "Flight"
+	DescriptionKey = "Parts/PhaseThrusterModularExtensionDesc"
+	Cost = 2000
+	TypeCategories = [thruster, uses_power, phase_thruster_modular]
+	Size = [2, 3]
+	SelectionPriority = 1
+	SelectionTypeByRotation = true
+	SelectionTypeID = "thrusters"
+	MaxHealth = 6000
+	ReceivableBuffs = [PhaseEngine, PhaseEngineModular]
+	HasNonContiguousPathing = true
+	BlockedTravelCells
+	[
+		[0, 0]
+		[1, 0]
+		[0, 2]
+		[1, 2]
+	]
+	BlockedTravelCellDirections
+	[
+		{
+			Key = [0, 1]
+			Value = [Right]
+		}
+		{
+			Key = [1, 1]
+			Value = [Left]
+		}
+	]
+	AllowedDoorLocations
+	[
+		[-1, 1]
+		[2, 1]
+	]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "micon.png"
+			SampleMode = Linear
+		}
+		Size = [42.66, 64]
+	}
+	Components : ^/0/Components
+	{
+		IsOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, BatteryStorage]
+			Mode = All
+		}
+		
+		OrangeThrustToggle
+		{
+			Type = ToggleProxy
+			ComponentID = OrangeThrustToggle
+			PartLocation = [0, 3]
+			Criteria
+			{
+				Category = phase_thruster_modular
+				Rot = 0
+				Left = 0
+				Right = 2
+				Top = 3
+			} 
+		}
+		BlueThrustToggle : &OrangeThrustToggle
+		{
+			Type = ToggleProxy
+			ComponentID = BlueThrustToggle
+		}
+		GreenThrustToggle : &OrangeThrustToggle
+		{
+			Type = ToggleProxy
+			ComponentID = GreenThrustToggle
+		}
+		YellowThrustToggle : &OrangeThrustToggle
+		{
+			Type = ToggleProxy
+			ComponentID = YellowThrustToggle
+		}
+		PurpleThrustToggle : &OrangeThrustToggle
+		{
+			Type = ToggleProxy
+			ComponentID = PurpleThrustToggle
+		}
+		RedThrustToggle : &OrangeThrustToggle
+		{
+			Type = ToggleProxy
+			ComponentID = RedThrustToggle
+		}
+		WhiteThrustToggle : &OrangeThrustToggle
+		{
+			Type = ToggleProxy
+			ComponentID = WhiteThrustToggle
+		}
+
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+		}
+
+		BatteryStorage
+		{
+			Type = AmmoStorage
+			AmmoType = battery
+			MaxAmmo = 4000
+		}
+		CombinedBatteryStorage
+		{
+			Type = MultiAmmoStorage
+			AmmoType = battery
+			AmmoStorages = [BatteryStorage]
+			ViaBuffs
+			{
+				OutgoingBuffProviders = [BuffProvider]
+				ComponentID = CombinedBatteryStorage
+			}
+			AddMode = PrioritizeLeastAmmo
+		}
+		BatteryConsumer
+		{
+			Type = AmmoConsumer
+			AmmoType = battery
+			Storage = CombinedBatteryStorage
+			DefaultPriority = &/PRIORITIES/Thruster_Supply
+			ResupplyThreshold = 500
+			OperationalToggle = PowerToggle
+			ReceiveAmmoMediaEffects = &/COMMON_EFFECTS/PowerDeliver
+		}
+
+		BuffProvider
+		{
+			Type = AreaBuffProvider
+			BuffType = PhaseEngine
+			BuffArea = [0, 3, 2, 1]
+			Criteria
+			{
+				Rot = 0
+				Left = 0
+				Right = 2
+				Top = 3
+			}
+		}
+
+		ActualBuffProvider
+		{
+			Type = AreaBuffProvider
+			OperationalToggle = IsOperational
+			BuffType = PhaseEngineModular
+			BuffAmount = { BaseValue=50%; BuffType=PhaseEngineModular; BuffMode=Add }
+			BuffArea = [0, 3, 2, 1]
+			Criteria
+			{
+				Rot = 0
+				Left = 0
+				Right = 2
+				Top = 3
+			}
+		}
+
+		Graphics : &<phase_thruster_modular.txt>/Part/Components/Graphics
+		{
+			Type = Graphics
+			Location = [1, 1.5]
+			OperationalToggle = IsOperational
+			OperationalDoodad
+			{
+				Layer = "doodads_high"
+				DamageLevels
+				[
+					{
+						File = "doodads_m.png"
+						Size = [2, 3]
+					}
+				]
+			}
+			NonOperationalDoodad = &OperationalDoodad
+			Roof
+			{
+				Layer = "roofs"
+				DamageLevels
+				[
+					{
+						File = "mroof.png"
+						Size = [2, 3]
+					}
+				]
+			}
+
+		}
+
+		BatterySprites = &<phase_thruster_modular.txt>/Part/Components/BatterySprites
+
+		BlueThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = BlueThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				BlueGraphics
+				{
+					Type = Graphics
+					Location = [1, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"blue/mlights_B1.png"
+									"blue/mlights_B2.png"
+									"blue/mlights_B3.png"
+									"blue/mlights_B4.png"
+									"blue/mlights_B5.png"
+									"blue/mlights_B4.png"
+									"blue/mlights_B3.png"
+									"blue/mlights_B2.png"
+								]
+								Size = [2, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+
+		GreenThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = GreenThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				GreenGraphics
+				{
+					Type = Graphics
+					Location = [1, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"green/mlights_G1.png"
+									"green/mlights_G2.png"
+									"green/mlights_G3.png"
+									"green/mlights_G4.png"
+									"green/mlights_G5.png"
+									"green/mlights_G4.png"
+									"green/mlights_G3.png"
+									"green/mlights_G2.png"
+								]
+								Size = [2, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+
+		OrangeThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = OrangeThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				OrangeGraphics
+				{
+					Type = Graphics
+					Location = [1, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"orange/mlights_O1.png"
+									"orange/mlights_O2.png"
+									"orange/mlights_O3.png"
+									"orange/mlights_O4.png"
+									"orange/mlights_O5.png"
+									"orange/mlights_O4.png"
+									"orange/mlights_O3.png"
+									"orange/mlights_O2.png"
+								]
+								Size = [2, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+
+		PurpleThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = PurpleThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				PurpleGraphics
+				{
+					Type = Graphics
+					Location = [1, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"purple/mlights_P1.png"
+									"purple/mlights_P2.png"
+									"purple/mlights_P3.png"
+									"purple/mlights_P4.png"
+									"purple/mlights_P5.png"
+									"purple/mlights_P4.png"
+									"purple/mlights_P3.png"
+									"purple/mlights_P2.png"
+								]
+								Size = [2, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+
+		RedThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = RedThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				RedGraphics
+				{
+					Type = Graphics
+					Location = [1, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"red/mlights_R1.png"
+									"red/mlights_R2.png"
+									"red/mlights_R3.png"
+									"red/mlights_R4.png"
+									"red/mlights_R5.png"
+									"red/mlights_R4.png"
+									"red/mlights_R3.png"
+									"red/mlights_R2.png"
+								]
+								Size = [2, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+
+		YellowThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = YellowThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				YellowGraphics
+				{
+					Type = Graphics
+					Location = [1, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"yellow/mlights_Y1.png"
+									"yellow/mlights_Y2.png"
+									"yellow/mlights_Y3.png"
+									"yellow/mlights_Y4.png"
+									"yellow/mlights_Y5.png"
+									"yellow/mlights_Y4.png"
+									"yellow/mlights_Y3.png"
+									"yellow/mlights_Y2.png"
+								]
+								Size = [2, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+
+		WhiteThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = WhiteThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				WhiteGraphics
+				{
+					Type = Graphics
+					Location = [1, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							{
+								AnimationFiles
+								[
+									"white/mlights_W1.png"
+									"white/mlights_W2.png"
+									"white/mlights_W3.png"
+									"white/mlights_W4.png"
+									"white/mlights_W5.png"
+									"white/mlights_W4.png"
+									"white/mlights_W3.png"
+									"white/mlights_W2.png"
+								]
+								Size = [2, 3]
+								AnimationInterval = 0.1
+							}
+						]
+					}
+				}
+			}
+		}
+
+		OperationEffects
+		{
+			Type = ToggleEffects
+			Location = [1, 1.5]
+			Toggle = IsOperational
+			ToggledOnMediaEffects = &/COMMON_EFFECTS/MachinesOn
+			ToggledOffMediaEffects = &/COMMON_EFFECTS/MachinesOff
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/BigPartDestroyed
+			Location = [1, 1.5]
+		}
+
+		ThrusterHum
+		{
+			Type = ContinuousEffects
+			Location = [1, 1.5]
+			OperationalToggle = IsOperational
+			MediaEffects
+			[
+				: /COMMON_SOUNDS/ThrusterHum
+				{
+					Volume = .05
+					Speed = 1.5
+					MaxConcurrentVolume = 1
+				}
+			]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [1, 1.5]
+			Layer = "indicators"
+			Indicators
+			[
+				// Turned off.
+				{
+					Toggle = PowerToggle
+					AtlasSprite
+					{
+						File = &/INDICATORS/PowerOff
+						Size = [1, 1]
+					}
+				}
+
+				// Out of power.
+				{
+					Toggle = BatteryStorage
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoPower
+						Size = [1, 1]
+					}
+				}
+			]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "mblueprints.png"
+			Size = [2, 3]
+		}
+	}
+}

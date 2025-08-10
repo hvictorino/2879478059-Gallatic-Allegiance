@@ -1,0 +1,102 @@
+ID = "ultranova.gauss_shot"
+Range = 220
+IdealRange = [75, 220]
+IdealRadius = [5, 50]
+Speed = 250
+
+Components : &<./Data/shots/bullet_large/bullet_large.rules>/Components
+{
+	Hit
+	{
+		Type = PenetratingHit
+		Penetration = 10
+		PenetrationSpeed = 250
+
+		PenetratesShields = true
+		ShieldPenetrationFactor = (&Penetration) / 50
+
+		CrewCollisions = {Enemies=true; Junk=true}
+		PenetratesCrew = true
+		HitCrew = &HitOperational
+
+		HitShield = &HitOperational
+		HitOperational
+		{
+			ReduceEffectsByPenetration = true
+			Offset = [-0.15, 0]
+
+			HitEffects
+			[
+				{
+					Type = Damage
+					Damage = 6000
+				}
+				{
+					Type = Impulse
+					Impulse = 100
+				}
+			]
+
+			MediaEffects = &<./Data/shots/bullet_railgun/bullet_railgun.rules>/Components/Hit/HitOperational/MediaEffects
+		}
+		HitStructural : &<./Data/shots/bullet_large/bullet_large.rules>/Components/Hit/HitStructural
+		{
+			MediaEffects = &<./Data/shots/bullet_railgun/bullet_railgun.rules>/Components/Hit/HitStructural/MediaEffects
+		}
+		PenetratingOperational = &HitOperational
+		PenetratingStructural
+		{
+			// No effect.
+		}
+		FinishedPenetratingOperational = &PenetratingOperational
+		FinishedPenetratingStructural = &PenetratingStructural
+	}
+
+	Sprite : ^/0/Sprite
+	{
+		ReduceScaleWith = Hit
+	}
+
+	GlowSprite
+	{
+		Type = Sprite
+		ReduceScaleWith = Hit
+		ReduceScaleExponent = 0.5
+		RenderBucket = BulletUpper2
+		Z = .25
+		IsLight = true
+		Sprite
+		{
+			Texture
+			{
+				File = "./Data/common_effects/particles/blob.png"
+				MipLevels = max
+				SampleMode = Linear
+			}
+			Size = [9, 9]
+			VertexColor
+			{
+				Rf = 0.69
+				Gf = 0.96383333
+				Bf = 1
+				Af = 1
+			}
+			TargetBlendMode = Add
+			Shader = "./Data/common_effects/fancy_light.shader"
+			_litReflectiveStrength = 24
+			_litAdditiveStrength = 0.05
+			_unlitAdditiveStrength = 0.2
+		}
+	}
+
+	MediaEffects
+	{
+		Type = MediaEffects
+		MediaEffects
+		[
+			&<particles/bullet_trail_railgun.rules>
+			&<particles/bullet_trail_railgun_ring.rules>
+			&<particles/bullet_trail_railgun_ring_distortion.rules>
+		]
+	}
+}

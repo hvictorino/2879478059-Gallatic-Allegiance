@@ -1,0 +1,73 @@
+ID = bullet_box
+NameKey = "Resource/BBox"
+PluralNameKey = "Resource/BBoxPlural"
+DescriptionKey = "Resource/BBoxDesc"
+BuyPrice = 8
+SellPrice = (&BuyPrice) / 2
+MaxPerNugget = 1
+MaxStackSize = 5
+FlexGridPriorityKey = "flex_grid_bbox"
+FlexGridDefaultPriority = 1
+DropRates = &<./data/resources/resources.rules>/AmmoDropRates
+
+Icon
+{
+	Texture
+	{
+		File = "icon.png"
+		MipLevels = max
+	}
+	Size = [64, 64]
+}
+
+Overlay
+{
+	Texture
+	{
+		File = "overlay.png"
+		SampleMode = Linear
+		MipLevels = max
+	}
+	Size = [0.85, 0.85]
+}
+
+NuggetSprite
+{
+	File = "bullet_box.png"
+	NormalsFile = "bullet_box_normals.png"
+	Size = [1, 1]
+	Offset = [.25, 0]
+	UVRotation = 1
+}
+
+StackSprites
+[
+	{
+		File = "bullet_box_stack1.png"
+		Size = [1, 1]
+	}
+	{
+		File = "bullet_box_stack2.png"
+		Size = [1, 1]
+	}
+	{
+		File = "bullet_box_stack3.png"
+		Size = [1, 1]
+	}
+	{
+		File = "bullet_box_stack4.png"
+		Size = [1, 1]
+	}
+	{
+		File = "bullet_box_stack5.png"
+		Size = [1, 1]
+	}
+	{
+		File = "bullet_box_stack6.png"
+		Size = [1, 1]
+	}
+]
+
+StackReceiveMediaEffects = &/COMMON_EFFECTS/AmmoDeliver
+StackPickupMediaEffects = &/COMMON_EFFECTS/ResourcePickup
+NuggetPickupMediaEffects = &/COMMON_EFFECTS/NuggetPickup

@@ -1,0 +1,448 @@
+Part : <./Data/ships/terran/base_part_terran.rules>/Part
+{
+	NameKey = "Parts/ParticleCannonSmallBarrel"
+	IconNameKey = "Parts/ParticleCannonSmallBarrelIcon"
+	ID = ultranova.small_particle_c_barrel
+	OtherIDs = [ultranova.federation_particle_cannon_barrel]
+	EditorGroup = "WeaponsProjectile"
+	DescriptionKey = "Parts/ParticleCannonSmallBarrelDesc"
+	Resources
+	[
+		[steel, 20]
+		[coil2, 5]
+		[tristeel, 5]
+	]
+	TypeCategories = [weapon, uses_power, particle_cannon_barrel, particle_cannon]
+	Size = [1, 2]
+	SelectionPriority = 1
+	SelectionTypeByRotation = true
+	MaxHealth = 4000
+	InitialPenetrationResistance = 3
+	PenetrationRectType = Normal
+	ReceivableBuffs = [ParticleCannonReverseOperational, ParticleCannonOperational, ParticleCannonBuff, ParticleCannonShot]
+	GeneratorRequiresDoors = false
+	AllowedDoorLocations = []
+	ExternalWalls = [None]
+	InternalWalls = [All]
+	IsWalled = false
+	EditorIcon
+	{
+		Texture
+		{
+			File = "barrel_on1.png"
+			SampleMode = Linear
+		}
+		Size = [32, 64]
+	}
+	Components : ^/0/Components
+	{
+		BuffOperational
+		{
+			Type = MultiToggle
+			Toggles = [PowerToggle, BatteryStorage]
+			Mode = All
+		}
+		IsOperational
+		{
+			Type = MultiToggle
+			Toggles = [BuffOperational, ParticleCannonOperationBuffToggle]
+			Mode = All
+		}
+
+		ParticleCannonOperationBuffToggle
+		{
+			Type = BuffToggle
+			BuffType = ParticleCannonOperational
+		}
+
+		ParticleCannonReverseOperationBuffToggle
+		{
+			Type = BuffToggle
+			BuffType = ParticleCannonReverseOperational
+		}
+
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+			RequiresCommand = false
+		}
+
+		CommandConsumer
+		{
+			Type = CommandConsumer
+			OperationalToggle = PowerToggle
+			CommandPoints = 2
+		}
+
+		FireModeToggle
+		{
+			Type = UIToggle
+			ToggleID = "fire_mode"
+			Default = 1
+			ToggledOnChoices = [0, 1, 2]
+		}
+		AutoTargetToggle
+		{
+			Type = ModeToggle
+			Mode = FireModeToggle
+			OnModes = [1, 2]
+		}
+		AutoFireToggle
+		{
+			Type = ModeToggle
+			Mode = FireModeToggle
+			OnMode = 2
+		}
+
+		BatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 5000
+		}
+
+		ResourceProxy
+		{
+			Type = ResourceStorageProxy
+			ResourceType = bullet
+			PartLocation = [0, 2]
+			PartCriteria
+			{
+				Category = particle_cannon
+				Rot = 0
+				Left = 0
+				Right = 1
+			}
+			ComponentID = LoadedAmmo
+		}
+
+		ReverseOperationBuffProvider
+		{
+			Type = AreaBuffProvider
+			BuffType = ParticleCannonReverseOperational
+			BuffArea = [0, 2, 1, 1]
+			Criteria
+			{
+				Rot = 0
+				Left = 0
+				Right = 1
+			}
+		}
+
+		ShotBuffProvider
+		{
+			Type = SelfBuffProvider
+			BuffType = ParticleCannonShot
+			ChainsFromBuffType = ParticleCannonBuff
+			BuffAmount = { BaseValue=0; BuffType=ParticleCannonBuff; BuffMode=Add; }
+		}
+
+		Weapon
+		{
+			Type = FixedWeapon
+			Location = [.5, 0] // Relative to upper-left corner of unrotated part.
+			Rotation = -90d // Relative to unrotated part.
+			OperationalToggle = IsOperational
+			AutoFireToggle = AutoFireToggle
+			FireInterval = 2
+			TargetingArc = 90d
+			AIFirepowerRating = { BaseValue=4000; BuffType=ParticleCannonShot; BuffMode=Multiply; }
+			Emitter = BulletEmitter
+			FirePermissionToggle = FireModeToggle
+
+			AutoTarget
+			{
+				TargetType = ShipParts
+				Toggle = AutoTargetToggle
+			}
+
+			CoverageLine
+			{
+				LineSprite
+				{
+					Texture = &/INDICATORS/RadialGradient
+					VertexColor = [255, 255, 255, 191]
+					UVRect = [.5, 0, 0, 1]
+				}
+				LineThickness = 2
+
+				BeginCapSprite : LineSprite
+				{
+					UVRect = [0, 0, .5, 1]
+				}
+				BeginCapSize = [1, 2]
+
+				EndCapSprite : LineSprite
+				{
+					UVRect = [.5, 0, .5, 1]
+				}
+				EndCapSize = [1, 2]
+			}
+		}
+
+		ReloadProgressBar
+		{
+			Type = ProgressBar
+			OperationalToggle = IsOperational
+			ShowProgressFor = Weapon
+		}
+
+		BulletEmitter
+		{
+			Type = BulletEmitter
+			Location = [.5, 0]
+			ChainedTo = Weapon
+			FireTrigger = Weapon
+			GetTargetFrom = Weapon
+			OperationalToggle = IsOperational
+			Bullet = &<explosive_particle_shot/explosive_particle_shot.rules>
+			ResourceUsage
+			[
+				{
+					ResourceStorage = ResourceProxy
+					ResourcesUsed = 2
+				}
+				{
+					ResourceStorage = BatteryStorage
+					ResourcesUsed = 500
+				}
+			]
+		}
+
+		FireEffect
+		{
+			Type = TriggeredEffects
+			Location = [.75, 0]
+			ChainedTo = Weapon
+			Trigger = BulletEmitter
+
+			MediaEffects
+			[
+				&<./Data/ships/terran/cannon_med/particles/cannon_shoot_med.rules>
+				&<./Data/ships/terran/cannon_med/particles/cannon_shoot_med_flash.rules>
+				&<./Data/ships/terran/cannon_med/particles/cannon_shoot_med_flare.rules>
+				&<./Data/ships/terran/cannon_med/particles/cannon_smoke_med.rules>
+
+				: /BASE_SOUNDS/AudioExterior
+				{
+					Sound = "./Data/ships/terran/cannon_med/shoot.wav"
+					Volume = .75
+					SpeedVariation = .25
+				}
+
+				: /BASE_SHAKE
+				{
+					ShakeAmount = .025
+					Duration = .25
+				}
+			]
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [.5, 1]
+			OperationalToggle = IsOperational
+			OperationalDoodad
+			{
+				Layer = "structure"
+				DamageLevels
+				[
+					{
+						AnimationFiles
+						[
+							"barrel_on1.png"
+							"barrel_on2.png"
+							"barrel_on3.png"
+							"barrel_on4.png"
+							"barrel_on5.png"
+							"barrel_on4.png"
+							"barrel_on3.png"
+							"barrel_on2.png"
+						]
+						NormalsAnimationFiles
+						[
+							"normals-barrel.png"
+							"normals-barrel.png"
+							"normals-barrel.png"
+							"normals-barrel.png"
+							"normals-barrel.png"
+							"normals-barrel.png"
+							"normals-barrel.png"
+							"normals-barrel.png"
+						]
+						Size = [1, 2]
+						AnimationInterval = 0.1
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "structure"
+				DamageLevels
+				[
+					{
+						File = "barrel_off.png"
+						NormalsFile = "normals-barrel.png"
+						Size = [1, 2]
+					}
+				]
+			}
+		}
+
+		BatterySprite1
+		{
+			Type = ResourceSprites
+			Location = [.5, 1.5]
+			ResourceStorage = BatteryStorage
+			Layer = "doodads_low"
+			ResourceLevels
+			[
+				{
+					File = "extender_batteries1.png"
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries2.png"
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries3.png"
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries4.png"
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries5.png"
+					Size = [1, 1]
+				}
+			]
+		}
+		BatterySprite2
+		{
+			Type = ResourceSprites
+			Location = [.5, 1.5]
+			ResourceStorage = BatteryStorage
+			Layer = "doodads_low"
+			ResourceLevels
+			[
+				{
+					File = "extender_batteries1.png"
+					MirrorU = true
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries2.png"
+					MirrorU = true
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries3.png"
+					MirrorU = true
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries4.png"
+					MirrorU = true
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries5.png"
+					MirrorU = true
+					Size = [1, 1]
+				}
+			]
+		}
+
+		OperationEffects
+		{
+			Type = ToggleEffects
+			Location = [.5, 1]
+			Toggle = IsOperational
+			ToggledOnMediaEffects = &/COMMON_EFFECTS/PowerOn
+			ToggledOffMediaEffects = &/COMMON_EFFECTS/PowerOff
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/SmallPartDestroyed
+			Location = [.5, 1]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [.5, 1]
+			Layer = "indicators"
+			Indicators
+			[
+				// Turned off.
+				{
+					Toggle = PowerToggle
+					AtlasSprite
+					{
+						File = &/INDICATORS/PowerOff
+						Size = [1, 1]
+					}
+				}
+
+				// Out of power.
+				{
+					Toggle = BatteryStorage
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoPower
+						Size = [1, 1]
+					}
+				}
+			]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints_barrel.png"
+			Size = [1, 2]
+		}
+	}
+
+	Stats
+	{
+		PowerCapacity = (&~/Part/Components/BatteryStorage/MaxResources) / 1000
+
+		RecPower = &../StatsByCategory/0/Stats/PowerPerSecond
+		RecCrew = (&RecPower) * 4
+	}
+
+	StatsByCategory
+	[
+		{
+			NameKey = "StatCategories/ParticleCannonShot"
+			Stats
+			{
+				DamagePerShot = &~/Part/Components/BulletEmitter/Bullet/Components/Hit/HitOperational/HitEffects/0/Damage/BaseValue
+				DamagePerSecond = (&DamagePerShot) * (&ROF)
+				Damage = [&../DamagePerShot, &../DamagePerSecond]
+				Penetration = &~/Part/Components/BulletEmitter/Bullet/Components/Hit/Penetration/BaseValue
+				ROF = 1 / (&~/Part/Components/Weapon/FireInterval)
+				RangeLimited = [&~/Part/Components/BulletEmitter/Bullet/Range/BaseValue, &~/Part/Components/BulletEmitter/Bullet/Range/MaxValue]
+				Arc = 0
+				ShotSpeed = &~/Part/Components/BulletEmitter/Bullet/Speed/BaseValue
+				ShotHP = &~/Part/Components/BulletEmitter/Bullet/Components/Targetable/Health
+				AmmoPerShot = &~/Part/Components/BulletEmitter/ResourceUsage/0/ResourcesUsed
+				AmmoPerSecond = (&AmmoPerShot) * (&ROF)
+				ShotAmmoUsage = [&../AmmoPerShot, &../AmmoPerSecond]
+				PowerPerShot = (&~/Part/Components/BulletEmitter/ResourceUsage/1/ResourcesUsed) / 1000
+				PowerPerSecond = (&PowerPerShot) * (&ROF)
+				ShotPowerUsage = [&../PowerPerShot, &../PowerPerSecond]
+			}
+		}
+	]
+
+	StatsNotesKey = "Stats/ParticleCannonNotes"
+}

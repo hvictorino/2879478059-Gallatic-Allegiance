@@ -1,0 +1,304 @@
+ThrusterColor
+{
+	ToggleID = "thruster_color"
+	Style = Popout
+	ShowInEditor = true
+	Choices
+	[
+		// Orange color.
+		{
+			ChoiceID = "thruster_orange"
+			ButtonToolTipKey = "PartToggles/ThrusterOrange"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "thruster_color_orange.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		// Blue color.
+		{
+			ChoiceID = "thruster_blue"
+			ButtonToolTipKey = "PartToggles/ThrusterBlue"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "thruster_color_blue.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		// Green color.
+		{
+			ChoiceID = "thruster_green"
+			ButtonToolTipKey = "PartToggles/ThrusterGreen"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "thruster_color_green.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		// Yellow color.
+		{
+			ChoiceID = "thruster_yellow"
+			ButtonToolTipKey = "PartToggles/ThrusterYellow"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "thruster_color_yellow.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		// Purple color.
+		{
+			ChoiceID = "thruster_purple"
+			ButtonToolTipKey = "PartToggles/ThrusterPurple"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "thruster_color_purple.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		// Red color.
+		{
+			ChoiceID = "thruster_red"
+			ButtonToolTipKey = "PartToggles/ThrusterRed"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "thruster_color_red.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+		
+		// White color.
+		{
+			ChoiceID = "thruster_white"
+			ButtonToolTipKey = "PartToggles/ThrusterWhite"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "thruster_color_white.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+	]
+}
+
+WindowsOnOff
+{
+	ToggleID = "windows_on_off"
+	Style = CycledButton
+	Choices
+	[
+		// Off
+		{
+			ChoiceID = "windows_on_off_off"
+			ButtonToolTipKey = "PartToggles/WindowsOnOff_Off"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "windows_off.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		// On
+		{
+			ChoiceID = "windows_on_off_on"
+			ButtonToolTipKey = "PartToggles/WindowsOnOff_On"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "windows_on.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+	]
+}
+
+ShieldRadius
+{
+	ToggleID = "shield_radius"
+	Style = Popout
+	ShowInEditor = true
+	Choices
+	[
+		// 50.
+		{
+			ChoiceID = "shield_radius_50"
+			ButtonToolTipKey = "PartToggles/ShieldRadius50"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "shield_range_50.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		// 100.
+		{
+			ChoiceID = "shield_radius_100"
+			ButtonToolTipKey = "PartToggles/ShieldRadius100"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "shield_range_100.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		// 150.
+		{
+			ChoiceID = "shield_radius_150"
+			ButtonToolTipKey = "PartToggles/ShieldRadius150"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "shield_range_150.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		// 200.
+		{
+			ChoiceID = "shield_radius_200"
+			ButtonToolTipKey = "PartToggles/ShieldRadius200"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "shield_range_200.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		// 250.
+		{
+			ChoiceID = "shield_radius_250"
+			ButtonToolTipKey = "PartToggles/ShieldRadius250"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "shield_range_250.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+	]
+}
+
+RocketType
+{
+	ToggleID = "rocket_type"
+	Style = Popout
+	ShowInEditor = true
+	Choices
+	[
+		// High-Explosive.
+		{
+			ChoiceID = "rocket_type_he"
+			ButtonToolTipKey = "PartToggles/RocketType_HE"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "rocket_type_he.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		// Torpedo.
+		{
+			ChoiceID = "rocket_type_torp"
+			ButtonToolTipKey = "PartToggles/RocketType_Torp"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "rocket_type_torpedo.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		// Micro-rocket.
+		{
+			ChoiceID = "rocket_type_micro"
+			ButtonToolTipKey = "PartToggles/RocketType_micro"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "rocket_type_micro.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+
+		// FTL.
+		{
+			ChoiceID = "rocket_type_FTL"
+			ButtonToolTipKey = "PartToggles/RocketType_FTL"
+			ButtonSprite
+			{
+				Texture
+				{
+					File = "rocket_type_ftl.png"
+					MipLevels = 2
+					SampleMode = Linear
+				}
+			}
+		}
+	]
+}

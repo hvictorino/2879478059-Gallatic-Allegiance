@@ -1,0 +1,239 @@
+CategoryNouns
+{
+	CoreShieldSingular = "Hauptschild"
+	CoreShieldPlural = "Hauptschilde"
+}
+
+Inputs
+{
+	PartToggles
+	{
+		thruster_orange = "Schubdüsenfarbe: Orange"
+		thruster_blue = "Schubdüsenfarbe: Blau"
+		thruster_green = "Schubdüsenfarbe: Grün"
+		thruster_yellow = "Schubdüsenfarbe: Gelb"
+		thruster_purple = "Schubdüsenfarbe: Violett"
+		thruster_red = "Schubdüsenfarbe: Rot"
+		thruster_white = "Schubdüsenfarbe: Weiß"
+		
+		windows_on_off_off = "Deckdetails: Aus"
+		windows_on_off_on = "Deckdetails: An"
+	}
+}
+
+Parts
+{
+	//Large Airlock
+	AirlockLarge = "Große Luftschleuse"
+	AirlockLargeIcon = &AirlockLarge
+	AirlockLargeDesc = "Eine große Luftschleuse die es der Crew erlaubt, dass Schiff zu verlassen und zu betreten. Ausserdem können so Ressourcen eingesammelt werden und ein handeln mit anderen Schiffen erfolgen. Zusätzlich hat es 2 Stapel Lagerplätze für Ressourcen."
+
+	//Small Antigrav
+	AntigravSmall = "Kleiner Antischwerkraftsmotor"
+	AntigravSmallIcon = "Kleiner Antischwerkraftsmotor"
+	AntigravSmallDesc = "Antischwerkraftmotoren sind kleine Motoren die innerhalb des Schiffes platziert werden können. Sie erzeugen Schubkraft in alle Richtungen, aber verbrauchen viel Energie im Vergleich zu der geringen Leistung denn sie bieten."
+	
+	//Small Beam PD
+	BeamPDSmall = "Kleine strategische Strahlenverteidigung"
+	BeamPDSmallIcon = "Kleine Strahlenverteidigung"
+	BeamPDSmallDesc = "<b><yellow>Fraktion:</yellow> Orion Alliance</b> \n\nEine kleine strategische Verteidung die mit einem Strahl aus Energie und sehr guter Präzision die eingehenden Projektile zerstört oder beschädigt."
+
+	//Large Beam PD
+	BeamPDLarge = "Große strategische Strahlenverteidigung"
+	BeamPDLargeIcon = "Große Strahlenverteidigung"
+	BeamPDLargeDesc = "<b><yellow>Fraktion:</yellow> Orion Alliance</b> \n\nEine strategische Verteidung die mit 3 schnellen Strahlen aus Energie und sehr guter Präzision die eingehenden Projektile zerstört oder beschädigt."
+
+	//Crew Quarters Walkthrough
+	CrewQuartersWalkThrough = "Quartiere (Durchgang)"
+	CrewQuartersWalkThroughIcon = "Quartiere (Durchgang)"
+	CrewQuartersWalkThroughDesc = "Bietet Betten für 4 Crewmitglieder und hat einen Durchgang durch den andere Crewmitglieder gehen können."
+
+	//Command Booster
+	CommandBooster = "Unterstützungs Kommandobooster"
+	CommandBoosterIcon = "Kommandobooster"
+	CommandBoosterDesc = "Der Unterstützungs-Kommando-Computer, auch bekannt als Kommandobooster, bitet <good>+15<image name='command_points' colored='true'/></good> Kommandopunkte wenn es mit einem Kommandoraum verbunden ist. \n\n"\
+						 "Um Überlastungen zu vermeiden, kann jeweils nur ein Kommandobooster an einen Kontrollraum angeschlossen werden."
+
+	//Small CIWS Unit
+	CIWSSmall = "Kleiner CIWS Turm"
+	CIWSSmallIcon = "Kleiner CIWS"
+	CIWSSmallDesc = "<b><yellow>Fraktion:</yellow> Terran Planets Federation</b> \n\nDer kleine CIWS(Nahbereichsverteidigungssystem) Turm feuert mehrere Projektile in Wellen, die eingehenden Projektile zerstören oder beschädigen."
+
+	//Large CIWS Unit
+	CIWSLarge = "Großer CIWS Turm"
+	CIWSLargeIcon = "Großer CIWS"
+	CIWSLargeDesc = "<b><yellow>Fraktion:</yellow> Terran Planets Federation</b> \n\nDer große CIWS(Nahbereichsverteidigungssystem) Turm feuert schnell mehrere Projektile aufeinmal, die eingehenden Projektile zerstören oder beschädigen."
+
+	//Fighter Energy Cannons
+	EnergyCannon = "Laserkanone"
+	EnergyCannonIcon = &EnergyCannon
+	EnergyCannonLeft = "Laserkanone (Links)"
+	EnergyCannonLeftIcon = "Laserkanone (L)"
+	EnergyCannonDesc = "Eine kleine Laserkanone die hinter der Panzerung platziert werden kann."
+
+	//Long Fighter Energy Cannons
+	EnergyCannonLong = "Lange Laserkanone"
+	EnergyCannonLongIcon = "Laserkanone"
+	EnergyCannonLongLeft = "Lange Laserkanone (Links)"
+	EnergyCannonLongLeftIcon = "Laserkanone (L)"
+	EnergyCannonLongDesc = "Eine längere Version der kleine Laserkanone die hinter der Panzerung platziert werden kann."
+
+	//Fighter Miniguns
+	EnergyMinigun = "Laserminigun"
+	EnergyMinigunIcon = &EnergyMinigun
+	EnergyMinigunLeft = "Laserminigun (Links)"
+	EnergyMinigunLeftIcon = "Laserminigun (L)"
+	EnergyMinigunDesc = "Eine schnellfeuernde Minigun die hinter der Panzerung platziert werden kann."
+
+	//Fire Room
+	FireRoom = "Feuerlöscherraum"
+	FireRoomIcon = &FireRoom
+	FireRoomDesc = "Ein feuerresistenter Raum der zwei Feuerlöscher hat."
+
+	//Gauss Cannon
+	CannonGauss = "Gauss Kanone"
+	CannonGaussIcon = &CannonGauss
+	CannonGaussDesc = "Feuert einen mächtigen Kanonenschuss der Schilde schweren Schaden zufügt, sowie tief in das feindliche Schiff eindringt."
+
+	//Heavy Machine Gun
+	MachineGunHeavy = "Schweres Energie Maschinengewehr"
+	MachineGunHeavyIcon = "Schweres Energie MG"
+	MachineGunHeavyDesc = "Feuert Energie-Geschosse mit sehr hoher Geschwindigkeit. Am besten geeignet für Nahkämpfe, aber kann auch für kleine Schäden in Distanzkämpfen verwendet werden."
+
+	//Dual Heavy Machine Gun
+	MachineGunHeavyDual = "Zweiläufige schweres Energie Maschinengewehr"
+	MachineGunHeavyDualIcon = "Zweiläufige schwere Energie MG"
+	MachineGunHeavyDualDesc = "Eine zweiläufige Version des schweren Energie Maschinengewehrs, dieses Waffe bietet mehr Energiekapazität und ist genauer."
+
+	//Missile Silo
+	MissileSilo = "Raketensilo"
+	MissileSiloIcon = &MissileSilo
+	MissileSiloDesc = "Wie der Raketenwerfer, aber kann in dem Schiff platziert werden und muss nicht außerhalb sein. Feuert auschließlich HE-Raketen."
+
+	//Small Particle Cannon
+	ParticleCannonSmallLoader = "Partikel-Kanonen-Ladeeinheit"
+	ParticleCannonSmallLoaderIcon = "PAC Ladeeinheit"
+	ParticleCannonSmallLoaderDesc = "<b><yellow>Fraktion:</yellow> Terran Planets Federation</b> \n\nEine erforderliche Komponente für die Partikelkanone, die Partikel-Kanonen-Ladeeinheit lädt Energie und Munition für die Partiklekanone."
+
+	ParticleCannonSmallBarrelExtender = "Partikel-Kanonen-Werfer-Erweiterung"
+	ParticleCannonSmallBarrelExtenderIcon = "PAC Werfererweiterung"
+	ParticleCannonSmallBarrelExtenderDesc = "<b><yellow>Fraktion:</yellow> Terran Planets Federation</b> \n\nEine optionale Komponente für die Partikelkanone, die Partikel-Kanonen-Werfer-Erweiterung erhöht die Reichweite, Geschwindigkeit und den Schaden der Partikelkanone."
+
+	ParticleCannonSmallBarrel = "Partikel-Kanonen-Werfer"
+	ParticleCannonSmallBarrelIcon = "PAC Werfer"
+	ParticleCannonSmallBarrelDesc = "<b><yellow>Fraktion:</yellow> Terran Planets Federation</b> \n\nEine erforderliche Komponente für die Partikelkanone, der Partikel-Kanonen-Werfer erlaubt es der Kanone zu feuern."
+
+	//Large Particle Cannon
+	ParticleCannonLargeLoader = "Große Partikel-Kanonen-Ladeeinheit"
+	ParticleCannonLargeLoaderIcon = "Große PAC Ladeeinheit"
+	ParticleCannonLargeLoaderDesc = "<b><yellow>Fraktion:</yellow> Terran Planets Federation</b> \n\nEine erforderliche Komponente für die Partikelkanone, die Partikel-Kanonen-Ladeeinheit lädt Energie und Munition für die Partiklekanone für die große Partiklekanone. \n\n"\
+									"Die große Partikelkanone feuert ein durchdringendes Projektil das einen E.M.P. Effekt bewirkt während es durch das feindliche Schiff schlägt."
+
+	ParticleCannonLargeExtender = "Große Partikel-Kanonen-Werfer-Erweiterung"
+	ParticleCannonLargeExtenderIcon = "Große PAC Werfererweiterung"
+	ParticleCannonLargeExtenderDesc = "<b><yellow>Fraktion:</yellow> Terran Planets Federation</b> \n\nEine optionale Komponente für die Partikelkanone, die Partikel-Kanonen-Werfer-Erweiterung erhöht die Reichweite, Geschwindigkeit und den Schaden der Partikelkanone. \n\n"\
+									"Die große Partikelkanone feuert ein durchdringendes Projektil das einen E.M.P. Effekt bewirkt während es durch das feindliche Schiff schlägt."
+
+	ParticleCannonLargeBarrelExtender = "Große Partikel-Kanonen-Werfer-Erweiterung (Extern)"
+	ParticleCannonLargeBarrelExtenderIcon = "Große PAC Werfererweiterung (Ext)"
+	ParticleCannonLargeBarrelExtenderDesc = "<b><yellow>Fraktion:</yellow> Terran Planets Federation</b> \n\nEine optionale Komponente für die Partikelkanone, die Partikel-Kanonen-Werfer-Erweiterung erhöht die Reichweite, Geschwindigkeit und den Schaden der Partikelkanone. Diese Variante hat erhöhtes Leben im Gegensatz zu der normalen, aber muss Batterien durchgereicht bekommen von hinteren Ladeeinheiten oder Werfererweiterung. Es kann nicht manuell von der Crew geladen werden. \n\n"\
+									"Die große Partikelkanone feuert ein durchdringendes Projektil das einen E.M.P. Effekt bewirkt während es durch das feindliche Schiff schlägt."
+
+	ParticleCannonLargeBarrel = "Großer Partikel-Kanonen-Werfer"
+	ParticleCannonLargeBarrelIcon = "Großer PAC Werfer"
+	ParticleCannonLargeBarrelDesc = "<b><yellow>Fraktion:</yellow> Terran Planets Federation</b> \n\nEine erforderliche Komponente für die Partikelkanone, der Partikel-Kanonen-Werfer feuert das Partikelprojektil. \n\n"\
+									"Die große Partikelkanone feuert ein durchdringendes Projektil das einen E.M.P. Effekt bewirkt während es durch das feindliche Schiff schlägt."
+
+	//Phase Thrusters
+	PhaseThrusterSmall = "Kleine Phasenschubdüse"
+	PhaseThrusterSmallIcon = &PhaseThrusterSmall
+	PhaseThrusterSmallDesc = "Eine schwache Schubdüse, die hauptsächlich zum manövrieren benutzt wird."
+
+	PhaseThrusterSmallAngled = "Kleine Phasenschubdüse (Angewinckelt)"
+	PhaseThrusterSmallAngledIcon = &PhaseThrusterSmall
+
+	PhaseThrusterSmallInset = "Kleine Phasenschubdüse (Innendrinn)"
+	PhaseThrusterSmallInsetIcon = &PhaseThrusterSmall
+
+	PhaseThrusterMed = "Standard Phasenschubdüse"
+	PhaseThrusterMedIcon = "Std. Phasenschubdüse"
+	PhaseThrusterMedDesc = "Eine leicht bessere Version von der kleinen Phasenschubdüse die mehr Antrieb bietet. Hauptsächlich zum manövrieren beabsichtigt."
+
+	PhaseThrusterMedAngled = "Standard Phasenschubdüse (Angewinckelt)"
+	PhaseThrusterMedAngledIcon = &PhaseThrusterMedIcon
+
+	PhaseThrusterMedInset = "Standard Phasenschubdüse (Innendrinn)"
+	PhaseThrusterMedInsetIcon = &PhaseThrusterMedIcon
+
+	//Plasma Thrusters
+	PlasmaThrusterSmall = "Kleine Plasmaschubdüse"
+	PlasmaThrusterSmallIcon = &PlasmaThrusterSmall
+	PlasmaThrusterSmallDesc = "Plasmaschubdüse sind stärker als gewöhnliche Schubdüsen, aber auch teurer und brauchen mehr Energie, zudem haben sie keinen Seitenschub."
+
+	PlasmaThrusterMed = "Standard Plasmaschubdüse"
+	PlasmaThrusterMedIcon = "Std. Plasmaschubdüse"
+	PlasmaThrusterMedDesc = &PlasmaThrusterSmallDesc
+
+	PlasmaThrusterLarge = "Große Plasmaschubdüse"
+	PlasmaThrusterLargeIcon = "Große Plasmaschubdüse"
+	PlasmaThrusterLargeDesc = &PlasmaThrusterSmallDesc
+	
+	PlasmaThrusterHuge = "Riesige Plasmaschubdüse"
+	PlasmaThrusterHugeIcon = "Riesige Plasmaschubdüse"
+	PlasmaThrusterHugeDesc = &PlasmaThrusterSmallDesc
+
+	//Phantom Reactor
+	ReactorPhantom = "Phantom-Klassen Reaktor"
+	ReactorPhantomIcon = "Phantom Reaktor"
+	ReactorPhantomDesc = "Ein kleiner Reaktor der die Hälfte der Leistung eines gewöhnlichen Reaktor gibt, aber mit weniger Energie-Erzeugungs-Rate."
+
+	//Fighter Turret
+	TurretFighter = "Kampflaserturm"
+	TurretFighterIcon = "Kampflaserturm"
+	TurretFighterDesc = "Ein einläufiger Deckturm der sehr präzise mit Laserprojektilen feuert, aber dafür niedrigen Schaden anrichtet."
+
+	//Medium Turret
+	TurretMed = "Standard Laserturm"
+	TurretMedIcon = "Std. Laserturm"
+	TurretMedDesc = "Ein zweiläufiger Deckturm der sehr präzise mit Laserprojektilen feuert, aber nur mittelmäßigen Schaden anrichtet."
+
+	//Large Turret
+	TurretLarge = "Großer Laserturm"
+	TurretLargeIcon = "Großer Laserturm"
+	TurretLargeDesc = "Ein zweiläufiger Deckturm der sehr präzise mit Laserprojektilen feuert und großen Schaden anrichtet."
+}
+
+PartToggles
+{
+	ThrusterOrange = "Schubdüsenfarbe: Orange"
+	ThrusterBlue = "Schubdüsenfarbe: Blau"
+	ThrusterGreen = "Schubdüsenfarbe: Grün"
+	ThrusterYellow = "Schubdüsenfarbe: Gelb"
+	ThrusterPurple = "Schubdüsenfarbe: Violett"
+	ThrusterRed = "Schubdüsenfarbe: Rot"
+	ThrusterWhite = "Schubdüsenfarbe: Weiß"
+
+	WindowsOnOff_Off = "Deckdetails: Aus"
+	WindowsOnOff_On = "Deckdetails: An"
+}
+
+Stats
+{
+	BulletVolleyFmt = "<white>Projektile pro Schuss:</white> <good>{0}</good> <gray>Pro Schuss</gray>"
+	ParticleCannonNotes = "<gray>Notiz: Schaden, Durchdringung, Reichweite, Projektilgeschwindkeit und Energieverbauch sind erhöht mit jeder zusätlichen Erweiterung.</gray>"
+}
+
+StatCategories
+{
+	//Shots
+	BeamPDShot = "Stahlen Projektil"
+	CIWSShot = "CIWS Projektil"
+	FighterWeapons = "Laserblitz"
+	GaussShot = "Gausskanonen Projektil"
+	MinigunShot = "Minigun Laser"
+	ParticleCannonShot = "Partikel Kanonen Projektil"
+	MachineGunBolt = "MG Energieblitz"
+
+	//Buffs
+	ParticleCannonBuff = "Partikel Kanonen Buff"
+}

@@ -1,0 +1,338 @@
+Part : &<../phase_thruster_small/phase_thruster_small.txt>/Part
+{
+	NameKey = "Parts/PhaseThrusterSmallAngledER"
+	IconNameKey = "Parts/PhaseThrusterSmallAngledERIcon"
+	ID = ultranova.phase_thruster_small_angled_eR
+	EditorGroup = "Flight"
+	DescriptionKey = "Parts/PhaseThrusterSmallAngledERDesc"
+	Cost = 250
+	TypeCategories = [thruster, uses_power]
+	Size = [1, 3]
+	PhysicalRect = [0, 0, 1, 2]
+	SaveRect = &PhysicalRect
+	UsePartWhenFlipped = ultranova.phase_thruster_small_angled_eL
+	AllowedDoorLocations
+	[
+		[0, -1]
+		[1, 0]
+		[-1, 0]
+	]
+	CustomCollider
+	[
+		[0, 0]
+		[1, 0]
+		[1, 2]
+		[0, 1]
+	]
+	EditorIcon
+	{
+		Texture
+		{
+			File = "icon.png"
+			SampleMode = Linear
+		}
+		UVRect
+		{
+			Left = 1
+			Right = 0
+			Top = 0
+			Bottom = 1
+		}
+		Size = [21.33, 64]
+	}
+	ExternalWallsByCell
+	[
+		{
+			Key = [0, 1]
+			Value = [TopRight, Right, BottomRight, Top, TopLeft]
+		}
+	]
+	InternalWallsByCell
+	[
+		{
+			Key = [0, 1]
+			Value = [Left, TopLeft, BottomLeft]
+		}
+	]
+	Components : ^/0/Components
+	{
+		Graphics
+		{
+			Type = Graphics
+			Location = [.5, .5]
+			OperationalToggle = IsOperational
+			Floor = &<../phase_thruster_small/phase_thruster_small.txt>/Part/Components/Graphics/Floor
+			OperationalDoodad
+			{
+				Layer = "doodads_high"
+				Offset = [0, 1]
+				DamageLevels
+				[
+					{
+						File = "doodads.png"
+						MirrorU = true
+						Size = [1, 3]
+					}
+				]
+			}
+			NonOperationalDoodad = &OperationalDoodad
+			Walls
+			{
+				Layer = "walls"
+				Offset = [0, .5]
+				DamageLevels
+				[
+					{
+						File = "walls.png"
+						MirrorU = true
+						Size = [1, 2]
+					}
+					{
+						File = "walls_33.png"
+						MirrorU = true
+						Size = [1, 2]
+					}
+					{
+						File = "walls_66.png"
+						MirrorU = true
+						Size = [1, 2]
+					}
+				]
+			}
+			Roof
+			{
+				Layer = "roofs"
+				Offset = [0, .5]
+				DamageLevels
+				[
+					{
+						File = "roof.png"
+						MirrorU = true
+						Size = [1, 2]
+					}
+					{
+						File = "roof_33.png"
+						MirrorU = true
+						Size = [1, 2]
+					}
+					{
+						File = "roof_66.png"
+						MirrorU = true
+						Size = [1, 2]
+					}
+				]
+			}
+		}
+
+		BlueThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = BlueThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				BlueGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							: &<phase_thruster_small_angled_L.txt>/Part/Components/BlueThrustComponents/Components/BlueGraphics/OperationalLighting/DamageLevels/0
+							{
+								MirrorU = true
+							}
+						]
+					}
+					OperationalRoofDoodad = &<phase_thruster_small_angled_L.txt>/Part/Components/BlueThrustComponents/Components/BlueGraphics/OperationalRoofDoodad
+				}
+				BlueThrustEffects = &<phase_thruster_small_angled_L.txt>/Part/Components/BlueThrustComponents/Components/BlueThrustEffects
+			}
+		}
+
+		GreenThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = GreenThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				GreenGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							: &<phase_thruster_small_angled_L.txt>/Part/Components/GreenThrustComponents/Components/GreenGraphics/OperationalLighting/DamageLevels/0
+							{
+								MirrorU = true
+							}
+						]
+					}
+					OperationalRoofDoodad = &<phase_thruster_small_angled_L.txt>/Part/Components/GreenThrustComponents/Components/GreenGraphics/OperationalRoofDoodad
+				}
+				GreenThrustEffects = &<phase_thruster_small_angled_L.txt>/Part/Components/GreenThrustComponents/Components/GreenThrustEffects
+			}
+		}
+
+		OrangeThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = OrangeThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				OrangeGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							: &<phase_thruster_small_angled_L.txt>/Part/Components/OrangeThrustComponents/Components/OrangeGraphics/OperationalLighting/DamageLevels/0
+							{
+								MirrorU = true
+							}
+						]
+					}
+					OperationalRoofDoodad = &<phase_thruster_small_angled_L.txt>/Part/Components/OrangeThrustComponents/Components/OrangeGraphics/OperationalRoofDoodad
+				}
+				OrangeThrustEffects = &<phase_thruster_small_angled_L.txt>/Part/Components/OrangeThrustComponents/Components/OrangeThrustEffects
+			}
+		}
+
+		PurpleThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = PurpleThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				PurpleGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							: &<phase_thruster_small_angled_L.txt>/Part/Components/PurpleThrustComponents/Components/PurpleGraphics/OperationalLighting/DamageLevels/0
+							{
+								MirrorU = true
+							}
+						]
+					}
+					OperationalRoofDoodad = &<phase_thruster_small_angled_L.txt>/Part/Components/PurpleThrustComponents/Components/PurpleGraphics/OperationalRoofDoodad
+				}
+				PurpleThrustEffects = &<phase_thruster_small_angled_L.txt>/Part/Components/PurpleThrustComponents/Components/PurpleThrustEffects
+			}
+		}
+
+		RedThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = RedThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				RedGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							: &<phase_thruster_small_angled_L.txt>/Part/Components/RedThrustComponents/Components/RedGraphics/OperationalLighting/DamageLevels/0
+							{
+								MirrorU = true
+							}
+						]
+					}
+					OperationalRoofDoodad = &<phase_thruster_small_angled_L.txt>/Part/Components/RedThrustComponents/Components/RedGraphics/OperationalRoofDoodad
+				}
+				RedThrustEffects = &<phase_thruster_small_angled_L.txt>/Part/Components/RedThrustComponents/Components/RedThrustEffects
+			}
+		}
+
+		YellowThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = YellowThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				YellowGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							: &<phase_thruster_small_angled_L.txt>/Part/Components/YellowThrustComponents/Components/YellowGraphics/OperationalLighting/DamageLevels/0
+							{
+								MirrorU = true
+							}
+						]
+					}
+					OperationalRoofDoodad = &<phase_thruster_small_angled_L.txt>/Part/Components/YellowThrustComponents/Components/YellowGraphics/OperationalRoofDoodad
+				}
+				YellowThrustEffects = &<phase_thruster_small_angled_L.txt>/Part/Components/YellowThrustComponents/Components/YellowThrustEffects
+			}
+		}
+
+		WhiteThrustComponents
+		{
+			Type = ToggledComponents
+			Toggle = WhiteThrustToggle
+			IncludeInBlueprints = true
+			Components
+			{
+				WhiteGraphics
+				{
+					Type = Graphics
+					Location = [.5, 1.5]
+					OperationalToggle = IsOperational
+					OperationalLighting
+					{
+						Layer = "lights_add"
+						DamageLevels
+						[
+							: &<phase_thruster_small_angled_L.txt>/Part/Components/WhiteThrustComponents/Components/WhiteGraphics/OperationalLighting/DamageLevels/0
+							{
+								MirrorU = true
+							}
+						]
+					}
+					OperationalRoofDoodad = &<phase_thruster_small_angled_L.txt>/Part/Components/WhiteThrustComponents/Components/WhiteGraphics/OperationalRoofDoodad
+				}
+				WhiteThrustEffects = &<phase_thruster_small_angled_L.txt>/Part/Components/WhiteThrustComponents/Components/WhiteThrustEffects
+			}
+		}
+		
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints.png"
+			MirrorU = true
+			Size = [1, 3]
+		}
+	}
+}

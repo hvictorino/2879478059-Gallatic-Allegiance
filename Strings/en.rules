@@ -1,0 +1,344 @@
+CategoryNouns
+{
+	CoreShieldSingular = "Core Shield"
+	CoreShieldPlural = "Core Shields"
+}
+
+Inputs
+{
+	PartToggles
+	{
+		thruster_orange = "Thruster Colour: Orange"
+		thruster_blue = "Thruster Colour: Blue"
+		thruster_green = "Thruster Colour: Green"
+		thruster_yellow = "Thruster Colour: Yellow"
+		thruster_purple = "Thruster Colour: Purple"
+		thruster_red = "Thruster Colour: Red"
+		thruster_white = "Thruster Colour: White"
+		
+		windows_on_off_off = "Roof Details: Off"
+		windows_on_off_on = "Roof Details: On"
+
+		shield_radius_50 = "Shield Radius: 50"
+		shield_radius_100 = "Shield Radius: 100"
+		shield_radius_150 = "Shield Radius: 150"
+		shield_radius_200 = "Shield Radius: 200"
+		shield_radius_250 = "Shield Radius: 250"
+
+		//Rocket Types
+		rocket_type_he = "Rocket Type: High-Explosive"
+		rocket_type_torp = "Rocket Type: Torpedo"
+		rocket_type_micro = "Rocket Type: Micro-rocket"
+		rocket_type_FTL = "Rocket Type: Faster-Than-Light Torpedo"
+	}
+}
+
+Parts
+{
+	//Large Airlock
+	AirlockLarge = "Large Airlock"
+	AirlockLargeIcon = &AirlockLarge
+	AirlockLargeDesc = "A Large Airlock that allows crew to enter and exit the ship, such as to pick up resources or transfer between ships. Also has storage for two tiles of resources."
+
+	//Small Antigrav
+	AntigravSmall = "Small Antigrav Engine"
+	AntigravSmallIcon = "Small Antigrav"
+	AntigravSmallDesc = "Antigravs are small engines that can be placed internally. They provide a small amount of thrust in all directions, but are power hungry for the little thrust they provide."
+
+	//Assault Cannon
+	AssaultCannon = "Assault Cannon"
+	AssaultCannonIcon = &AssaultCannon
+	AssaultCannonDesc = "Assault Cannons are fixed weapons that fire powerful AOE Plasma Bolts at a slow but steady rate."
+
+	//Small Beam PD
+	BeamPDSmall = "Small Beam Point Defense"
+	BeamPDSmallIcon = "Small Beam PD"
+	BeamPDSmallDesc = "<b><yellow>Faction:</yellow> Orion Alliance</b> \n\nA small point defence unit that fires beams of energy at oncoming projectiles, damaging or destroying projectiles with powerful accuracy."
+
+	//Large Beam PD
+	BeamPDLarge = "Large Beam Point Defense"
+	BeamPDLargeIcon = "Large Beam PD"
+	BeamPDLargeDesc = "<b><yellow>Faction:</yellow> Orion Alliance</b> \n\nA point defence unit that fires beams of energy at oncoming projectiles in bursts of three, damaging or destroying projectiles with powerful accuracy."
+
+	//Gauss Cannon
+	CannonGauss = "Gauss Cannon"
+	CannonGaussIcon = &CannonGauss
+	CannonGaussDesc = "Fires a powerful cannon shot which disables shields easily and penetrates deep into enemy ships."
+
+	//Crew Quarters Walkthrough
+	CrewQuartersWalkThrough = "Crew Quarters (Walkthrough)"
+	CrewQuartersWalkThroughIcon = "Quarters (Walkthrough)"
+	CrewQuartersWalkThroughDesc = "Provides living space for four crewmen, while also allowing crew members to pass through the room"
+
+	//Command Booster
+	CommandBooster = "Auxiliary Command Computer"
+	CommandBoosterIcon = "Command Booster"
+	CommandBoosterDesc = "The Auxiliary Command Computer, also known as the Command Booster, provides <good>+15<image name='command_points' colored='true'/></good> Command Points when connected to a control room. \n\n"\
+						 "To avoid overloads, only one Command Booster can be attached to a Control Room at a time."
+
+	//Small CIWS Unit
+	CIWSSmall = "Small CIWS Turret"
+	CIWSSmallIcon = "Small CIWS"
+	CIWSSmallDesc = "<b><yellow>Faction:</yellow> Terran Planets Federation</b> \n\nThe Small CIWS Turret fires projectiles in bursts, and can damage or destroy enemy missiles or bullets."
+
+	//Large CIWS Unit
+	CIWSLarge = "Large CIWS Turret"
+	CIWSLargeIcon = "Large CIWS"
+	CIWSLargeDesc = "<b><yellow>Faction:</yellow> Terran Planets Federation</b> \n\nThe Large CIWS Turret rapidly fires projectiles that can damage or destroy enemy missiles or bullets."
+
+	//Fighter Energy Cannons
+	EnergyCannons = "Laser Cannons"
+	EnergyCannonsDesc = "Laser Cannons are small weapons that can be placed behind armour pieces, and are useful for constructing fighters."
+
+	EnergyCannon = "Laser Cannon"
+	EnergyCannonIcon = &EnergyCannon
+	EnergyCannonLeft = "Laser Cannon (Left)"
+	EnergyCannonLeftIcon = "Laser Cannon (L)"
+	EnergyCannonDesc = "A small laser cannon that can be placed behind armour pieces."
+
+	//Long Fighter Energy Cannons
+	EnergyCannonLong = "Long Laser Cannon"
+	EnergyCannonLongIcon = "Laser Cannon"
+	EnergyCannonLongLeft = "Long Laser Cannon (Left)"
+	EnergyCannonLongLeftIcon = "Laser Cannon (L)"
+	EnergyCannonLongDesc = "A longer version of the small laser cannon that can be placed behind armour pieces."
+
+	//Fighter Miniguns
+	EnergyMiniguns = "Laser Miniguns"
+	EnergyMinigunsDesc = "Laser Miniguns are small, rapid-firing weapons that can be placed behind armour pieces. They are inaccurate, but useful for close range engagements."
+
+	EnergyMinigun = "Laser Minigun"
+	EnergyMinigunIcon = &EnergyMinigun
+	EnergyMinigunLeft = "Laser Minigun (Left)"
+	EnergyMinigunLeftIcon = "Laser Minigun (L)"
+	EnergyMinigunDesc = "A rapid-firing minigun that can be placed behind armour pieces."
+
+	//Fire Room
+	FireRoom = "Fire Room"
+	FireRoomIcon = &FireRoom
+	FireRoomDesc = "A fire-resistant room that contains two fire extinguishers."
+
+	//Light Ammo Factory
+	FactoryLightAmmo = "Ballistics Factory"
+	FactoryLightAmmoIcon = "Box Magazines"
+	FactoryLightAmmoDesc = "The Ballistics Factory uses iron to produce Box Magazines, which are required for Light Ballistic Weapons."
+
+	//Heavy Machine Gun
+	MachineGunHeavy = "Heavy Energy Machine-Gun"
+	MachineGunHeavyIcon = "Heavy Energy MG"
+	MachineGunHeavyDesc = "Fires energy-bolts at a rapid pace. Designed for short range combat, but can also be used to harass the enemy from a distance."
+
+	//Light Gun Turret
+	LightGunTurret = "Light Gun Turret"
+	LightGunTurretIcon = &LightGunTurret
+	LightGunTurretDesc = "A Light Gun mounted on a turret which uses Ammunition from Box Magazines. Each magazine stores 80 bullets. Can be set to shoot down Missiles and Shells."
+
+	//Dual Heavy Machine Gun
+	MachineGunHeavyDual = "Dual Heavy Energy Machine-Gun"
+	MachineGunHeavyDualIcon = "Dual Heavy Energy MG"
+	MachineGunHeavyDualDesc = "A dual-barrelled version of the Heavy Energy Machine-Gun, this weapon has a larger battery capacity and is more accurate."
+
+	//Missile Silo
+	MissileSilo = "Missile Silo"
+	MissileSiloIcon = &MissileSilo
+	MissileSiloDesc = "Like the missile launcher, but can be fired from the inside of a ship. Only fires HE missiles."
+
+	//Small Particle Cannon
+	ParticleCannonSmall = "Particle Cannon"
+	ParticleCannonSmallDesc = "The Particle Cannon is a small modular weapon that fires a projectile that can penetrate deep into enemy ships."
+
+	ParticleCannonSmallLoader = "Particle Cannon Loader"
+	ParticleCannonSmallLoaderIcon = "PAC Loader"
+	ParticleCannonSmallLoaderDesc = "<b><yellow>Faction:</yellow> Terran Planets Federation</b> \n\nA required part when building a Particle Cannon, the particle cannon loader supplies power and ammo to the Particle Cannon."
+
+	ParticleCannonSmallBarrelExtender = "Particle Cannon Barrel Extension"
+	ParticleCannonSmallBarrelExtenderIcon = "PAC Extension"
+	ParticleCannonSmallBarrelExtenderDesc = "<b><yellow>Faction:</yellow> Terran Planets Federation</b> \n\nAn optional part when building a Particle Cannon, the particle cannon extension increases the range, speed and damage of the particle cannon."
+
+	ParticleCannonSmallBarrel = "Particle Cannon Barrel"
+	ParticleCannonSmallBarrelIcon = "PAC Barrel"
+	ParticleCannonSmallBarrelDesc = "<b><yellow>Faction:</yellow> Terran Planets Federation</b> \n\nA required part when building a Particle Cannon, the particle cannon launcher allows the cannon to fire."
+
+	//Large Particle Cannon
+	ParticleCannonLarge = "Large Particle Cannon"
+	ParticleCannonLargeDesc = "The Large Particle Cannon is a modular weapon that fires a penetrating projectile, which emits an E.M.P. effect as it penetrates through an enemy craft."
+
+	ParticleCannonLargeLoader = "Large Particle Cannon Loader"
+	ParticleCannonLargeLoaderIcon = "Large PAC Loader"
+	ParticleCannonLargeLoaderDesc = "<b><yellow>Faction:</yellow> Terran Planets Federation</b> \n\nA required part when building a Particle Cannon, the particle cannon loader supplies power and ammo to the Large Particle Cannon. \n\n"\
+									"The Large Particle Cannon fires a penetrating projectile that emits an E.M.P. effect as it penetrates through an enemy craft."
+
+	ParticleCannonLargeExtender = "Large Particle Cannon Extension"
+	ParticleCannonLargeExtenderIcon = "Large PAC Extension"
+	ParticleCannonLargeExtenderDesc = "<b><yellow>Faction:</yellow> Terran Planets Federation</b> \n\nAn optional part when building a Particle Cannon, the particle cannon extension increases the range, speed and damage of the particle cannon. \n\n"\
+									"The Large Particle Cannon fires a penetrating projectile that emits an E.M.P. effect as it penetrates through an enemy craft."
+
+	ParticleCannonLargeBarrelExtender = "Large Particle Cannon Extension (External)"
+	ParticleCannonLargeBarrelExtenderIcon = "Large PAC Extension (Ext)"
+	ParticleCannonLargeBarrelExtenderDesc = "<b><yellow>Faction:</yellow> Terran Planets Federation</b> \n\nAn optional part when building a Particle Cannon, the particle cannon extension increases the range, speed and damage of the particle cannon. The external barrel extender has increased health compared to the regular extender, but requires batteries to be fed to it by extenders/loaders behind it. It cannot be manually loaded by crew. \n\n"\
+									"The Large Particle Cannon fires a penetrating projectile that emits an E.M.P. effect as it penetrates through an enemy craft."
+
+	ParticleCannonLargeBarrel = "Large Particle Cannon Barrel"
+	ParticleCannonLargeBarrelIcon = "Large PAC Barrel"
+	ParticleCannonLargeBarrelDesc = "<b><yellow>Faction:</yellow> Terran Planets Federation</b> \n\nA required part when building a Particle Cannon, the particle cannon barrel actually fires the Particle bolt. \n\n"\
+									"The Large Particle Cannon fires a penetrating projectile that emits an E.M.P. effect as it penetrates through an enemy craft."
+
+	//Phase Thrusters
+	PhaseThrusterSmall = "Small Phase Thruster"
+	PhaseThrusterSmallIcon = &PhaseThrusterSmall
+	PhaseThrusterSmallDesc = "A weak thruster that provides a small amount of thrust for manoeuvring."
+
+	PhaseThrusterSmallAngled = "Small Phase Thruster (Angled)"
+	PhaseThrusterSmallAngledIcon = &PhaseThrusterSmall
+
+	PhaseThrusterSmallInset = "Small Phase Thruster (Inset)"
+	PhaseThrusterSmallInsetIcon = &PhaseThrusterSmall
+
+	PhaseThrusterMed = "Medium Phase Thruster"
+	PhaseThrusterMedIcon = "Med. Phase Thruster"
+	PhaseThrusterMedDesc = "A slightly stronger version of the Small Phase Thruster that provides more thrust. Primarily designed for manoeuvring."
+
+	PhaseThrusterMedAngled = "Medium Phase Thruster (Angled)"
+	PhaseThrusterMedAngledIcon = &PhaseThrusterMedIcon
+
+	PhaseThrusterMedInset = "Medium Phase Thruster (Inset)"
+	PhaseThrusterMedInsetIcon = &PhaseThrusterMedIcon
+
+	//Plasma Thrusters
+	PlasmaThrusterSmall = "Small Plasma Thruster"
+	PlasmaThrusterSmallIcon = &PlasmaThrusterSmall
+	PlasmaThrusterSmallDesc = "Plasma Thrusters are stronger than regular thrusters, but are more expensive, require more fuel and don't have lateral thrust."
+
+	PlasmaThrusterMed = "Standard Plasma Thruster"
+	PlasmaThrusterMedIcon = "Med. Plasma Thruster"
+	PlasmaThrusterMedDesc = &PlasmaThrusterSmallDesc
+
+	PlasmaThrusterLarge = "Large Plasma Thruster"
+	PlasmaThrusterLargeIcon = "Large Plasma Thruster"
+	PlasmaThrusterLargeDesc = &PlasmaThrusterSmallDesc
+
+	PlasmaThrusterHuge = "Huge Plasma Thruster"
+	PlasmaThrusterHugeIcon = "Huge Plasma Thruster"
+	PlasmaThrusterHugeDesc = &PlasmaThrusterSmallDesc
+
+	PlasmaThrusterScoreSmall = "Small Core Plasma Thruster"
+	PlasmaThrusterScoreSmallIcon = "Sml. Core Plasma Thruster"
+	PlasmaThrusterScoreSmallDesc = "Core Plasma Thrusters are powerful thrusters that consume massive amounts of fuel. However, due to their large size, engine rooms cannot buff or supply them."
+
+	//Rocket Factory
+	RocketFactory = "Rocket Factory"
+	RocketFactoryIcon = "Rocket Factory"
+	RocketFactoryDesc = "A factory that produces the rockets needed for rocket launchers. Consumes both Iron and Sulfur."
+
+	//Rocket Silo
+	RocketSilo = "Rocket Silo"
+	RocketSiloIcon = "Rocket Silo"
+	RocketSiloDesc = "A small rocket silo that launches both HE Rockets and Fighter Torpedoes. Ideal for fighters."
+
+	//Heavy Rocket Silo
+	RocketSiloHeavy = "Heavy Rocket Silo"
+	RocketSiloHeavyIcon = "Heavy Rocket Silo"
+	RocketSiloHeavyDesc = "A larger rocket silo that stores more rockets and can fire H.E. Rockets, Fighter Torpedoes and Micro-Rockets."
+
+	//Rocket Turret
+	RocketTurretSmall = "Small Rocket Turret"
+	RocketTurretSmallIcon = "Rocket Turret"
+	RocketTurretSmallDesc = "The Rocket Turret is mounted on the deck of the ship, and can fire either H.E. Rockets or Micro-Rockets."
+
+	//Medium Rocket Turret
+	RocketTurretMedium = "Heavy Rocket Turret"
+	RocketTurretMediumIcon = "Heavy Rocket Turret"
+	RocketTurretMediumDesc = "A larger version of the Rocket Turret, which is mounted on the deck of the ship, and can fire H.E. Rockets, Torpedoes or Micro-Rockets."
+
+	//Phantom Reactor
+	ReactorPhantom = "Phantom-Class Reactor"
+	ReactorPhantomIcon = "Phantom Reactor"
+	ReactorPhantomDesc = "A smaller reactor that gives half the power of a regular reactor at a slower rate."
+
+	//Core Shield
+	ShieldCoreSmall = "Core Shield"
+	ShieldCoreSmallIcon = &ShieldCoreSmall
+	ShieldCoreSmallDesc = "Projects a large bubble shield that protects your entire ship from enemy fire. Vulnerable to Disruptors and EMP missiles. Its incredible power also comes at a cost, as it explodes violently when it dies and ships can only have one core shield."
+
+	//Fighter Turret
+	TurretFighter = "Fighter Laser Turret"
+	TurretFighterIcon = "Fighter Turret"
+	TurretFighterDesc = "A single barreled roof turret that fires highly accurate but low damage laser bolts."
+
+	//Medium Turret
+	TurretMed = "Medium Laser Turret"
+	TurretMedIcon = "Med. Turret"
+	TurretMedDesc = "A double barreled roof turret that fires highly accurate medium damage laser bolts."
+
+	//Large Turret
+	TurretLarge = "Large Laser Turret"
+	TurretLargeIcon = "Large Turret"
+	TurretLargeDesc = "A double barreled roof turret that fires highly accurate high damage laser bolts."
+
+	//Capital Turret
+	TurretCapital = "Capital Laser Turret"
+	TurretCapitalIcon = "Capital Turret"
+	TurretCapitalDesc = "A huge double barreled roof turret that fires highly accurate high damage laser bolts."
+}
+
+PartToggles
+{
+	ThrusterOrange = "Thruster Colour: Orange"
+	ThrusterBlue = "Thruster Colour: Blue"
+	ThrusterGreen = "Thruster Colour: Green"
+	ThrusterYellow = "Thruster Colour: Yellow"
+	ThrusterPurple = "Thruster Colour: Purple"
+	ThrusterRed = "Thruster Colour: Red"
+	ThrusterWhite = "Thruster Colour: White"
+
+	WindowsOnOff_Off = "Roof Details: Off"
+	WindowsOnOff_On = "Roof Details: On"
+	
+	ShieldRadius50 = "Shield Radius: 50"
+	ShieldRadius100 = "Shield Radius: 100"
+	ShieldRadius150 = "Shield Radius: 150"
+	ShieldRadius200 = "Shield Radius: 200"
+	ShieldRadius250 = "Shield Radius: 250"
+
+	//Rocket Types
+	RocketType_HE = "Rocket Type: High-Explosive"
+	RocketType_Torp = "Rocket Type: Torpedo"
+	RocketType_micro = "Rocket Type: Micro-rocket"
+	RocketType_FTL = "Rocket Type: Faster Than Light Torpedo"
+}
+
+Resource
+{
+	Rocket = "Rocket Part"
+	RocketPlural = "Rocket Parts"
+	RocketDesc = "Rocket parts used in Rocket Silos and Launchers. Cheaper than normal missiles."
+
+	BBox = "Box Magazine"
+	BBoxPlural = "Box Magazines"
+	BBoxDesc = "Box Magazines store belts of bullets used for ballistic weapons. Each box contains 60 light rounds."
+}
+
+Stats
+{
+	BulletVolleyFmt = "<white>Bullets per Volley:</white> <good>{0}</good> <gray>Per Volley</gray>"
+	ParticleCannonNotes = "<gray>NOTE: Damage, Penetration, Range, Projectile Speed, and Power Usage are increased with each additional Extension.</gray>"
+}
+
+StatCategories
+{
+	//Shots
+	AssaultCannon = "Assault Cannon Shot"
+	BeamPDShot = "Beam PD Shot"
+	CIWSShot = "CIWS Shot"
+	FighterWeapons = "Laser Bolt"
+	GaussShot = "Gauss Cannon Bullet"
+	MachineGunBolt = "MG Energy Bolt"
+	MinigunShot = "Minigun Laser"
+	MicroRocket = "Micro Rocket"
+	ParticleCannonShot = "Particle Cannon Shot"
+	RocketHE = "H.E. Rocket"
+	Torpedo = "Fighter Torpedo"
+
+	//Buffs
+	ParticleCannonBuff = "Particle Cannon Buff"
+}

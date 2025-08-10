@@ -1,0 +1,415 @@
+Part : <./Data/ships/terran/base_part_terran.rules>/Part
+{
+	NameKey = "Parts/ParticleCannonSmallBarrelExtender"
+	IconNameKey = "Parts/ParticleCannonSmallBarrelExtenderIcon"
+	ID = ultranova.small_particle_c_extension
+	OtherIDs = [ultranova.federation_particle_cannon_barrel_extender]
+	EditorGroup = "WeaponsProjectile"
+	DescriptionKey = "Parts/ParticleCannonSmallBarrelExtenderDesc"
+	Resources
+	[
+		[steel, 12]
+		[coil2, 3]
+		[tristeel, 5]
+	]
+	TypeCategories = [weapon, uses_power, particle_cannon_barrel, particle_cannon]
+	Size = [1, 1]
+	SelectionPriority = 1
+	SelectionTypeByRotation = true
+	MaxHealth = 2000
+	InitialPenetrationResistance = 3
+	PenetrationRectType = Normal
+	ReceivableBuffs = [ParticleCannonReverseOperational, ParticleCannonOperational, ParticleCannonBuff]
+	GeneratorRequiresDoors = false
+	AllowedDoorLocations = []
+	ExternalWalls = [None]
+	InternalWalls = [All]
+	IsWalled = false
+	EditorIcon
+	{
+		Texture
+		{
+			File = "cannon_extender_on1.png"
+			SampleMode = Linear
+		}
+		Size = [32, 32]
+	}
+	Components : ^/0/Components
+	{
+		BuffOperational
+		{
+			Type = MultiToggle
+			Toggles = [BatteryStorage, ParticleCannonOperationBuffToggle]
+			Mode = All
+		}
+		IsOperational
+		{
+			Type = MultiToggle
+			Toggles = [BuffOperational, ParticleCannonReverseOperationBuffToggle, PowerToggle]
+			Mode = All
+		}
+
+		ParticleCannonOperationBuffToggle
+		{
+			Type = BuffToggle
+			BuffType = ParticleCannonOperational
+		}
+
+		ParticleCannonReverseOperationBuffToggle
+		{
+			Type = BuffToggle
+			BuffType = ParticleCannonReverseOperational
+		}
+
+		BatteryStorage
+		{
+			Type = ResourceStorage
+			ResourceType = battery
+			MaxResources = 5000
+		}
+
+		PowerToggle
+		{
+			Type = UIToggle
+			ToggleID = "on_off"
+			Default = 1
+			RequiresCommand = false
+		}
+
+		CommandConsumer
+		{
+			Type = CommandConsumer
+			OperationalToggle = PowerToggle
+			CommandPoints = 1
+		}
+
+		LoadedAmmo // Same name as the component in the loader for chaining.
+		{
+			Type = ResourceStorageProxy
+			ResourceType = bullet
+			PartLocation = [0, 1]
+			PartCriteria
+			{
+				Category = particle_cannon
+				Rot = 0
+				Left = 0
+				Right = 1
+			}
+			ComponentID = LoadedAmmo
+		}
+
+		ParticleCannonBuffProvider
+		{
+			Type = AreaBuffProvider
+			BuffType = ParticleCannonBuff
+			BuffAmount = { BaseValue=1; BuffType=ParticleCannonBuff; BuffMode=Add; }
+			BuffArea = [0, -1, 1, 1]
+			ChainsFromBuffType = ParticleCannonBuff
+			Criteria
+			{
+				Rot = 0
+				Left = 0
+				Right = 1
+				Bottom = 0
+			}
+		}
+
+		OperationBuffProvider
+		{
+			Type = AreaBuffProvider
+			BuffType = ParticleCannonOperational
+			BuffArea = [0, -1, 1, 1]
+			OperationalToggle = IsOperational
+			Criteria
+			{
+				Rot = 0
+				Left = 0
+				Right = 1
+				Bottom = 0
+			}
+		}
+
+		ReverseOperationBuffProvider
+		{
+			Type = AreaBuffProvider
+			BuffType = ParticleCannonReverseOperational
+			ChainsFromBuffType = ParticleCannonReverseOperational
+			OperationalToggle = ParticleCannonReverseOperationBuffToggle
+			BuffArea = [0, 1, 1, 1]
+			Criteria
+			{
+				Rot = 0
+				Left = 0
+				Right = 1
+			}
+		}
+
+		ForwardPower
+		{
+			Type = ResourceStorageProxy
+			ResourceType = battery
+			PartLocation = [0, -1]
+			PartCriteria
+			{
+				Category = particle_cannon_barrel
+				Rot = 0
+				Left = 0
+				Right = 1
+				Bottom = 0
+			}
+			ComponentID = BatteryStorage
+		}
+
+		WaitForTheOne //This component makes sure that the front loader waits until there is more than one battery.
+		{
+			Type = ThresholdToggle
+			AmountFrom = BatteryStorage
+			MinAmount = 1.1 / 5
+		}
+
+		ForwardLoader
+		{
+			Type = ResourceConverter
+			OperationalToggle = WaitForTheOne
+			FromStorage = BatteryStorage
+			ToStorage = ForwardPower
+			FromQuantity = 1000
+			ToQuantity = 1000
+			Interval = .25
+		}
+
+		PowerDrainOnShoot
+		{
+			Type = ResourceChange
+			Trigger = BulletEmitter
+			ResourceStorage = BatteryStorage
+			Amount = -500
+		}
+
+		BulletEmitter
+		{
+			Type = TriggerProxy
+			PartLocation = [0, -1]
+			PartCriteria
+			{
+				Category = particle_cannon_barrel
+				Rot = 0
+				Left = 0
+				Right = 1
+				Bottom = 0
+			}
+			ComponentID = BulletEmitter
+		}
+
+		Graphics
+		{
+			Type = Graphics
+			Location = [.5, .5]
+			OperationalToggle = IsOperational
+			OperationalDoodad
+			{
+				Layer = "structure"
+				DamageLevels
+				[
+					{
+						AnimationFiles
+						[
+							"cannon_extender_on1.png"
+							"cannon_extender_on2.png"
+							"cannon_extender_on3.png"
+							"cannon_extender_on4.png"
+							"cannon_extender_on5.png"
+							"cannon_extender_on4.png"
+							"cannon_extender_on3.png"
+							"cannon_extender_on2.png"
+						]
+						NormalsAnimationFiles
+						[
+							"normals-extender.png"
+							"normals-extender.png"
+							"normals-extender.png"
+							"normals-extender.png"
+							"normals-extender.png"
+							"normals-extender.png"
+							"normals-extender.png"
+							"normals-extender.png"
+						]
+						Size = [1, 1]
+						AnimationInterval = 0.1
+					}
+				]
+			}
+			NonOperationalDoodad
+			{
+				Layer = "structure"
+				DamageLevels
+				[
+					{
+						File = "cannon_extender_off.png"
+						NormalsFile = "normals-extender.png"
+						Size = [1, 1]
+					}
+				]
+			}
+		}
+
+		BatterySprite1
+		{
+			Type = ResourceSprites
+			Location = [.5, 0.5]
+			ResourceStorage = BatteryStorage
+			Layer = "doodads_low"
+			ResourceLevels
+			[
+				{
+					File = "extender_batteries1.png"
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries2.png"
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries3.png"
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries4.png"
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries5.png"
+					Size = [1, 1]
+				}
+			]
+		}
+		BatterySprite2
+		{
+			Type = ResourceSprites
+			Location = [.5, 0.5]
+			ResourceStorage = BatteryStorage
+			Layer = "doodads_low"
+			ResourceLevels
+			[
+				{
+					File = "extender_batteries1.png"
+					MirrorU = true
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries2.png"
+					MirrorU = true
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries3.png"
+					MirrorU = true
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries4.png"
+					MirrorU = true
+					Size = [1, 1]
+				}
+				{
+					File = "extender_batteries5.png"
+					MirrorU = true
+					Size = [1, 1]
+				}
+			]
+		}
+
+		OperationEffects
+		{
+			Type = ToggleEffects
+			Location = [.5, 1.5]
+			Toggle = IsOperational
+			ToggledOnMediaEffects = &/COMMON_EFFECTS/PowerOn
+			ToggledOffMediaEffects = &/COMMON_EFFECTS/PowerOff
+		}
+
+		DestroyedEffects
+		{
+			Type = DeathEffects
+			MediaEffects = &/COMMON_EFFECTS/SmallPartDestroyed
+			Location = [.5, .5]
+		}
+
+		Indicators
+		{
+			Type = IndicatorSprites
+			Location = [.5, .5]
+			Layer = "indicators"
+			Indicators
+			[
+				// Out of power.
+				{
+					Toggle = BatteryStorage
+					AtlasSprite
+					{
+						File = &/INDICATORS/NoPower
+						Size = [1, 1]
+					}
+				}
+			]
+		}
+
+		Blueprints
+		{
+			Type = BlueprintSprite
+			File = "blueprints_extender.png"
+			Size = [1, 1]
+		}
+	}
+
+	Stats
+	{
+		PowerCapacity = (&~/Part/Components/BatteryStorage/MaxResources) / 1000
+		RecPower = &<particle_cannon_barrel.rules>/Part/StatsByCategory/0/Stats/PowerPerSecond
+	}
+
+	StatsByCategory
+	[
+		{
+			NameKey = "StatCategories/ParticleCannonBuff"
+			Stats
+			{
+				BaseMultiplier = (&<../../../Buffs/buffs.rules>/ParticleCannonShot/Multiplier) * 100
+				Exponent = (&<../../../Buffs/buffs.rules>/ParticleCannonShot/Exponent)
+				RailgunBuff
+				[
+					(&../BaseMultiplier) * (1 ^ (&../Exponent))
+					(&../BaseMultiplier) * (2 ^ (&../Exponent))
+					(&../BaseMultiplier) * (3 ^ (&../Exponent))
+					(&../BaseMultiplier) * (4 ^ (&../Exponent))
+					(&../BaseMultiplier) * (5 ^ (&../Exponent))
+					(&../BaseMultiplier) * (6 ^ (&../Exponent))
+					(&../BaseMultiplier) * (7 ^ (&../Exponent))
+					(&../BaseMultiplier) * (8 ^ (&../Exponent))
+					(&../BaseMultiplier) * (9 ^ (&../Exponent))
+					(&../BaseMultiplier) * (10 ^ (&../Exponent))
+					(&../BaseMultiplier) * (11 ^ (&../Exponent))
+					(&../BaseMultiplier) * (12 ^ (&../Exponent))
+					(&../BaseMultiplier) * (13 ^ (&../Exponent))
+					(&../BaseMultiplier) * (14 ^ (&../Exponent))
+					(&../BaseMultiplier) * (15 ^ (&../Exponent))
+					(&../BaseMultiplier) * (16 ^ (&../Exponent))
+					(&../BaseMultiplier) * (17 ^ (&../Exponent))
+					(&../BaseMultiplier) * (18 ^ (&../Exponent))
+					(&../BaseMultiplier) * (19 ^ (&../Exponent))
+					(&../BaseMultiplier) * (20 ^ (&../Exponent))
+					(&../BaseMultiplier) * (21 ^ (&../Exponent))
+					(&../BaseMultiplier) * (22 ^ (&../Exponent))
+					(&../BaseMultiplier) * (23 ^ (&../Exponent))
+					(&../BaseMultiplier) * (24 ^ (&../Exponent))
+					(&../BaseMultiplier) * (25 ^ (&../Exponent))
+					(&../BaseMultiplier) * (26 ^ (&../Exponent))
+					(&../BaseMultiplier) * (27 ^ (&../Exponent))
+					(&../BaseMultiplier) * (28 ^ (&../Exponent))
+					(&../BaseMultiplier) * (29 ^ (&../Exponent))
+					(&../BaseMultiplier) * (30 ^ (&../Exponent))
+				]
+			}
+		}
+	]
+}

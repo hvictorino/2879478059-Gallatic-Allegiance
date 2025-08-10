@@ -1,0 +1,22 @@
+BuffProvider
+{
+	Type = GridBuffProvider
+	BuffType = BoosterActivate
+	GridDistance = 1
+	OperationalToggle = BuffToggle
+}
+
+SelfBuffProvider
+{
+	Type = SelfBuffProvider
+	BuffType = CommandBoostLimiter
+	BuffAmount = 1
+}
+
+BuffToggle
+{
+	Type = BuffToggle
+	BuffType = CommandBoostLimiter
+	MinBuffValue = 1
+	MaxBuffValue = 2
+}
