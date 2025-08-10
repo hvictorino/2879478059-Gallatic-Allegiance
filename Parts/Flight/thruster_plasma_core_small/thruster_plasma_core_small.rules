@@ -420,9 +420,9 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			Vertices
 			[
 				[0.1875, 6]
-				[0.5, 7.625]
-				[3.5, 7.625]
 				[3.8125, 6]
+				[3.5, 7.625]
+				[0.5, 7.625]
 			]
 			Density = 1
 		}

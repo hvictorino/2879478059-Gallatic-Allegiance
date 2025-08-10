@@ -412,10 +412,10 @@ Part : <./Data/ships/terran/base_part_terran.rules>/Part
 			Type = PolygonCollider
 			Vertices
 			[
-				[2.33, 3]
 				[0.66, 3]
-				[0.33, 4]
+				[2.33, 3]
 				[2.66, 4]
+				[0.33, 4]
 			]
 			Density = 1
 		}

@@ -67,8 +67,8 @@ Parts
 	&<Flight/thruster_plasma_small/thruster_plasma_small.rules>/Part
 	&<Flight/thruster_plasma_med/thruster_plasma_med.rules>/Part
 	&<Flight/thruster_plasma_large/thruster_plasma_large.rules>/Part
-	//&<Flight/thruster_plasma_huge/thruster_plasma_huge.rules>/Part
-	//&<Flight/thruster_plasma_core_small/thruster_plasma_core_small.rules>/Part
+	&<Flight/thruster_plasma_huge/thruster_plasma_huge.rules>/Part
+	&<Flight/thruster_plasma_core_small/thruster_plasma_core_small.rules>/Part
 
 	&<Flight/antigrav_small/antigrav_small.rules>/Part
 
